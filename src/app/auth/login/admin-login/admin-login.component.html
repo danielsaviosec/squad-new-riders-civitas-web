@@ -1,1 +1,41 @@
-<p>admin-login works!</p>
+<section>
+  <hgroup>
+    <h2>Olá, administrador!</h2>
+    <p>
+      Cadastre e gerencie estudantes, professores, turmas e disciplinas da sua
+      escola.
+    </p>
+  </hgroup>
+
+  <form class="form" [formGroup]="authForm" (ngSubmit)="onSubmit($event)">
+    <mat-form-field>
+      <input
+        matInput
+        autocomplete="email"
+        formControlName="email"
+        placeholder="Insira seu e-mail"
+        type="text"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        autocomplete="current-password"
+        formControlName="password"
+        placeholder="Insira sua senha"
+        type="password"
+      />
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="!authForm.valid"
+    >
+      Entrar
+    </button>
+    <a mat-stroked-button color="primary" routerLink="/">Voltar</a>
+  </form>
+</section>

@@ -1,0 +1,42 @@
+:host {
+  background-color: rgba($color: #65558f, $alpha: 0.65);
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+}
+
+section {
+  background: #fff;
+  box-sizing: border-box;
+  max-width: 500px;
+  padding: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  button,
+  a {
+    border-radius: 999px;
+  }
+
+  button:has(+ a) {
+    margin-bottom: 8px;
+  }
+}
+
+hgroup {
+  margin-bottom: 35px;
+  text-align: center;
+
+  h2 {
+    font-size: 45px;
+    line-height: 52px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
