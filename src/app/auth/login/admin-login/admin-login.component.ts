@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -13,12 +13,16 @@ export class AdminLoginComponent {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   onSubmit($event: SubmitEvent) {
     $event.preventDefault();
 
-    console.log({ form: this.authForm.value });
-    this.router.navigate(['/']);
+    const loginCredentials = {
+      email: this.authForm.value.email || '',
+      password: this.authForm.value.password || '',
+    };
+
+    this.authService.login(loginCredentials);
   }
 }
