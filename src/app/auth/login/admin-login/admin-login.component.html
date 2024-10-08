@@ -16,6 +16,12 @@
         placeholder="Insira seu e-mail"
         type="text"
       />
+      <mat-error
+        *ngIf="
+          authForm.controls.email.touched && authForm.controls.email.errors
+        "
+        >Por favor, digite um e-mail válido.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -32,7 +38,7 @@
       mat-flat-button
       color="primary"
       type="submit"
-      [disabled]="!authForm.valid"
+      [disabled]="authForm.invalid"
     >
       Entrar
     </button>

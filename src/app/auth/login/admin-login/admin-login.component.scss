@@ -15,14 +15,11 @@ section {
 .form {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 
   button,
   a {
     border-radius: 999px;
-  }
-
-  button:has(+ a) {
-    margin-bottom: 8px;
   }
 }
 
