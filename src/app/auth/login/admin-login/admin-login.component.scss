@@ -3,13 +3,18 @@
   display: grid;
   place-items: center;
   min-height: 100%;
+  padding: 12px;
 }
 
 section {
   background: #fff;
   box-sizing: border-box;
   max-width: 500px;
-  padding: 50px;
+  padding: 50px 25px;
+
+  @media screen and (min-width: 480px) {
+    padding: 50px;
+  }
 }
 
 .form {
@@ -23,12 +28,20 @@ section {
   }
 }
 
+.error {
+  &,
+  &::placeholder {
+    color: #d63a32 !important;
+    opacity: 1;
+  }
+}
+
 hgroup {
   margin-bottom: 35px;
   text-align: center;
 
   h2 {
-    font-size: 45px;
+    font-size: clamp(35px, (1rem + 5vw), 45px);
     line-height: 52px;
   }
 
