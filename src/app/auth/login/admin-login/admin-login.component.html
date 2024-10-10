@@ -44,7 +44,7 @@
     </mat-form-field>
 
     <span
-      *ngIf="isLoginErrorVisible()"
+      *ngIf="authForm.errors?.['unauthorized']"
       class="error"
       style="transform: translateY(-100%)"
     >
@@ -55,9 +55,12 @@
       mat-flat-button
       color="primary"
       type="submit"
-      [disabled]="authForm.invalid"
+      [disabled]="authForm.invalid || authForm.pending"
     >
       Entrar
+      <mat-icon *ngIf="authForm.pending">
+        <mat-spinner diameter="18"></mat-spinner>
+      </mat-icon>
     </button>
     <a mat-stroked-button color="primary" routerLink="/">Voltar</a>
   </form>

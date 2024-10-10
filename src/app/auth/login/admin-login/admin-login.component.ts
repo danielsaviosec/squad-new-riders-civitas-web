@@ -1,8 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthService, LoginCredentials } from '../../auth.service';
+import {
+  AuthService,
+  LoginCredentials,
+  LoginResponse,
+} from '../../auth.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -10,29 +15,26 @@ import { AuthService, LoginCredentials } from '../../auth.service';
   styleUrls: ['./admin-login.component.scss'],
 })
 export class AdminLoginComponent {
-  loginFailed = false;
   authForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
 
   onSubmit($event: SubmitEvent) {
     $event.preventDefault();
+    this.authForm.markAsPending();
 
     const credentials = this.authForm.value as LoginCredentials;
 
     this.authService.login(credentials).subscribe({
-      next: (res) => {
-        // TODO: fazer o redirecionamento baseado no token
-        if (res) this.router.navigate(['/']);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.authForm.reset();
-        // TODO: alterar esse codigo quando backend estiver pronto
-        if (error.status === 404) this.loginFailed = true;
-      },
+      next: (response) => this.handleLoginSuccess(response),
+      error: (error: HttpErrorResponse) => this.handleLoginError(error),
     });
   }
 
@@ -45,6 +47,38 @@ export class AdminLoginComponent {
   }
 
   isLoginErrorVisible(): boolean {
-    return this.loginFailed && this.authForm.pristine;
+    return this.authForm.errors?.['unauthorized'] && this.authForm.pristine;
+  }
+
+  private handleLoginSuccess(response: LoginResponse) {
+    if (response.token) {
+      localStorage.setItem('token', response.token);
+      this.router.navigate(['/']);
+    }
+  }
+
+  private handleLoginError(error: HttpErrorResponse) {
+    this.authForm.reset();
+
+    switch (error.status) {
+      case 401:
+        this.authForm.setErrors({ unauthorized: true });
+        break;
+
+      case 0:
+        this._snackBar.open('Sem conexão com a internet.', '', {
+          horizontalPosition: 'right',
+          duration: 5000,
+        });
+        break;
+
+      // outros casos de erro...
+
+      default:
+        this._snackBar.open('Erro inesperado do servidor.', '', {
+          horizontalPosition: 'right',
+          duration: 5000,
+        });
+    }
   }
 }

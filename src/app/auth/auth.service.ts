@@ -6,6 +6,11 @@ export interface LoginCredentials {
   password: string;
 }
 
+export interface LoginResponse {
+  message: string;
+  token: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,8 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(credentials: LoginCredentials) {
-    console.log({ credentials });
-    // TODO: enviar dados para o nosso backend
-    return this.http.post('/api/auth/login', credentials);
+    // TODO: falta conectar com a URL do backend
+    return this.http.post<LoginResponse>('/admin/login', credentials);
   }
 }
