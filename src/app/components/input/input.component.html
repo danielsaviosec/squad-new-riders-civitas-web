@@ -1,0 +1,8 @@
+<div class="input-container">
+  <mat-form-field appearance="outline" [ngClass]="{'error-state': hasError}">
+    <mat-label *ngIf="label">{{ label }}</mat-label>
+    <input matInput [type]="type" [placeholder]="placeholder" (input)="onInput($event)" [value]="value" />
+    <mat-icon *ngIf="hasError" matSuffix>highlight_off_icon</mat-icon>
+    <mat-hint class="error-message" *ngIf="hasError">{{ errorMessage }}</mat-hint>
+  </mat-form-field>
+</div>
