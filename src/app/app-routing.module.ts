@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TelaAdminComponent } from './pages/tela-admin/tela-admin.component';
+import { AdminScreenComponent } from './pages/admin-screen/admin-screen.component';
 
 const routes: Routes = [
-  { path: 'tela-admin', component: TelaAdminComponent }
+  { path: 'admin-screen', component: AdminScreenComponent }
 ];
 
 @NgModule({
