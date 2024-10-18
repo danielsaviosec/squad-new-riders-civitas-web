@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
     orion-bootcamp-front-end:
         container_name: orion-bootcamp-front-end
