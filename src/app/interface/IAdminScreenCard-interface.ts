@@ -1,4 +1,4 @@
-export interface AdminScreenCardButton {
+export interface IAdminScreenCard {
     title: string;
     image: string;
   }

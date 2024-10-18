@@ -1,4 +1,4 @@
-export interface LogoDesktop {
+export interface ILogo {
     name: string;
     image: string;
 }

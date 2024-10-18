@@ -33,7 +33,7 @@
         <div class="card-wrapper">
             <div class="card" *ngFor="let option of cardsAdmin">
                 <img [src]="option.image">
-                <button class="btn-card">
+                <button (click)="intoToClassRegistration()" class="btn-card">
                     {{option.title}}
                 </button>
             </div>
