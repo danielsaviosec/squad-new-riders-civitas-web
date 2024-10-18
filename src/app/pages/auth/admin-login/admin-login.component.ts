@@ -7,7 +7,7 @@ import {
   AuthService,
   LoginCredentials,
   LoginResponse,
-} from '../../auth.service';
+} from '../auth.service';
 
 @Component({
   selector: 'app-admin-login',

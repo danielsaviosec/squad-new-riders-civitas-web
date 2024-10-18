@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminScreenComponent } from './pages/admin-screen/admin-screen.component';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './pages/auth/auth.module';
 import { ClassRegistrationComponent } from './pages/class-registration/class-registration.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
