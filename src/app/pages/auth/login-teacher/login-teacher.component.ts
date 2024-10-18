@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { BackButtonComponent } from 'src/app/components/back-button/back-button.component';
-import { ButtonComponent } from 'src/app/components/button/button.component';
-import { InputComponent } from 'src/app/components/input/input.component';
 
 @Component({
   selector: 'app-login-teacher',
   templateUrl: './login-teacher.component.html',
   styleUrls: ['./login-teacher.component.scss'],
-  standalone: true,
-  imports: [MatButtonModule, ButtonComponent, InputComponent, MatIconModule, BackButtonComponent]
 })
 export class LoginTeacherComponent {
   isInvalid: boolean = false;
