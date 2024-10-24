@@ -29,4 +29,9 @@ export class AdminScreenComponent {
   intoToClassRegistration() {
     this.router.navigate(['/class-registration']);
   }
+
+//Direcionamento do botão "Sair" para a página de login do administrador.
+  logout(){
+    this.router.navigate(['/admin-login']);
+  }
 }

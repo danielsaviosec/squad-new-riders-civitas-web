@@ -2,13 +2,13 @@
     <section class="sidebar-section">
         <div class="sidebar">
             <div class="top-icon" *ngFor="let option of logoDesktop">
-                <a href="#"><img [src]="option.image"></a>
+                <img [src]="option.image">
             </div>
             <div class="mobile" *ngFor="let option of logoMobile">
-                <a href="#"><img [src]="option.image"></a>
+                <img [src]="option.image">
             </div>
             <div class="logout-box">
-                <a href="#">Sair</a>
+                <button (click)="logout()">Sair</button>
                 <span>V.1.0.0</span>
             </div>
         </div>
@@ -21,7 +21,7 @@
             </h1>
             <div class="content">
                 <p>
-                    Prazer, somos o Civitas! <br><br>
+                    Prazer, somos a Civitas! <br><br>
                     Vamos juntos nessa missão de desenvolver nossos estudantes para que desenvolvam habilidades
                     comportamentais importantes para o dia a dia da vida deles.<br><br>
                     Nosso primeiro passo é o cadastro de informações necessárias para que os usuários sejam registrados para que acessem à plataforma. <br>
