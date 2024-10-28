@@ -19,8 +19,7 @@ main {
         justify-content: center;
         align-items: center;
         min-height: 80vh;
-        min-width: 172px;
-        flex-grow: 1;
+        flex-grow: 0.3;
         padding: 3.3rem;
         position: fixed;
         top: 10%;
@@ -44,7 +43,7 @@ main {
                 border-radius: 100%;
                 position: absolute;
                 top: -8%;
-                left: 22.5%;
+                left: 18%;
 
                 img {
                     width: 82px;
@@ -66,25 +65,21 @@ main {
                 margin-top: 25rem;
                 gap: 1.3rem;
 
-                button {
-                    background: none;
-                    border: none;
+                a {
                     color: #000;
-                    font-size: 1rem;
+                    font-size: 1.3rem;
                     text-align: center;
                     font-weight: 700;
                     transition: all 0.3s ease-in-out;
-                    cursor: pointer;
                 }
 
-                button:hover {
+                a:hover {
                     color: #292929;
                 }
 
                 span {
                     color: #292929;
                     font-size: 0.625rem;
-                    font-weight: 500;
                     text-align: center;
                 }
             }
@@ -92,8 +87,8 @@ main {
     }
 
     .main-section {
-        flex-grow: 3;
-        margin: 5rem 0 0 3rem;
+        flex-grow: 1;
+        margin: 5rem 8rem 0 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -106,7 +101,7 @@ main {
             width: 100%;
 
             h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
                 font-weight: 500;
                 margin-bottom: 3rem;
             }
@@ -125,7 +120,7 @@ main {
                 font-weight: 400;
                 font-size: 0.7rem;
                 padding: 0.3rem;
-                width: 28%;
+                width: 30%;
                 height: 25%;
                 transition: background 0.3s ease;
                 cursor: pointer;
