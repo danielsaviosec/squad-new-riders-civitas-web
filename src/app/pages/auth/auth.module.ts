@@ -33,6 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
     SharedModule
   ]
 })
