@@ -33,3 +33,20 @@
     font-size: 0.875rem;
   }
 }
+
+
+
+/* Esconder os spinners para navegadores baseados em WebKit (Chrome, Safari) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Tornar o campo de número visualmente similar ao campo de texto */
+input[type="number"] {
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+}
