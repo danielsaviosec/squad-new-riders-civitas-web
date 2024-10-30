@@ -7,7 +7,7 @@ import {
   AuthService,
   LoginCredentials,
   LoginResponse,
-} from '../../auth.service';
+} from '../auth.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -38,11 +38,18 @@ export class AdminLoginComponent {
     });
   }
 
+  isInvalidRequired(controlName: string): boolean {
+    const control = this.authForm.get(controlName);
+    return control?.hasError('required') && control.touched ? true : false;
+  }
+
   isInvalidEmailFormat(): boolean {
+    const control = this.authForm.get('email');
     return (
-      !this.authForm.controls.email.hasError('required') &&
-      this.authForm.controls.email.hasError('email') &&
-      this.authForm.controls.email.touched
+      control != null &&
+      !control.hasError('required') &&
+      (control.hasError('email') ?? false) &&
+      control.touched
     );
   }
 
