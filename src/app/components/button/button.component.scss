@@ -1,32 +1,37 @@
-button.mdc-button--raised {
-    background-color: #65558F;
-    color: #FFFFFF;
-    width: 315px;
-    font-size: 1rem;
-    border-radius: 20px;
-    align-self: center;
+button.mdc-button--unelevated {
+  background-color: #65558F;
+  color: #FFFFFF;
+  width: 315px;
+  font-size: 1rem;
+  border-radius: 20px;
+  align-self: center;
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.38);
+    background-color: rgba(0, 0, 0, 0.12);
   }
-  
-  button.admin-button {
-    background-color: transparent;
-    font-size: .8rem;
-    color: black;
+}
+
+button.admin-button {
+  background-color: transparent;
+  font-size: .8rem;
+  color: black;
+  box-shadow: none;
+  text-decoration: underline;
+  height: auto;
+  width: auto;
+  padding: 0;
+
+  &:focus {
     box-shadow: none;
-    text-decoration: underline;
-    height: auto;
-    width: auto;
-    padding: 0;
-  
-    &:focus {
-      box-shadow: none;
-    }
-  
-    ::ng-deep span {
-      height: auto !important;
-      width: auto !important;
-  
-      &:hover {
-        opacity: 1;
-      }
+  }
+
+  ::ng-deep span {
+    height: auto !important;
+    width: auto !important;
+
+    &:hover {
+      opacity: 1;
     }
   }
+}

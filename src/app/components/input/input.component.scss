@@ -1,0 +1,52 @@
+.input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .error-state {
+    mat-label,
+    .mat-form-field-outline {
+      color: #f44336;
+    }
+
+    ::ng-deep .mdc-text-field--outlined {
+      --mdc-outlined-text-field-outline-color: #f44336;
+    }
+
+    .mat-icon {
+      color: #f44336; // Cor vermelha para o ícone
+    }
+  }
+
+  .error-icon {
+    color: #f44336;
+  }
+
+  ::ng-deep .mat-mdc-form-field-hint-wrapper {
+    padding: 0;
+  }
+
+  .error-message {
+    color: #f44336;
+    text-align: left;
+    margin-top: .4rem;
+    font-size: 0.875rem;
+  }
+}
+
+
+
+/* Esconder os spinners para navegadores baseados em WebKit (Chrome, Safari) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Tornar o campo de número visualmente similar ao campo de texto */
+input[type="number"] {
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+}

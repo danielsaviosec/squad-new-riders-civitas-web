@@ -1,0 +1,29 @@
+<div class="main-container">
+  <div class="left-section"></div>
+  <div class="right-section">
+    <app-back-button class="back-button"></app-back-button>
+    <div class="logo-civitas"></div>
+    <h1>Seja bem-vindo!</h1>
+    <p>
+      Olá, professor(a)!<br/>
+      Aproveite a nossa ferramenta para aprimorar o desenvolvimento pessoal dos seus estudantes!
+    </p>
+    <div class="button-group">
+      <app-input
+        type="number"
+        label="Número de matrícula do professor"
+        placeholder="Digite o número de matrícula"
+        [hasError]="isInvalid"
+        errorMessage="O número de matrícula está incorreta"
+        (inputValueChange)="onInputValueChange($event)"
+      >
+      </app-input>
+      <app-button
+        label="Entrar"
+        [disabled]="isButtonDisabled()"
+        (clickEvent)="validateInput()"
+      >
+      </app-button>
+    </div>
+  </div>
+</div>
