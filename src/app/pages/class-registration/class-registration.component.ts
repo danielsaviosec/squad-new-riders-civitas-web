@@ -34,7 +34,7 @@ export class ClassRegistrationComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit():void {
     this.form = this.fb.group({
       anoLetivo: ['', Validators.required],
       periodoLetivo: ['', Validators.required],
@@ -45,13 +45,13 @@ export class ClassRegistrationComponent implements OnInit {
 
   //=================================
   //Botão voltar 
-  goBack() {
+  goBack():void {
     this.router.navigate(['/admin-screen'])
   }
 
   //===================
   //Lógicas do cadastro enviado ou repetição de nomes
-  onSubmit() {
+  onSubmit():void {
     if (this.form.valid) {
       this.showSuccessMessage()
     } else {
@@ -59,7 +59,7 @@ export class ClassRegistrationComponent implements OnInit {
     }
   }
 
-  showSuccessMessage() {
+  showSuccessMessage():void {
     this.snackBar.open('Turma cadastrada com sucesso!', '', {
       duration: 3000,
       panelClass: ['sucess-snackbar'],
@@ -71,7 +71,7 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  showErrorMessage(message: string, subMessage: string) {
+  showErrorMessage(message: string, subMessage: string):void {
     this.snackBar.open(message, subMessage, {
       duration: 5000,
       panelClass: ['error-snackbar'],

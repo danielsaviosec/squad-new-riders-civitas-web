@@ -26,7 +26,7 @@ export class AdminScreenComponent {
 
 // ======================================
 //Direcionamento do botão de "Cadastrar Turmas" para a página de cadastro.
-  intoToClassRegistration() {
+  intoToClassRegistration():void {
     this.router.navigate(['/class-registration']);
   }
 }

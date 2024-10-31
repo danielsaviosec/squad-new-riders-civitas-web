@@ -1,15 +1,15 @@
-export interface SelectOption {
+export interface ISelectOption {
     value: string;
     label: string;
   }
   
-  export interface ClassRegistrationForm {
+  export interface IClassRegistrationForm {
     anoLetivo: string;
     periodoLetivo: string;
     ensino: string;
     apelidoTurma: string;
   }
   
-  export interface AnoLetivoOption extends SelectOption {}
-  export interface PeriodoLetivoOption extends SelectOption {}
-  export interface EnsinoOption extends SelectOption {}
+  export interface AnoLetivoOption extends ISelectOption {}
+  export interface PeriodoLetivoOption extends ISelectOption {}
+  export interface EnsinoOption extends ISelectOption {}
