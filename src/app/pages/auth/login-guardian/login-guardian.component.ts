@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-guardian.component.scss']
 })
 export class LoginGuardianComponent {
-  isInvalid: boolean = false;
-  inputValue: string = '';
+  isInvalid = false;
+  inputValue = '';
 
   onInputValueChange(value: string): void {
     this.inputValue = value;
