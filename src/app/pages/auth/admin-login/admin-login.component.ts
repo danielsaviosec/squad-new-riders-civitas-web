@@ -76,6 +76,7 @@ export class AdminLoginComponent {
         this._snackBar.open('Sem conexão com a internet.', '', {
           horizontalPosition: 'right',
           duration: 5000,
+          panelClass: 'snackbar-error'
         });
         break;
 
@@ -85,6 +86,7 @@ export class AdminLoginComponent {
         this._snackBar.open('Erro inesperado do servidor.', '', {
           horizontalPosition: 'right',
           duration: 5000,
+          panelClass: 'snackbar-error'
         });
     }
   }
