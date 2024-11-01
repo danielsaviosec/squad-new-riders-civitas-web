@@ -1,0 +1,49 @@
+<main>
+    <section class="sidebar-section">
+        <div class="sidebar">
+            <div class="top-icon" *ngFor="let option of logoDesktop">
+                <a href="#"><img alt="Logo civitas" [src]="option.image"></a>
+            </div>
+            <div class="mobile" *ngFor="let option of logoMobile">
+                <a href="#"><img alt="Logo civitas" [src]="option.image"></a>
+            </div>
+            <div class="logout-box">
+                <a href="#">Sair</a>
+                <span>V.1.0.0</span>
+            </div>
+        </div>
+    </section>
+    <!-- ==== CONTENT ==== -->
+    <section class="main-section">
+        <div class="content-wrapper">
+            <h1>
+                Cadastro de informações sobre a escola
+            </h1>
+            <div class="content">
+                <p>
+                    Prazer, somos o Civitas! <br><br>
+                    Vamos juntos nessa missão de desenvolver nossos estudantes para que desenvolvam habilidades
+                    comportamentais importantes para o dia a dia da vida deles.<br><br>
+                    Nosso primeiro passo é o cadastro de informações necessárias para que os usuários sejam registrados para que acessem à plataforma. <br>
+                    Vamos lá?
+                </p>
+            </div>
+            <button class="btn-content">Ficou com alguma dúvida? Clique aqui</button>
+        </div>
+        <div class="card-wrapper">
+            <div class="card" *ngFor="let option of cardsAdmin">
+                <img alt="Cadastro" [src]="option.image">
+                <button (click)="intoToClassRegistration()" class="btn-card">
+                    {{option.title}}
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- ===== FOOTER MOBILE ===== -->
+    <footer>
+        <div class="logout-mobile">
+            <a href="#">Sair</a>
+            <span>V.1.0.0</span>
+        </div>
+    </footer>
+</main>
