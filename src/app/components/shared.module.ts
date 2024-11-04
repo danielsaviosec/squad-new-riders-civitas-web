@@ -7,12 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     InputComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,

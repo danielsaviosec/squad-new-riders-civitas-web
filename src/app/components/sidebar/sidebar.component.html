@@ -1,0 +1,16 @@
+<section class="sidebar-section">
+    <div class="sidebar">
+        <div class="top-icon" *ngFor="let option of logoDesktop">
+            <img [src]="option.image">
+        </div>
+        <div class="sidebar-menu">
+        </div>
+        <div class="mobile" *ngFor="let option of logoMobile">
+            <img [src]="option.image">
+        </div>
+        <div class="logout-box">
+            <button (click)="logout()">Sair</button>
+            <span>V.1.0.0</span>
+        </div>
+    </div>
+</section>
