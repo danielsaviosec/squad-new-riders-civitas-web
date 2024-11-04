@@ -4,6 +4,12 @@
             <img [src]="option.image">
         </div>
         <div class="sidebar-menu">
+            <div class="menu" *ngFor="let option of menuIcons">
+                <button class="btn-menu">
+                    <img class="svg" [src]="option.image">
+                    {{option.name}}
+                </button>
+            </div>
         </div>
         <div class="mobile" *ngFor="let option of logoMobile">
             <img [src]="option.image">
