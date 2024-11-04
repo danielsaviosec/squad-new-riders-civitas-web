@@ -7,12 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { SnackbarErrorComponent } from './snackbar-error/snackbar-error.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     InputComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    SnackbarErrorComponent
   ],
   imports: [
     CommonModule,
