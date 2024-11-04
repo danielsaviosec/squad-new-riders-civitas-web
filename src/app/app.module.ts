@@ -17,12 +17,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './components/shared.module';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminScreenComponent,
     ClassRegistrationComponent,
+    SidebarComponent
   ],
   imports: [
     AppRoutingModule,
