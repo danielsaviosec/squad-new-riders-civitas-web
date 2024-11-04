@@ -22,7 +22,7 @@ export class SidebarComponent {
 
   constructor(private router: Router) { }
 
-  logout() {
+  logout():void {
     this.router.navigate(['/select-profile'])
   }
 }
