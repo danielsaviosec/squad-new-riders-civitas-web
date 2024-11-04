@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
   declarations: [
     ButtonComponent,
     InputComponent,
-    BackButtonComponent
+    BackButtonComponent,
   ],
   imports: [
     CommonModule,
