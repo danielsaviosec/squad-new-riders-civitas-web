@@ -120,14 +120,15 @@ main {
                 font-weight: 400;
                 font-size: 0.7rem;
                 padding: 0.3rem;
-                width: 30%;
                 height: 25%;
-                transition: background 0.3s ease;
+                width: 28%;
+                transition: all 0.3s ease;
                 cursor: pointer;
             }
 
             .btn-content:hover {
-                background: $secondary-color;
+                background: $button-register-color;
+                color: #fff;
             }
         }
 
@@ -165,12 +166,13 @@ main {
                     border-radius: 25px;
                     font-size: 0.625rem;
                     font-weight: 400;
-                    transition: background 0.3s ease-in-out;
+                    transition: all 0.3s ease;
                     cursor: pointer;
                 }
 
                 .btn-card:hover {
-                    background: $primary-color;
+                    background: $button-register-color;
+                    color: #fff;
                 }
             }
         }
