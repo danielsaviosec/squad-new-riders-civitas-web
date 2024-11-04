@@ -2,10 +2,10 @@
     <section class="sidebar-section">
         <div class="sidebar">
             <div class="top-icon" *ngFor="let option of logoDesktop">
-                <a href="#"><img [src]="option.image"></a>
+                <a href="#"><img alt="Logo civitas" [src]="option.image"></a>
             </div>
             <div class="mobile" *ngFor="let option of logoMobile">
-                <a href="#"><img [src]="option.image"></a>
+                <a href="#"><img alt="Logo civitas" [src]="option.image"></a>
             </div>
             <div class="logout-box">
                 <a href="#">Sair</a>
@@ -32,7 +32,7 @@
         </div>
         <div class="card-wrapper">
             <div class="card" *ngFor="let option of cardsAdmin">
-                <img [src]="option.image">
+                <img alt="Cadastro" [src]="option.image">
                 <button (click)="intoToClassRegistration()" class="btn-card">
                     {{option.title}}
                 </button>

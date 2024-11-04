@@ -14,18 +14,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BackButtonComponent } from './components/back-button/back-button.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ButtonComponent } from './components/button/button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from './components/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminScreenComponent,
     ClassRegistrationComponent,
-    BackButtonComponent,
-    ButtonComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -39,7 +36,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],

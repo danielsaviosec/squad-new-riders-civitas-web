@@ -37,7 +37,7 @@ export class AdminLoginComponent {
       error: (error: HttpErrorResponse) => this.handleLoginError(error),
     });
   }
-  
+
   isInvalidRequired(controlName: string): boolean {
     const control = this.authForm.get(controlName);
     return control?.hasError('required') && control.touched ? true : false;
