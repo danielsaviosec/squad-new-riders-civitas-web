@@ -87,8 +87,8 @@ main {
     }
 
     .main-section {
-        flex-grow: 1;
-        margin: 5rem 8rem 0 0;
+        flex-grow: 3;
+        margin: 5rem 0 0 3rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -101,7 +101,7 @@ main {
             width: 100%;
 
             h1 {
-                font-size: 3rem;
+                font-size: 2.8rem;
                 font-weight: 500;
                 margin-bottom: 3rem;
             }
