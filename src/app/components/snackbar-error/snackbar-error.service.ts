@@ -9,8 +9,8 @@ export class SnackbarErrorService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  showErrorMessage(message: string, subMessage: string) {
-    return this.snackBar.openFromComponent(SnackbarErrorComponent, {
+  showErrorMessage(message: string, subMessage: string):void {
+    this.snackBar.openFromComponent(SnackbarErrorComponent, {
       data: { message, subMessage },
       duration: 3000,
       horizontalPosition: 'right',
