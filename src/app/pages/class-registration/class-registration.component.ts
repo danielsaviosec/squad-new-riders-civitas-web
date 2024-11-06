@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnoLetivoOption, PeriodoLetivoOption, EnsinoOption } from 'src/app/interface/IClassRegistration.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,7 +33,7 @@ export class ClassRegistrationComponent implements OnInit {
     { value: 'ensinoFundamental', label: 'Ensino Fundamental 1' },
   ];
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private snackbarErrorService: SnackbarErrorService, private router: Router) { }
 
   ngOnInit():void {
     this.form = this.fb.group({
@@ -53,9 +54,9 @@ export class ClassRegistrationComponent implements OnInit {
   //Lógicas do cadastro enviado ou repetição de nomes
   onSubmit():void {
     if (this.form.valid) {
-      this.showSuccessMessage()
+      this.showSuccessMessage();
     } else {
-      this.showErrorMessage('Turma já existe', 'Verifique as informações digitadas ou tente novamente.');
+      this.errorMessage();
     }
   }
 
@@ -71,11 +72,10 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  showErrorMessage(message: string, subMessage: string):void {
-    this.snackBar.open(message, subMessage, {
-      duration: 5000,
-      panelClass: ['error-snackbar'],
-      horizontalPosition: 'right'
-    });
+  errorMessage():void {
+    this.snackbarErrorService.showErrorMessage(
+      'Turma já existe',
+      'Verifique as informações digitadas ou cadastre novos dados'
+    );
   }
 }
