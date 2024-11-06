@@ -1,0 +1,22 @@
+<section class="sidebar-section">
+    <div class="sidebar">
+        <div class="top-icon" *ngFor="let option of logoDesktop">
+            <img alt="image desktop" [src]="option.image">
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu" *ngFor="let option of menuIcons">
+                <button class="btn-menu">
+                    <img alt="image icons" class="svg" [src]="option.image">
+                    {{option.name}}
+                </button>
+            </div>
+        </div>
+        <div class="mobile" *ngFor="let option of logoMobile">
+            <img alt="image mobile" [src]="option.image">
+        </div>
+        <div class="logout-box">
+            <button (click)="logout()">Sair</button>
+            <span>V.1.0.0</span>
+        </div>
+    </div>
+</section>

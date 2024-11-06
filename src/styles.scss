@@ -1,4 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+//EDIÇÕES DOS SNACKBARS
+simple-snack-bar {
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-mdc-snack-bar-container {
+    padding: 25px 25px !important;
+    margin-right: 8px !important;
+    margin-top: 16px !important;
+
+    &.error-snackbar {
+        color: #fff;
+
+        .mdc-snackbar__surface {
+            background-color: #F3EDF7;
+        }
+
+        .mdc-button__label {
+            letter-spacing: -0.2px;
+        }
+    }
+}
+
+// SNACKBAR DE ERRO
+.error-snackbar {
+    .mat-simple-snackbar-action {
+        color: white;
+    }
+}
+
+#cdk-overlay06-6.cdk-overlay-pane {
+    background: none !important;
+}

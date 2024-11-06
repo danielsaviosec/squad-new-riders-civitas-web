@@ -7,9 +7,9 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 
 const routes: Routes = [
   { path: '', component: SelectProfileComponent },
-  { path: 'login/professor', component: LoginTeacherComponent },
-  { path: 'login/responsavel', component: LoginGuardianComponent },
-  { path: 'login/administrador', component: AdminLoginComponent }
+  { path: 'login-professor', component: LoginTeacherComponent },
+  { path: 'login-responsavel', component: LoginGuardianComponent },
+  { path: 'login-administrador', component: AdminLoginComponent }
 ];
 
 @NgModule({

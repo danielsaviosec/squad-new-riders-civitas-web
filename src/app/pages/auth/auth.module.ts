@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
 import { AuthRoutingModule } from './auth-routing.module';
 import { SelectProfileComponent } from './components/select-profile/select-profile.component';
 import { LoginTeacherComponent } from './components/login-teacher/login-teacher.component';
@@ -18,24 +17,22 @@ import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
+    AdminLoginComponent,
     SelectProfileComponent,
     LoginTeacherComponent,
-    LoginGuardianComponent,
-    AdminLoginComponent
+    LoginGuardianComponent
   ],
   imports: [
     AuthRoutingModule,
     CommonModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatIconModule,
     MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    SharedModule,
     MatFormFieldModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    SharedModule
-  ]
+    MatIconModule
+  ],
 })
 export class AuthModule {}
