@@ -5,7 +5,7 @@
         </div>
         <div class="sidebar-menu">
             <div class="menu" *ngFor="let option of menuIcons">
-                <button class="btn-menu">
+                <button class="btn-menu" (click)="navigateTo(option.route)">
                     <img class="svg" [src]="option.image">
                     {{option.name}}
                 </button>
