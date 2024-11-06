@@ -18,13 +18,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './components/shared.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TeacherRegistrationComponent } from './pages/teacher-registration/teacher-registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminScreenComponent,
     ClassRegistrationComponent,
-    SidebarComponent
+    SidebarComponent,
+    TeacherRegistrationComponent
   ],
   imports: [
     AppRoutingModule,
