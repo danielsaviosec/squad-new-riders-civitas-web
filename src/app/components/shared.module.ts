@@ -28,7 +28,9 @@ import { ListComponent } from './list/list.component';
   exports: [
     ButtonComponent,
     InputComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    SnackbarErrorComponent,
+    ListComponent
   ]
 })
 
