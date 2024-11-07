@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
+  @Input() tipo!: 'professor' | 'turma'; // Tipo de componente (professor ou turma)
 
+  // Inputs para professor
+  @Input() nomeCompleto?: string;
+  @Input() matricula?: string;
+  @Input() apelidosTurmas: string[] = [];
+
+  // Inputs para turma
+  @Input() apelidoTurma?: string;
+  @Input() anoLetivo?: string;
+  @Input() periodoLetivo?: string;
+  @Input() ensino?: string;
 }
