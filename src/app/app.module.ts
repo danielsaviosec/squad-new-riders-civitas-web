@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './components/shared.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TeacherRegistrationComponent } from './pages/teacher-registration/teacher-registration.component';
+import { TeacherScreenComponent } from './pages/teacher-screen/teacher-screen.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TeacherRegistrationComponent } from './pages/teacher-registration/teach
     AdminScreenComponent,
     ClassRegistrationComponent,
     SidebarComponent,
-    TeacherRegistrationComponent
+    TeacherRegistrationComponent,
+    TeacherScreenComponent
   ],
   imports: [
     AppRoutingModule,
