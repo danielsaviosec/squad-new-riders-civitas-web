@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-login-guardian',
-  templateUrl: './login-guardian.component.html',
-  styleUrls: ['./login-guardian.component.scss']
+  selector: 'app-login-teacher',
+  templateUrl: './login-teacher.component.html',
+  styleUrls: ['./login-teacher.component.scss'],
 })
-export class LoginGuardianComponent {
-  isInvalid: boolean = false;
-  inputValue: string = '';
+export class LoginTeacherComponent {
+  isInvalid = false;
+  inputValue = '';
 
   onInputValueChange(value: string): void {
     this.inputValue = value;
