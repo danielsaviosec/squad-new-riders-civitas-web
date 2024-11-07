@@ -3,14 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminScreenComponent } from './pages/admin-screen/admin-screen.component';
 import { ClassRegistrationComponent } from './pages/class-registration/class-registration.component';
 import { AdminLoginComponent } from './pages/auth/admin-login/admin-login.component';
+import { TeacherRegistrationComponent } from './pages/teacher-registration/teacher-registration.component';
 import { StudentRegistrationComponent } from './pages/student-registration/student-registration.component';
 import { AuthGuard } from './pages/auth/auth.guard';
 
 const routes: Routes = [
   { path: 'admin-screen', component: AdminScreenComponent },
   { path: 'class-registration', component: ClassRegistrationComponent },
-  { path: 'student-registration', component: StudentRegistrationComponent },
   { path: 'admin-login', component: AdminLoginComponent },
+  { path: 'teacher-registration', component: TeacherRegistrationComponent },
+  { path: 'student-registration', component: StudentRegistrationComponent },
   {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),

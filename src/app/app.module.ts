@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './components/shared.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TeacherRegistrationComponent } from './pages/teacher-registration/teacher-registration.component';
 import { StudentRegistrationComponent } from './pages/student-registration/student-registration.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { StudentRegistrationComponent } from './pages/student-registration/stude
     AdminScreenComponent,
     ClassRegistrationComponent,
     SidebarComponent,
+    TeacherRegistrationComponent
     StudentRegistrationComponent
   ],
   imports: [
