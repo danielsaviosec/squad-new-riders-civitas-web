@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { SnackbarErrorComponent } from './snackbar-error/snackbar-error.component';
 import { ListComponent } from './list/list.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ListComponent } from './list/list.component';
     InputComponent,
     BackButtonComponent,
     SnackbarErrorComponent,
-    ListComponent
+    ListComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { ListComponent } from './list/list.component';
     InputComponent,
     BackButtonComponent,
     SnackbarErrorComponent,
-    ListComponent
+    ListComponent,
+    SidebarComponent
   ]
 })
 

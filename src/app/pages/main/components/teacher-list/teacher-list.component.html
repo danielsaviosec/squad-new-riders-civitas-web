@@ -1,10 +1,11 @@
+
 <main>
   <section class="sidebar-section">
     <app-sidebar [menuIcons]="icons"></app-sidebar>
   </section>
 
   <div class="title">
-    <h2>Turmas cadastradas</h2>
+    <h2>Professores cadastrados</h2>
   </div>
 
   <div class="search">
@@ -21,8 +22,18 @@
 
   <section class="main-section">
       <div class="content-wrapper">
-        <app-list tipo="turma" [anoLetivo]="'2024'" [periodoLetivo]="'1º semestre'" [ensino]="'Ensino Médio'" [apelidoTurma]="'Turma A'"></app-list>
-        <app-list tipo="turma" [anoLetivo]="'2024'" [periodoLetivo]="'1º semestre'" [ensino]="'Ensino Médio'" [apelidoTurma]="'Turma C'"></app-list>
+        <app-list
+          tipo="professor"
+          [nomeCompleto]="'Professor João Silva'"
+          [matricula]="'Matrícula: 12345'"
+          [apelidosTurmas]="['Turma A', 'Turma B']">
+        </app-list>
+        <app-list
+          tipo="professor"
+          [nomeCompleto]="'Professor João Silva'"
+          [matricula]="'Matrícula: 12345'"
+          [apelidosTurmas]="['Turma A', 'Turma B']">
+        </app-list>
       </div>
   </section>
 </main>

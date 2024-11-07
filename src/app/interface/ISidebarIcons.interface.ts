@@ -1,5 +1,5 @@
 export interface ISidebarIcons {
-    name: string;
-    image: string;
-    route: string;
+  name: string;
+  image: string;
+  route: string;
 }
