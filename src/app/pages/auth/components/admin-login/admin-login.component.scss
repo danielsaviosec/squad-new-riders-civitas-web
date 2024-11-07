@@ -3,6 +3,7 @@
   display: grid;
   place-items: center;
   min-height: 100%;
+  box-sizing: border-box;
   padding: 12px;
 }
 
@@ -42,11 +43,21 @@ hgroup {
   h2 {
     font-size: clamp(35px, (1rem + 5vw), 45px);
     line-height: 52px;
+    font-size: 43px;
     text-align: center;
   }
 
   p {
     font-size: 16px;
+    padding-top: 15px;
     line-height: 24px;
   }
+}
+
+::ng-deep .snackbar-error {
+
+  .mdc-snackbar__surface {
+    background-color: #410E0B !important;
+  }
+
 }

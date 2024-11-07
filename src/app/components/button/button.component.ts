@@ -7,8 +7,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() label!: string; // Propriedade para definir o texto do botão
-  @Input() customClass: string = ''; // Classe personalizada
-  @Input() disabled: boolean = false;
+  @Input() customClass = ''; // Classe personalizada
+  @Input() disabled = false;
   @Output() clickEvent = new EventEmitter<void>(); // Evento de clique
 
   onClick() {
