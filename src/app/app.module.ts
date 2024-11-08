@@ -19,6 +19,7 @@ import { SharedModule } from './components/shared.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TeacherRegistrationComponent } from './pages/teacher-registration/teacher-registration.component';
 import { StudentRegistrationComponent } from './pages/student-registration/student-registration.component';
+import { TeacherScreenComponent } from './pages/teacher-screen/teacher-screen.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,9 @@ import { StudentRegistrationComponent } from './pages/student-registration/stude
     AdminScreenComponent,
     ClassRegistrationComponent,
     SidebarComponent,
-    TeacherRegistrationComponent
-    StudentRegistrationComponent
+    TeacherRegistrationComponent,
+    StudentRegistrationComponent,
+    TeacherScreenComponent
   ],
   imports: [
     AppRoutingModule,
