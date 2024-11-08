@@ -5,16 +5,40 @@ import { MainRoutingModule } from './main-routing.module';
 import { ClassListComponent } from './components/class-list/class-list.component';
 import { SharedModule } from 'src/app/components/shared.module';
 import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
+import { AdminScreenComponent } from "./components/admin-screen/admin-screen.component";
+import { ClassRegistrationComponent } from "./components/class-registration/class-registration.component";
+import { TeacherRegistrationComponent } from "./components/teacher-registration/teacher-registration.component";
+import { StudentRegistrationComponent } from "./components/student-registration/student-registration.component";
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
     ClassListComponent,
-    TeacherListComponent
+    TeacherListComponent,
+    AdminScreenComponent,
+    ClassRegistrationComponent,
+    TeacherRegistrationComponent,
+    StudentRegistrationComponent
   ],
   imports: [
     MainRoutingModule,
     CommonModule,
-    SharedModule
+    MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    SharedModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatOptionModule,
   ],
 })
 export class MainModule {}
