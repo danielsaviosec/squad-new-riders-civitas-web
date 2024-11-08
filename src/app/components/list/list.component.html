@@ -1,16 +1,25 @@
 <div class="card">
   <div class="section-text">
-    <h3>[Nome completo do professor], [matrícula do professor]</h3>
-    <span>[apelido de turma 1], [apelido de turma 2]</span>
+    <ng-container *ngIf="tipo === 'professor'; else turmaTemplate">
+      <!-- Exibir dados do professor -->
+      <h3>{{ nomeCompleto }}, {{ matricula }}</h3>
+      <span>{{ apelidosTurmas.join(', ') }}</span>
+    </ng-container>
+
+    <!-- Template para dados da turma -->
+    <ng-template #turmaTemplate>
+      <h3>{{ apelidoTurma }}</h3>
+      <span>{{ anoLetivo }}, {{ periodoLetivo }}, {{ ensino }}</span>
+    </ng-template>
   </div>
 
   <div class="section-controlers">
-    <button mat-icon-button aria-label="Editar">
-      <mat-icon style="font-size: 20px">edit</mat-icon>
+    <button mat-icon-button aria-label="Editar" title="Editar">
+      <mat-icon style="font-size: 18px">edit</mat-icon>
     </button>
 
-    <button mat-icon-button aria-label="Excluir">
-      <mat-icon style="font-size: 20px">delete</mat-icon>
+    <button mat-icon-button aria-label="Excluir" title="Excluir">
+      <mat-icon style="font-size: 18px">delete</mat-icon>
     </button>
   </div>
 </div>
