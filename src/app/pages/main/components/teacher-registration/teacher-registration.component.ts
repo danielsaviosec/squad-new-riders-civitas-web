@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './teacher-registration.component.html',
   styleUrls: ['./teacher-registration.component.scss']
 })
-export class TeacherRegistrationComponent {
+export class TeacherRegistrationComponent implements OnInit {
   form!: FormGroup;
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private snackbarErrorService: SnackbarErrorService, private router: Router) { }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MainRoutingModule } from './main-routing.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ClassListComponent } from './components/class-list/class-list.component';
 import { SharedModule } from 'src/app/components/shared.module';
@@ -12,11 +13,13 @@ import { StudentRegistrationComponent } from "./components/student-registration/
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
+import { SnackbarErrorComponent } from 'src/app/components/snackbar-error/snackbar-error.component';
+import { TeacherScreenComponent } from './components/teacher-screen/teacher-screen.component';
+import { MatSelectModule } from '@angular/material/select'
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { MatOptionModule } from '@angular/material/core';
     AdminScreenComponent,
     ClassRegistrationComponent,
     TeacherRegistrationComponent,
-    StudentRegistrationComponent
+    StudentRegistrationComponent,
+    TeacherScreenComponent,
+    SnackbarErrorComponent // Certifique-se de declarar o componente
   ],
   imports: [
     MainRoutingModule,
@@ -33,12 +38,13 @@ import { MatOptionModule } from '@angular/material/core';
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSnackBarModule,
+    MatSnackBarModule, // Certifique-se de importar o MatSnackBarModule
     MatProgressSpinnerModule,
     SharedModule,
     MatFormFieldModule,
     MatIconModule,
     MatOptionModule,
-  ],
+    MatSelectModule
+  ]
 })
 export class MainModule {}

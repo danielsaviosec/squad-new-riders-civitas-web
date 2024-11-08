@@ -9,7 +9,7 @@ import { IAdminScreenCard, ILogo } from 'src/app/interface';
 })
 
 export class AdminScreenComponent {
-  
+
   logoDesktop: ILogo[] = [
     { name: "Logo Civitas", image: 'assets/civitas-logos/logo_civitas_sem_fundo.webp' }
   ];
@@ -27,6 +27,6 @@ export class AdminScreenComponent {
 // ======================================
 //Direcionamento do botão de "Cadastrar Turmas" para a página de cadastro.
   intoToClassRegistration():void {
-    this.router.navigate(['/class-registration']);
+    this.router.navigate(['/main/class-registration']);
   }
 }

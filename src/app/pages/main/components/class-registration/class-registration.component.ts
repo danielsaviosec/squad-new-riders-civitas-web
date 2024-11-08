@@ -45,7 +45,7 @@ export class ClassRegistrationComponent implements OnInit {
   }
 
   //=================================
-  //Botão voltar 
+  //Botão voltar
   goBack():void {
     this.router.navigate(['/admin-screen'])
   }
