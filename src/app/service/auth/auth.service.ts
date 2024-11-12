@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.development';
 
-export interface LoginCredentials {
+export interface LoginAdminCredentials {
   email: string;
   password: string;
 }
@@ -15,11 +16,15 @@ export interface LoginResponse {
   user: string;
 }
 
+export interface LoginProfessorCredentials {
+  registrationNumber: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = '@civitas:token';
+  private tokenKey = 'token';
   private userKey = '@civitas:user';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -33,11 +38,21 @@ export class AuthService {
    * @param credentials - Credenciais do usuário.
    * @returns Observable com a resposta de login.
    */
-  login(credentials: LoginCredentials): Observable<LoginResponse> {
-    // TODO: falta conectar com a URL do backend
-    return this.http.post<LoginResponse>('/admin/login', credentials).pipe(
+  loginAdmin(credentials: LoginAdminCredentials): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(environment.apiUrl+'admin/login', credentials).pipe(
       tap((response) => {
         if(response.token && response.user) {
+          this.saveUserToStorage(response.token, response.user);
+        }
+      })
+    );
+  }
+
+  // Novo método de login para o professor
+  loginProfessor(credentials: LoginProfessorCredentials): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}teachers/login`, credentials).pipe(
+      tap((response) => {
+        if (response.token && response.user) {
           this.saveUserToStorage(response.token, response.user);
         }
       })
@@ -50,7 +65,7 @@ export class AuthService {
    * @returns `true` se o usuário está autenticado, caso contrário, `false`.
    */
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.tokenKey) && !!localStorage.getItem(this.userKey);
+    return !!localStorage.getItem(this.tokenKey);
   }
 
   /**

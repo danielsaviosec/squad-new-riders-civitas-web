@@ -1,316 +1,145 @@
 @import '../../../../styles/variables.scss';
 
 main {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "sidebar description-section"
+        "sidebar cards-section";
+    grid-template-columns: 172px auto;
+    grid-template-rows: 360px auto;
+    margin-right: 10%;
 
-    section {
+    .content-wrapper {
+        grid-area: description-section;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
+        margin-top: 4rem;
+        padding-left: 4rem;
+        width: 100%;
 
-    .sidebar-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 80vh;
-        flex-grow: 0.3;
-        padding: 3.3rem;
-        position: fixed;
-        top: 10%;
-        left: 0;
-        background: $primary-color;
-        transition: all 0.3s ease;
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+        }
 
-        .sidebar {
-            display: flex;
-            justify-content: space-around;
-            flex-direction: column;
-            align-items: center;
+        .content {
+            font-size: 1rem;
+            font-weight: 400;
+            width: 80%;
+        }
 
-            .top-icon {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: #fff;
-                width: 90px;
-                height: 90px;
-                border-radius: 100%;
-                position: absolute;
-                top: -8%;
-                left: 18%;
+        .btn-content {
+            background: $primary-color;
+            border: none;
+            border-radius: 25px;
+            margin-top: 2rem;
+            font-weight: 400;
+            font-size: 0.7rem;
+            padding: 0.2rem;
+            height: 30px;
+            width: 220px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-                img {
-                    width: 82px;
-                    height: 82px;
-                    margin-top: 1.5rem;
-                    margin-bottom: 0.8rem;
-                    border-radius: 50%;
-                }
-            }
-
-            .mobile {
-                display: none;
-            }
-
-            .logout-box {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-top: 25rem;
-                gap: 1.3rem;
-
-                a {
-                    color: #000;
-                    font-size: 1.3rem;
-                    text-align: center;
-                    font-weight: 700;
-                    transition: all 0.3s ease-in-out;
-                }
-
-                a:hover {
-                    color: #292929;
-                }
-
-                span {
-                    color: #292929;
-                    font-size: 0.625rem;
-                    text-align: center;
-                }
-            }
+        .btn-content:hover {
+            background: $button-register-color;
+            color: #fff;
         }
     }
 
-    .main-section {
-        flex-grow: 3;
-        margin: 5rem 0 0 3rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .card-wrapper {
+        grid-area: cards-section;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        padding-left: 4rem;
 
-        .content-wrapper {
-            display: flex;
-            flex-direction: column;
-            margin-top: 1rem;
-            max-width: 56rem;
-            width: 100%;
+        .card {
+            background-color: $secondary-color;
+            width: 300px;
+            height: 265px;
+            padding: 0.625rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+            margin-top: 2.5rem;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.03), inset 0px 1px 0px rgba(255, 255, 255, 0.03);
 
-            h1 {
-                font-size: 2.8rem;
-                font-weight: 500;
-                margin-bottom: 3rem;
+            img {
+                width: 225px;
+                height: 70%;
+                margin: 0 auto;
+                margin-top: 0.8rem;
+                border-radius: 8px;
             }
 
-            .content {
-                font-size: 1rem;
-                font-weight: 400;
-                width: 80%;
-            }
-
-            .btn-content {
-                background: $primary-color;
+            .btn-card {
+                background: #fff;
                 border: none;
+                width: 80%;
+                height: 13%;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
                 border-radius: 25px;
-                margin-top: 2rem;
+                font-size: 0.625rem;
                 font-weight: 400;
-                font-size: 0.7rem;
-                padding: 0.3rem;
-                height: 25%;
-                width: 28%;
                 transition: all 0.3s ease;
                 cursor: pointer;
             }
 
-            .btn-content:hover {
+            .btn-card:hover {
                 background: $button-register-color;
                 color: #fff;
-            }
-        }
-
-        .card-wrapper {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            padding-left: 4rem;
-
-            .card {
-                background-color: $secondary-color;
-                width: 300px;
-                height: 265px;
-                padding: 0.625rem;
-                border-radius: 8px;
-                text-align: center;
-                margin-bottom: 3rem;
-                margin-top: 2.5rem;
-                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.03), inset 0px 1px 0px rgba(255, 255, 255, 0.03);
-
-                img {
-                    width: 225px;
-                    height: 70%;
-                    margin: 0 auto;
-                    margin-top: 0.8rem;
-                    border-radius: 8px;
-                }
-
-                .btn-card {
-                    background: #fff;
-                    border: none;
-                    width: 80%;
-                    height: 13%;
-                    margin-top: 1rem;
-                    border-radius: 25px;
-                    font-size: 0.625rem;
-                    font-weight: 400;
-                    transition: all 0.3s ease;
-                    cursor: pointer;
-                }
-
-                .btn-card:hover {
-                    background: $button-register-color;
-                    color: #fff;
-                }
-            }
-        }
-    }
-
-    footer {
-        display: none;
-    }
-
-    /* ==== MOBILE ===== */
-    @media (max-width: 1200px) {
-        .main-section {
-            margin-right: -4rem;
-        }
-    }
-
-    @media (max-width: 940px) {
-        .top-icon {
-            top: -5%
-        }
-
-        .logout-box {
-            gap: 0.8rem;
-            margin-bottom: 3rem;
-        }
-
-        .main-section {
-            margin-left: 12rem;
-            width: 70%;
-
-            .content-wrapper h1 {
-                font-size: 2.2rem;
-            }
-
-            .card-wrapper {
-                padding-left: 0;
             }
         }
     }
 
     @media (max-width: 810px) {
-        flex-direction: column;
+        width: 100%;
+        grid-template-areas:
+            "sidebar"
+            "description-section"
+            "cards-section";
+        grid-template-columns: auto;
+        grid-template-rows: 100px auto;
 
-        .sidebar-section {
-            position: static;
-            width: 100%;
-            min-height: auto;
-            padding: 1rem;
-            flex-grow: 0;
-            border-bottom: 2px solid #29292950;
+        .content-wrapper h1 {
+            margin-inline: 2px;
+            font-size: 1.8rem;
+            width: 70%;
+        }
 
-            .sidebar {
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
+        .content-wrapper {
+            padding-left: 15px;
+            margin-inline: 15px;
+            width: 70%;
 
-                .top-icon {
-                    display: none;
-                }
-
-                .mobile {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    img {
-                        width: 280px;
-                    }
-                }
-
-                .logout-box {
-                    display: none;
-                }
+            .content {
+                font-size: 0.8rem;
             }
         }
 
-        .main-section {
-            margin: 1rem auto;
+        .content-wrapper .content {
+            flex-direction: column;
             width: 100%;
 
-            .content-wrapper {
-                padding: 3rem;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-
-                h1 {
-                    font-size: 2rem;
-                    width: 80%;
-                }
-
-                .btn-content {
-                    width: 70%;
-                }
-            }
-
-            .card-wrapper {
-                grid-template-columns: 1fr;
-                margin: 1rem auto;
-
-                .card {
-                    width: 100%;
-                }
+            .text-wrapper h2 {
+                font-size: 1.5rem;
             }
         }
 
-        footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 10vh;
-            background: #B8ADD4;
-            border-top: 2px solid #29292950;
-            padding: 1rem;
-            gap: 1rem;
+        .card-wrapper {
+            padding-left: 15px;
+            margin-top: 15px;
+            grid-template-columns: 1fr;
+            margin-inline: 5px;
+            gap: 1px;
 
-            a {
-                display: block;
-                justify-content: center;
-                align-items: center;
-                color: #000;
-                font-size: 1.3rem;
-                text-align: center;
-                font-weight: 700;
-                transition: all 0.3s ease-in-out;
-            }
-
-            a:hover {
-                color: #292929;
-            }
-
-            span {
-                padding: 1rem;
-                color: #292929;
-                font-size: 0.625rem;
-                text-align: center;
+            .card {
+                margin-bottom: 5px;
             }
         }
     }

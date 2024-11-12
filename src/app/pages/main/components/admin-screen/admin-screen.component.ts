@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { IAdminScreenCard, ILogo } from 'src/app/interface';
+import { IAdminScreenCard, ISidebarIcons } from 'src/app/interface';
 
 @Component({
   selector: 'app-admin-screen',
@@ -10,23 +10,29 @@ import { IAdminScreenCard, ILogo } from 'src/app/interface';
 
 export class AdminScreenComponent {
 
-  logoDesktop: ILogo[] = [
-    { name: "Logo Civitas", image: 'assets/civitas-logos/logo_civitas_sem_fundo.webp' }
+  icons: ISidebarIcons[] = [
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/admin-screen' },
+    { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
+    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
-  logoMobile: ILogo[] = [
-    { name: "Civitas - logo em azul com escrita em preto", image: 'assets/civitas-logos/logo_completo_horizontal_civitas.webp' }
-  ]
-
   cardsAdmin: IAdminScreenCard[] = [
-    { title: 'Cadastrar Turmas', image: 'assets/admin-screen-cards/cadastro.jpg' }
+    { title: 'Cadastrar Turmas', image: 'assets/admin-screen-cards/cadastro.jpg', route: 'main/class-registration' },
+    { title: 'Cadastrar Estudantes', image: 'assets/admin-screen-cards/cadastro.jpg', route: 'main/student-registration' },
+    { title: 'Cadastrar Professores', image: 'assets/admin-screen-cards/cadastro.jpg', route: 'main/teacher-registration' },
   ];
 
   constructor(private router: Router) { }
 
-// ======================================
-//Direcionamento do botão de "Cadastrar Turmas" para a página de cadastro.
-  intoToClassRegistration():void {
-    this.router.navigate(['/main/class-registration']);
+  // ======================================
+  //Direcionamento do botão de "Acesse aqui".
+  intoToVideo(): void {
+    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_self');
+  }
+
+  //Direcionamento do botão dos cards para as páginas de cadastros.
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }

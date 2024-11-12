@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { BackButtonComponent } from './back-button/back-button.component';
@@ -25,14 +26,16 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    RouterModule
   ],
   exports: [
     ButtonComponent,
     InputComponent,
     BackButtonComponent,
     ListComponent,
-    SidebarComponent
+    SidebarComponent,
+    RouterModule
   ],
   providers: [MatSnackBar]
 })

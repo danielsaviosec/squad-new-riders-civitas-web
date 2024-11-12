@@ -1,15 +1,27 @@
 <div class="card">
   <div class="section-text">
-    <ng-container *ngIf="tipo === 'professor'; else turmaTemplate">
+    <ng-container *ngIf="tipo === 'professor'; else tipoTemplate">
       <!-- Exibir dados do professor -->
       <h3>{{ nomeCompleto }}, {{ matricula }}</h3>
       <span>{{ apelidosTurmas.join(', ') }}</span>
     </ng-container>
 
-    <!-- Template para dados da turma -->
-    <ng-template #turmaTemplate>
-      <h3>{{ apelidoTurma }}</h3>
-      <span>{{ anoLetivo }}, {{ periodoLetivo }}, {{ ensino }}</span>
+    <!-- Template para dados de turma ou estudante -->
+    <ng-template #tipoTemplate>
+      <ng-container *ngIf="tipo === 'turma'; else estudanteTemplate">
+        <!-- Exibir dados da turma -->
+        <h3>{{ apelidoTurma }}</h3>
+        <span>{{ anoLetivo }}, {{ periodoLetivo }}, {{ ensino }}</span>
+      </ng-container>
+
+      <!-- Template para dados do estudante -->
+      <ng-template #estudanteTemplate>
+        <h3>{{ nomeDoEstudante }}, {{ matriculaDoEstudante }}</h3>
+        <span>
+          {{ apelidoTurmaEstudante }}, {{ rgCpfDoEstudante }},
+          CPF do Responsável: {{ cpfResponsavel }}
+        </span>
+      </ng-template>
     </ng-template>
   </div>
 

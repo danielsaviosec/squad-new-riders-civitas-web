@@ -19,7 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
 import { SnackbarErrorComponent } from 'src/app/components/snackbar-error/snackbar-error.component';
 import { TeacherScreenComponent } from './components/teacher-screen/teacher-screen.component';
-import { MatSelectModule } from '@angular/material/select'
+import { MatSelectModule } from '@angular/material/select';
+import { StudentListComponent } from './components/student-list/student-list.component';
+import { SearchClassComponent } from './components/search-class/search-class.component';
+import { SearchStudentComponent } from './components/search-student/search-student.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { MatSelectModule } from '@angular/material/select'
     TeacherRegistrationComponent,
     StudentRegistrationComponent,
     TeacherScreenComponent,
-    SnackbarErrorComponent // Certifique-se de declarar o componente
+    SnackbarErrorComponent,
+    StudentListComponent,
+    SearchClassComponent,
+    SearchStudentComponent // Certifique-se de declarar o componente
   ],
   imports: [
     MainRoutingModule,

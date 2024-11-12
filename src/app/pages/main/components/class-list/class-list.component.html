@@ -1,6 +1,11 @@
-<main>
+<div *ngIf="isLoading" class="loading-spinner">
+  <!-- Spinner de carregamento -->
+  <mat-spinner></mat-spinner>
+</div>
+
+<main *ngIf="!isLoading">
   <section class="sidebar-section">
-    <app-sidebar [menuIcons]="icons"></app-sidebar>
+    <app-sidebar [homeLink]="{ route: 'main/teacher-screen' }" [menuIcons]="icons"></app-sidebar>
   </section>
 
   <div class="title">
@@ -19,10 +24,19 @@
     </div>
   </div>
 
+  <div class="sub-title">
+  </div>
+
   <section class="main-section">
-      <div class="content-wrapper">
-        <app-list tipo="turma" [anoLetivo]="'2024'" [periodoLetivo]="'1º semestre'" [ensino]="'Ensino Médio'" [apelidoTurma]="'Turma A'"></app-list>
-        <app-list tipo="turma" [anoLetivo]="'2024'" [periodoLetivo]="'1º semestre'" [ensino]="'Ensino Médio'" [apelidoTurma]="'Turma C'"></app-list>
-      </div>
+    <div class="content-wrapper">
+      <!-- Itera sobre as turmas recebidas da API -->
+      <app-list *ngFor="let turma of turmaOptions"
+                tipo="turma"
+                [anoLetivo]="turma.schoolYear"
+                [periodoLetivo]="turma.schoolShift"
+                [ensino]="turma.educationType"
+                [apelidoTurma]="turma.name">
+      </app-list>
+    </div>
   </section>
 </main>

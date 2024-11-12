@@ -1,0 +1,26 @@
+<main>
+    <section class="sidebar-section">
+        <app-sidebar [homeLink]="{ route: 'main/teacher-screen' }" [menuIcons]="icons"></app-sidebar>
+    </section>
+
+    <div class="title">
+        <h2>Plano de Desenvolvimento Individual</h2>
+    </div>
+
+    <div class="search">
+        <app-back-button></app-back-button>
+    </div>
+
+    <div class="sub-title">
+        <h3>Suas turmas</h3>
+    </div>
+
+    <section class="main-section">
+        <app-list tipo="professor" [nomeCompleto]="'Professor João Silva'" [matricula]="'Matrícula: 12345'"
+            [apelidosTurmas]="['Turma A', 'Turma B']">
+        </app-list>
+        <app-list tipo="professor" [nomeCompleto]="'Professor João Silva'" [matricula]="'Matrícula: 12345'"
+            [apelidosTurmas]="['Turma A', 'Turma B']">
+        </app-list>
+    </section>
+</main>

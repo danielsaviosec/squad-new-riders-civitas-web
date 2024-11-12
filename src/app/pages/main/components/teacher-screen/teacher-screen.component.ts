@@ -9,7 +9,7 @@ import { ISidebarIcons } from 'src/app/interface';
 })
 export class TeacherScreenComponent {
   icons: ISidebarIcons[] = [
-    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: '/' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/teacher-screen' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
   ];
 

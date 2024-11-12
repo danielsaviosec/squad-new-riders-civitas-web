@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AnoLetivoOption, PeriodoLetivoOption, EnsinoOption } from 'src/app/interface/IClassRegistration.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
+import { ClassService, ClassRegistrationData } from 'src/app/service/classes/classes.service';
 
 @Component({
   selector: 'app-class-registration',
@@ -11,29 +12,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./class-registration.component.scss']
 })
 export class ClassRegistrationComponent implements OnInit {
-  form!: FormGroup;
+  form = new FormGroup({
+    anoLetivo: new FormControl('', Validators.required),
+    periodoLetivo: new FormControl('', Validators.required),
+    ensino: new FormControl('', Validators.required),
+    apelidoTurma: new FormControl('', [Validators.required, Validators.maxLength(20)])
+  });
 
   anoLetivo: AnoLetivoOption[] = [
-    { value: '1-ano', label: '1º ano' },
-    { value: '2-ano', label: '2º ano' },
-    { value: '3-ano', label: '3º ano' },
-    { value: '4-ano', label: '4º ano' },
-    { value: '5-ano', label: '5º ano' },
-    { value: '6-ano', label: '6º ano' },
-    { value: '7-ano', label: '7º ano' },
+    { value: '1-ano', label: '1º ano', backName: '1st year' },
+    { value: '2-ano', label: '2º ano', backName: '2nd year' },
+    { value: '3-ano', label: '3º ano', backName: '3rd year' },
+    { value: '4-ano', label: '4º ano', backName: '4th year' },
+    { value: '5-ano', label: '5º ano', backName: '5th year' },
+    { value: '6-ano', label: '6º ano', backName: '6th year' }
   ];
   periodoLetivo: PeriodoLetivoOption[] = [
-    { value: 'manha', label: 'Manhã' },
-    { value: 'tarde', label: 'Tarde' },
-    { value: 'noite', label: 'Noite' },
+    { value: 'manha', label: 'Manhã', backName: 'Morning' },
+    { value: 'tarde', label: 'Tarde', backName: 'Afternoon' },
+    { value: 'noite', label: 'Noite', backName: 'Night' },
   ];
   ensino: EnsinoOption[] = [
-    { value: 'maternal', label: 'Maternal' },
-    { value: 'preEscola', label: 'Pré-escola' },
-    { value: 'ensinoFundamental', label: 'Ensino Fundamental 1' },
+    { value: 'maternal', label: 'Maternal', backName: 'Nursery' },
+    { value: 'preEscola', label: 'Pré-escola', backName: 'Preschool' },
+    { value: 'ensinoFundamental', label: 'Ensino Fundamental 1', backName: 'Elementary school 1' },
   ];
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private snackbarErrorService: SnackbarErrorService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private snackbarErrorService: SnackbarErrorService,
+    private router: Router,
+    private classService: ClassService
+  ) { }
 
   ngOnInit():void {
     this.form = this.fb.group({
@@ -53,18 +64,32 @@ export class ClassRegistrationComponent implements OnInit {
   //===================
   //Lógicas do cadastro enviado ou repetição de nomes
   onSubmit():void {
-    if (this.form.valid) {
-      this.showSuccessMessage();
-    } else {
-      this.errorMessage();
-    }
+    if (this.form.invalid) return;
+
+    const formValues = this.form.value;
+
+    const selectedAnoLetivo = this.anoLetivo.find(option => option.value === formValues.anoLetivo)?.backName ?? '';
+    const selectedPeriodoLetivo = this.periodoLetivo.find(option => option.value === formValues.periodoLetivo)?.backName ?? '';
+    const selectedEnsino = this.ensino.find(option => option.value === formValues.ensino)?.backName ?? '';
+
+    const classData: ClassRegistrationData = {
+      name: formValues.apelidoTurma ?? '',
+      schoolYear: selectedAnoLetivo,
+      schoolShift: selectedPeriodoLetivo,
+      educationType: selectedEnsino
+    };
+
+    this.classService.registerClass(classData).subscribe({
+      next: () => this.handleSuccess(),
+      error: () => this.handleError()
+    });
   }
 
-  showSuccessMessage():void {
-    this.snackBar.open('Turma cadastrada com sucesso!', '', {
+  private handleSuccess() {
+    this._snackBar.open('Turma cadastrada com sucesso!', '', {
       duration: 3000,
-      panelClass: ['sucess-snackbar'],
       horizontalPosition: 'right',
+      panelClass: 'snackbar-success'
     });
 
     setTimeout(() => {
@@ -72,9 +97,9 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  errorMessage():void {
+  handleError():void {
     this.snackbarErrorService.showErrorMessage(
-      'Turma já existe',
+      'Erro ao cadastrar turma. Tente novamente.',
       'Verifique as informações digitadas ou cadastre novos dados'
     );
   }

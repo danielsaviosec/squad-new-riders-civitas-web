@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
+import { StudentService, StudentRegistrationData } from '../../../../service/students/student.service';
 
 @Component({
   selector: 'app-student-registration',
@@ -12,38 +13,27 @@ import { Router } from '@angular/router';
 export class StudentRegistrationComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private snackbarErrorService: SnackbarErrorService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private snackbarErrorService: SnackbarErrorService,
+    private router: Router,
+    private studentService: StudentService // Adiciona o serviço StudentService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      nome: ['', Validators.required, Validators.maxLength(50)],
-      matricula: ['', Validators.required, Validators.maxLength(20)],
+      nome: ['', [Validators.required, Validators.maxLength(50)]],
+      matricula: ['', [Validators.required, Validators.maxLength(20)]],
       turma: ['', Validators.required],
       cpfResponsavel: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/), Validators.maxLength(14)]],
       cpfOrRg: ['', [Validators.required, this.cpfOrRgValidator, Validators.maxLength(14)]]
     });
   }
 
-  /** cpfOuRgValidator
- * Validador para verificar se o valor de entrada é CPF ou RG válido.
- * 
- * Esta função verifica se o valor de um campo corresponde ao formato esperado de um CPF ou de um RG (variando de 7 a 14 dígitos, com ou sem pontos e hífen).
- * Se o valor corresponder a um dos formatos, a função retorna "null", indicando que o valor é válido.
- * Caso contrário, ela retorna um objeto de erro { invalidCpfOrRg: true }.
- *
- * Estrutura dos Padrões de Regex
- * - CPF: O formato 000.000.000-00 é esperado, onde cada 0(zero) representa um dígito numérico.
- * - RG: Permite uma sequência de 7 a 14 dígitos, separada por pontos e/ou hífen, dependendo das variações regionais dos estados brasileiros.
- * 
- * @param control O controle do formulário a ser validado.
- * @returns "null" se o valor é um CPF ou RG válido; caso contrário, retorna { invalidCpfOrRg: true }.
- */
-
   cpfOrRgValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
-
     const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-
     const rgRegex = /^(\d{1,2}\.?\d{3}\.?\d{3}-?\d{1,2}|\d{7,14})$/;
 
     if (cpfRegex.test(value) || rgRegex.test(value)) {
@@ -53,22 +43,35 @@ export class StudentRegistrationComponent implements OnInit {
     return { invalidCpfOrRg: true };
   }
 
-  //=================================
-  //Botão voltar 
   goBack(): void {
-    this.router.navigate(['/admin-screen'])
+    this.router.navigate(['/admin-screen']);
   }
 
-  //Snackbar de sucesso se tudo for válido, e Snackbar de erro caso informação for inválida
+  // Submissão do formulário
   onSubmit(): void {
     if (this.form.valid) {
-      this.showSuccessMessage()
+      const studentData: StudentRegistrationData = {
+        fullName: this.form.value.nome,
+        document: this.form.value.cpfOrRg,
+        registrationNumber: this.form.value.matricula,
+        studentClass: this.form.value.turma,
+        cpfGuardian: this.form.value.cpfResponsavel
+      };
+
+      this.studentService.registerStudent(studentData).subscribe(
+        () => {
+          this.showSuccessMessage();
+        },
+        (error) => {
+          console.error('Erro ao cadastrar estudante:', error);
+          this.errorMessage();
+        }
+      );
     } else {
       this.errorMessage();
     }
   }
 
-  //Snackbar de sucesso
   showSuccessMessage(): void {
     this.snackBar.open('Estudante cadastrado com sucesso!', '', {
       duration: 3000,
@@ -77,15 +80,14 @@ export class StudentRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen'])
+      this.router.navigate(['/admin-screen']);
     }, 3500);
   }
 
-  //Snackbar de erro
   errorMessage(): void {
     this.snackbarErrorService.showErrorMessage(
-      'Estudante já existe no cadastro',
-      'Verifique as informações digitadas ou digite novas informações.'
+      'Erro ao cadastrar professor',
+      'Verifique os dados e tente novamente.'
     );
   }
 }
