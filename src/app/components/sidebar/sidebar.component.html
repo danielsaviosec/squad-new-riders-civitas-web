@@ -1,11 +1,13 @@
 <section class="sidebar-section">
     <div class="sidebar">
         <div class="top-icon" *ngFor="let option of logoDesktop">
-            <img alt="image desktop" [src]="option.image">
+            <a [routerLink]="[homeLink.route]" class="logo-link">
+                <img alt="image desktop" [src]="option.image">
+            </a>
         </div>
         <div class="sidebar-menu">
             <div class="menu" *ngFor="let option of menuIcons">
-                <button class="btn-menu">
+                <button (click)="navigateTo(option.route)" class="btn-menu">
                     <img alt="image icons" class="svg" [src]="option.image">
                     {{option.name}}
                 </button>

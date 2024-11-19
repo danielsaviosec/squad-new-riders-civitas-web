@@ -5,25 +5,25 @@
     <div class="logo-civitas"></div>
     <h1>Seja bem-vindo!</h1>
     <p>
-      Olá, professor(a)!<br/>
+      Olá, professor(a)!<br />
       Aproveite a nossa ferramenta para aprimorar o desenvolvimento pessoal dos seus estudantes!
     </p>
-    <div class="button-group">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit($event)" class="button-group">
       <app-input
         type="number"
         label="Número de matrícula do professor"
         placeholder="Digite o número de matrícula"
-        [hasError]="isInvalid"
+        [hasError]="isInvalidRequired()"
         errorMessage="O número de matrícula está incorreta"
-        (inputValueChange)="onInputValueChange($event)"
+        (inputValueChange)="authForm.get('registrationNumber')?.setValue($event)"
       >
       </app-input>
       <app-button
         label="Entrar"
-        [disabled]="isButtonDisabled()"
-        (clickEvent)="validateInput()"
+        [disabled]="authForm.invalid"
+        type="submit"
       >
       </app-button>
-    </div>
+    </form>
   </div>
 </div>

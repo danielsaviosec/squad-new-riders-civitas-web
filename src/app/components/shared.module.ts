@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { BackButtonComponent } from './back-button/back-button.component';
@@ -7,16 +8,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { SnackbarErrorComponent } from './snackbar-error/snackbar-error.component';
 import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     InputComponent,
     BackButtonComponent,
-    SnackbarErrorComponent,
     ListComponent,
     SidebarComponent
   ],
@@ -25,16 +25,19 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatIconModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule,
+    RouterModule
   ],
   exports: [
     ButtonComponent,
     InputComponent,
     BackButtonComponent,
-    SnackbarErrorComponent,
     ListComponent,
-    SidebarComponent
-  ]
+    SidebarComponent,
+    RouterModule
+  ],
+  providers: [MatSnackBar]
 })
 
 export class SharedModule {}

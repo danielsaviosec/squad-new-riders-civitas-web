@@ -9,22 +9,22 @@ import { ISidebarIcons } from 'src/app/interface';
 })
 export class TeacherScreenComponent {
   icons: ISidebarIcons[] = [
-    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: '/' },
-    { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/listing-classes' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/teacher-screen' },
+    { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
   ];
 
   constructor(private router: Router) { }
 
   /**greeting
-   * 
+   *
    * Retorna uma saudação apropriada com base no horário do dispositivo do usuário.
-   * 
+   *
    * Bom dia: entre as 5h até as 11h59
    * Boa tarde: entre 12h até as 17h59
    * Boa noite: entre 18h até as 4h59
-   * 
+   *
    * @returns string: uma saudação conforme o horário do usuário ao acessar a página.
-   * 
+   *
    */
 
   get greeting(): string {
@@ -41,6 +41,6 @@ export class TeacherScreenComponent {
 
   //Direcionamento do botão de "Buscar Turmas" para a página de turmas.
   intoToListingClasses(): void {
-    this.router.navigate(['main/listing-classes']);
+    this.router.navigate(['main/class-list']);
   }
 }

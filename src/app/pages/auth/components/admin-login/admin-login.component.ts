@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {
   AuthService,
-  LoginCredentials,
+  LoginAdminCredentials,
   LoginResponse,
 } from '../../../../service/auth/auth.service';
 
@@ -30,9 +30,9 @@ export class AdminLoginComponent {
     $event.preventDefault();
     this.authForm.markAsPending();
 
-    const credentials = this.authForm.value as LoginCredentials;
+    const credentials = this.authForm.value as LoginAdminCredentials;
 
-    this.authService.login(credentials).subscribe({
+    this.authService.loginAdmin(credentials).subscribe({
       next: (response) => this.handleLoginSuccess(response),
       error: (error: HttpErrorResponse) => this.handleLoginError(error),
     });
@@ -60,7 +60,7 @@ export class AdminLoginComponent {
   private handleLoginSuccess(response: LoginResponse) {
     if (response.token) {
       localStorage.setItem('token', response.token);
-      this.router.navigate(['/']);
+      this.router.navigate(['/main']);
     }
   }
 
