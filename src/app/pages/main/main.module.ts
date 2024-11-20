@@ -24,7 +24,8 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { SearchClassComponent } from './components/search-class/search-class.component';
 import { SearchStudentComponent } from './components/search-student/search-student.component';
 import { UpdateStudentComponent } from './components/update-student/update-student.component';
-import { UpdateTeacherComponent } from './components/update-teacher/update-teacher.component'
+import { UpdateTeacherComponent } from './components/update-teacher/update-teacher.component';
+import { UpdateClassComponent } from './components/update-class/update-class.component'
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UpdateTeacherComponent } from './components/update-teacher/update-teach
     SearchClassComponent,
     SearchStudentComponent,
     UpdateStudentComponent,
-    UpdateTeacherComponent // Certifique-se de declarar o componente
+    UpdateTeacherComponent,
+    UpdateClassComponent // Certifique-se de declarar o componente
   ],
   imports: [
     MainRoutingModule,
