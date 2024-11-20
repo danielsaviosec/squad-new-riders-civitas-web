@@ -23,7 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { SearchClassComponent } from './components/search-class/search-class.component';
 import { SearchStudentComponent } from './components/search-student/search-student.component';
-import { UpdateStudentComponent } from './components/update-student/update-student.component'
+import { UpdateStudentComponent } from './components/update-student/update-student.component';
+import { UpdateTeacherComponent } from './components/update-teacher/update-teacher.component'
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UpdateStudentComponent } from './components/update-student/update-stude
     StudentListComponent,
     SearchClassComponent,
     SearchStudentComponent,
-    UpdateStudentComponent // Certifique-se de declarar o componente
+    UpdateStudentComponent,
+    UpdateTeacherComponent // Certifique-se de declarar o componente
   ],
   imports: [
     MainRoutingModule,
