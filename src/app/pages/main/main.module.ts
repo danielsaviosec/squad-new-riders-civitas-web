@@ -22,7 +22,8 @@ import { TeacherScreenComponent } from './components/teacher-screen/teacher-scre
 import { MatSelectModule } from '@angular/material/select';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { SearchClassComponent } from './components/search-class/search-class.component';
-import { SearchStudentComponent } from './components/search-student/search-student.component'
+import { SearchStudentComponent } from './components/search-student/search-student.component';
+import { UpdateStudentComponent } from './components/update-student/update-student.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SearchStudentComponent } from './components/search-student/search-stude
     SnackbarErrorComponent,
     StudentListComponent,
     SearchClassComponent,
-    SearchStudentComponent // Certifique-se de declarar o componente
+    SearchStudentComponent,
+    UpdateStudentComponent // Certifique-se de declarar o componente
   ],
   imports: [
     MainRoutingModule,
