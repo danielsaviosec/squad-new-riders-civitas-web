@@ -5,14 +5,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
-  @Input() type: string = 'text';
-  @Input() errorMessage: string = '';
-  @Input() hasError: boolean = false;
+  @Input() label = '';
+  @Input() placeholder = '';
+  @Input() type = 'text';
+  @Input() errorMessage = '';
+  @Input() hasError = false;
   @Output() inputValueChange = new EventEmitter<string>();
 
-  value: string = '';
+  value = '';
 
   onInput(event: Event):void {
     this.value = (event.target as HTMLInputElement).value;

@@ -1,0 +1,63 @@
+:host {
+  background-color: rgba($color: #65558f, $alpha: 0.65);
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+}
+
+section {
+  background: #fff;
+  box-sizing: border-box;
+  max-width: 500px;
+  padding: 50px 25px;
+
+  @media screen and (min-width: 480px) {
+    padding: 50px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  button,
+  a {
+    border-radius: 999px;
+  }
+}
+
+.error {
+  &,
+  &::placeholder {
+    color: #d63a32 !important;
+    opacity: 1;
+  }
+}
+
+hgroup {
+  margin-bottom: 35px;
+
+  h2 {
+    font-size: clamp(35px, (1rem + 5vw), 45px);
+    line-height: 52px;
+    font-size: 43px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 16px;
+    padding-top: 15px;
+    line-height: 24px;
+  }
+}
+
+::ng-deep .snackbar-error {
+
+  .mdc-snackbar__surface {
+    background-color: #410E0B !important;
+  }
+
+}

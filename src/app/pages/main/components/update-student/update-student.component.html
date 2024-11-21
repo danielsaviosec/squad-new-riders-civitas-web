@@ -1,0 +1,79 @@
+<div class="container">
+    <app-back-button (click)="goBack()" class="back-button"></app-back-button>
+    <div class="card">
+        <div class="text-card">
+            <p><strong>Atualização do estudante</strong></p>
+            <p>Confira e atualize as informações do estudante</p>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- Campo de Nome Completo -->
+            <div class="form-card">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-label>Nome Completo</mat-label>
+                    <input matInput formControlName="nome" placeholder="Nome completo do estudante" maxlength="50">
+                    <mat-error *ngIf="form.get('nome')?.hasError('required')">
+                        Nome é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+  
+            <!-- Campo de RG ou CPF -->
+            <div class="form-card">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-label>RG ou CPF do Estudante</mat-label>
+                    <input matInput formControlName="cpfOrRg" placeholder="xx.xxx.xxx-xx" maxlength="14">
+                    <mat-error *ngIf="form.get('cpfOrRg')?.hasError('invalidCpfOrRg')">
+                        Insira um CPF ou RG válido.
+                    </mat-error>
+                    <mat-error *ngIf="form.get('cpfOrRg')?.hasError('required')">
+                        CPF ou RG é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+  
+            <!-- Campo de Número de Matrícula -->
+            <div class="form-card">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-label>Número de Matrícula</mat-label>
+                    <input matInput formControlName="matricula" placeholder="Registro do estudante na escola" maxlength="20">
+                    <mat-error *ngIf="form.get('matricula')?.hasError('required')">
+                        Número de matrícula é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+  
+            <!-- Campo de Turma (comentado por enquanto, descomente para ativar) -->
+  
+            <!-- <div class="form-card">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-label>Turmas</mat-label>
+                    <mat-select formControlName="turma" placeholder="Selecione a turma">
+                        <mat-option *ngFor="let option of turma" [value]="option.value">
+                            {{ option.label }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
+  
+  
+            <!-- Campo de CPF do Responsável -->
+            <div class="form-card">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-label>CPF do Responsável</mat-label>
+                    <input matInput formControlName="cpfResponsavel" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+                    <mat-error *ngIf="form.get('cpfResponsavel')?.hasError('pattern')">
+                        CPF inválido. Verifique as informações digitadas.
+                    </mat-error>
+                    <mat-error *ngIf="form.get('cpfResponsavel')?.hasError('required')">
+                        CPF do responsável é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+  
+            <!-- Botão de Submissão -->
+            <div class="btn-wrapper">
+                <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Atualizar</button>
+            </div>
+        </form>
+    </div>
+  </div>

@@ -1,0 +1,51 @@
+<div class="container">
+    <app-back-button (click)="goBack()" class="back-button"></app-back-button>
+    <div class="card">
+      <div class="text-card">
+        <p><strong>Atualizar turma</strong></p>
+        <p>Confira e edite as informações da turma</p>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Ano letivo</mat-label>
+            <mat-select formControlName="anoLetivo" placeholder="6º ano">
+              <mat-option *ngFor="let option of anoLetivo" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Período letivo</mat-label>
+            <mat-select formControlName="periodoLetivo" placeholder="Manhã">
+              <mat-option *ngFor="let option of periodoLetivo" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Ensino</mat-label>
+            <mat-select formControlName="ensino" placeholder="Fundamental">
+              <mat-option *ngFor="let option of ensino" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Apelido da turma</mat-label>
+            <input matInput formControlName="apelidoTurma" placeholder="6º ano B" maxlength="20">
+          </mat-form-field>
+        </div>
+        <div class="btn-wrapper">
+          <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Atualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
+    font-family: "Raleway", sans-serif;
 }
 
 html,
@@ -17,27 +17,37 @@ a {
     text-decoration: none;
 }
 
+//EDIÇÕES DOS SNACKBARS
 simple-snack-bar {
     display: flex;
     flex-direction: column;
 }
 
 .mat-mdc-snack-bar-container {
+    padding: 25px 25px !important;
+    margin-right: 8px !important;
+    margin-top: 16px !important;
+
     &.error-snackbar {
-        --mdc-snackbar-container-color: #DBD5E9; //background snackbar
-        --mdc-snackbar-supporting-text-color: #000; //color text snackbar
+        color: #fff;
+
+        .mdc-snackbar__surface {
+            background-color: #F3EDF7;
+        }
 
         .mdc-button__label {
-            margin-left: 0.6rem;
-            color: #65558F;
+            letter-spacing: -0.2px;
         }
     }
+}
 
-    &.sucess-snackbar {
-        .mdc-button__label {
-            margin-left: 0.6rem;
-            color: #65558F;
-        }
+// SNACKBAR DE ERRO
+.error-snackbar {
+    .mat-simple-snackbar-action {
+        color: white;
     }
+}
 
+#cdk-overlay06-6.cdk-overlay-pane {
+    background: none !important;
 }

@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+::ng-deep .error-snackbar {
+
+  .snackbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+    height: 110px;
+
+    .snackbar-content {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 4px;
+
+      .main-message {
+        margin-top: 0.8rem;
+        font-weight: bolder;
+        color: $third-color !important;
+      }
+
+      .sub-message {
+        font-weight: 600;
+        opacity: 0.8 !important;
+        color: $third-color !important;
+
+      }
+
+      .snackbar-button {
+        font-size: 0.9rem;
+        width: 10% !important;
+        font-weight: bolder;
+        color: $button-register-color !important;
+      }
+    }
+  }
+}

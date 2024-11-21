@@ -1,0 +1,49 @@
+<div *ngIf="isLoading" class="loading-spinner">
+    <!-- Spinner de carregamento -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading" class="container">
+    <app-back-button (click)="goBack()" class="back-button"></app-back-button>
+    <div class="card">
+      <div class="text-card">
+        <p><strong>Atualização de professor</strong></p>
+        <p>Confira e atualize as informações do professor</p>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Nome completo</mat-label>
+            <input matInput formControlName="nome" placeholder="Nome do professor" maxlength="50" />
+          </mat-form-field>
+        </div>
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>CPF</mat-label>
+            <input matInput formControlName="cpf" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+            <mat-error *ngIf="form.get('cpf')?.hasError('pattern')">
+              CPF inválido. Verifique as informações digitadas.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Número de matrícula</mat-label>
+            <input matInput formControlName="matricula" placeholder="Registro do professor na escola" maxlength="20">
+          </mat-form-field>
+        </div>
+        <div class="form-card">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Turmas</mat-label>
+            <mat-select formControlName="turma" placeholder="6 série B" multiple>
+              <mat-option *ngFor="let option of turmaOptions" [value]="option.id">
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="btn-wrapper">
+          <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Atualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>  
