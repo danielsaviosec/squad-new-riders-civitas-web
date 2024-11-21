@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ListTeacherComponent } from './list-teacher/list-teacher.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     InputComponent,
     BackButtonComponent,
     ListComponent,
+    ListTeacherComponent,
     SidebarComponent
   ],
   imports: [
@@ -34,6 +36,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     InputComponent,
     BackButtonComponent,
     ListComponent,
+    ListTeacherComponent,
     SidebarComponent,
     RouterModule
   ],

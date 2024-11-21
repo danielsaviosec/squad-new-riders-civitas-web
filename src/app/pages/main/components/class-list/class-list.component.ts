@@ -73,7 +73,7 @@ export class ClassListComponent implements OnInit {
         }
       );
     } else if(this.userRole === "teacher") {
-      console.log("Turmas do professor");
+      this.isLoading = false;
     }
   }
 

@@ -30,13 +30,22 @@
   <section class="main-section">
     <div class="content-wrapper">
       <!-- Itera sobre as turmas recebidas da API -->
-      <app-list *ngFor="let turma of turmaOptions"
-                tipo="turma"
-                [anoLetivo]="turma.schoolYear"
-                [periodoLetivo]="turma.schoolShift"
-                [ensino]="turma.educationType"
-                [apelidoTurma]="turma.name">
-      </app-list>
+      <div *ngIf="userRole === 'admin'">
+        <ng-container *ngFor="let turma of turmaOptions">
+          <app-list
+            tipo="turma"
+            [anoLetivo]="turma.schoolYear"
+            [periodoLetivo]="turma.schoolShift"
+            [ensino]="turma.educationType"
+            [apelidoTurma]="turma.name">
+          </app-list>
+        </ng-container>
+      </div>
+
+      <app-list-teacher
+        *ngIf="userRole === 'teacher'"
+        tipo="turma">
+      </app-list-teacher>
     </div>
   </section>
 </main>

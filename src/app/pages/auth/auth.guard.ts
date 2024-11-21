@@ -34,7 +34,6 @@ export class AuthGuard implements CanActivate {
     // Verifica se o papel do usuário é permitido na rota
     const allowedRoles: string[] = route.data['allowedRoles'] || [];
     if (allowedRoles.length && (!userRole || !allowedRoles.includes(userRole))) {
-      console.log(userRole);
       if (this.router.url !== '/main') {
         this.router.navigate(['/main']);
       }

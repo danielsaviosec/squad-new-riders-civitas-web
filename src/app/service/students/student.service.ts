@@ -13,7 +13,6 @@ export class StudentService {
   constructor(private http: HttpClient) {}
 
   registerStudent(data: StudentRegistrationData): Observable<CreateResponse> {
-    console.log(data);
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<CreateResponse>(`${environment.apiUrl}students/register`, data, { headers });
