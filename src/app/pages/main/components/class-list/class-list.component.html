@@ -8,8 +8,12 @@
     <app-sidebar [homeLink]="{ route: 'main/teacher-screen' }" [menuIcons]="icons"></app-sidebar>
   </section>
 
-  <div class="title">
+  <div class="title" *ngIf="userRole === 'admin'">
     <h2>Turmas cadastradas</h2>
+  </div>
+
+  <div class="title" *ngIf="userRole === 'teacher'">
+    <h2>Plano de Desenvolvimento Individual</h2>
   </div>
 
   <div class="search">
@@ -24,7 +28,8 @@
     </div>
   </div>
 
-  <div class="sub-title">
+  <div class="sub-title" *ngIf="userRole === 'teacher'">
+    <h4>Suas Turmas</h4>
   </div>
 
   <section class="main-section">
@@ -42,10 +47,13 @@
         </ng-container>
       </div>
 
-      <app-list-teacher
-        *ngIf="userRole === 'teacher'"
-        tipo="turma">
-      </app-list-teacher>
+      <div *ngIf="userRole === 'teacher'">
+        <ng-container>
+          <app-list-teacher
+            tipo="turma">
+          </app-list-teacher>
+        </ng-container>
+      </div>
     </div>
   </section>
 </main>

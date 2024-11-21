@@ -19,4 +19,18 @@
 
 
   </div>
+
+  <div *ngIf="tipo === 'estudante'" class="section-controllers">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu Professor">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item>
+        <span>Visualizar</span>
+      </button>
+      <button mat-menu-item>
+        <span>Cadastrar PDI</span>
+      </button>
+    </mat-menu>
+  </div>
 </div>

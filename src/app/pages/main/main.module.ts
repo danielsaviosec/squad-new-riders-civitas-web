@@ -42,7 +42,7 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     SearchStudentComponent,
     UpdateStudentComponent,
     UpdateTeacherComponent,
-    UpdateClassComponent // Certifique-se de declarar o componente
+    UpdateClassComponent
   ],
   imports: [
     MainRoutingModule,
@@ -50,7 +50,7 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSnackBarModule, // Certifique-se de importar o MatSnackBarModule
+    MatSnackBarModule,
     MatProgressSpinnerModule,
     SharedModule,
     MatFormFieldModule,

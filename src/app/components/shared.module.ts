@@ -5,6 +5,7 @@ import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { BackButtonComponent } from './back-button/back-button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -29,7 +30,8 @@ import { ListTeacherComponent } from './list-teacher/list-teacher.component';
     MatButtonModule,
     MatInputModule,
     MatSnackBarModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule
   ],
   exports: [
     ButtonComponent,

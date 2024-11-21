@@ -13,55 +13,6 @@
     font-weight: 600;
   }
 
-  ::ng-deep button {
-    box-sizing: border-box;
-    padding: 0;
-  }
-
-  ::ng-deep .mat-icon {
-    height: 20px;
-    width: 20px;
-  }
-
-  ::ng-deep .mat-mdc-icon-button, ::ng-deep .mat-mdc-button-touch-target {
-    width: 35px;
-    height: 35px;
-  }
-
-  &:hover {
-    background-color: #4F378B1F
-  }
-}
-
-.card {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px 30px 20px;
-  border-bottom: 1px solid #cac4d0;
-  border-top: 1px solid #cac4d0;
-  cursor: pointer;
-
-  h3 {
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  ::ng-deep button {
-    box-sizing: border-box;
-    padding: 0;
-  }
-
-  ::ng-deep .mat-icon {
-    height: 20px;
-    width: 20px;
-  }
-
-  ::ng-deep .mat-mdc-icon-button, ::ng-deep .mat-mdc-button-touch-target {
-    width: 35px;
-    height: 35px;
-  }
-
   &:hover {
     background-color: #4F378B1F
   }
