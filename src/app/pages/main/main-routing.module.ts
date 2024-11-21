@@ -12,6 +12,7 @@ import { SearchClassComponent } from "./components/search-class/search-class.com
 import { SearchStudentComponent } from "./components/search-student/search-student.component";
 import { UpdateStudentComponent } from "./components/update-student/update-student.component";
 import { UpdateTeacherComponent } from "./components/update-teacher/update-teacher.component";
+import { UpdateClassComponent } from "./components/update-class/update-class.component";
 
 const routes: Routes = [
   { path: 'class-list', component: ClassListComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'search-student', component: SearchStudentComponent },
   { path: 'update-student', component: UpdateStudentComponent },
   { path: 'update-teacher', component: UpdateTeacherComponent },
+  { path: 'update-class', component: UpdateClassComponent },
 ];
 
 @NgModule({

@@ -6,13 +6,14 @@ import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar
 import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 
-import { ClassRegistrationData } from 'src/app/interface/register/ClassRegistrationData.interface';
+import { IClassRegistrationData } from 'src/app/interface/register/IClassRegistrationData.interface';
 
 @Component({
   selector: 'app-update-class',
   templateUrl: './update-class.component.html',
   styleUrls: ['./update-class.component.scss']
 })
+
 export class UpdateClassComponent implements OnInit {
   form = new FormGroup({
     anoLetivo: new FormControl('', Validators.required),
@@ -74,7 +75,7 @@ export class UpdateClassComponent implements OnInit {
     const selectedPeriodoLetivo = this.periodoLetivo.find(option => option.value === formValues.periodoLetivo)?.backName ?? '';
     const selectedEnsino = this.ensino.find(option => option.value === formValues.ensino)?.backName ?? '';
 
-    const classData: ClassRegistrationData = {
+    const classData: IClassRegistrationData = {
       name: formValues.apelidoTurma ?? '',
       schoolYear: selectedAnoLetivo,
       schoolShift: selectedPeriodoLetivo,
