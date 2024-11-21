@@ -6,28 +6,10 @@ import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment.development';
 
-export interface LoginAdminCredentials {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  message: string;
-  token: string;
-  user: string;
-}
-
-export interface LoginProfessorCredentials {
-  registrationNumber: string;
-}
-
-interface DecodedToken {
-  id: 1,
-  email: string,
-  schoolId?: number,
-  iat: number,
-  exp: number
-}
+import { LoginAdminCredentials } from 'src/app/interface/auth/loginAdminCredentials.interface';
+import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
+import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCredentials.interface';
+import { DecodedToken } from 'src/app/interface/auth/DecodedToken.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -58,7 +40,7 @@ export class AuthService {
   }
 
   // Novo método de login para o professor
-  loginProfessor(credentials: LoginProfessorCredentials): Observable<LoginResponse> {
+  loginTeacher(credentials: LoginTeacherCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}teachers/login`, credentials).pipe(
       tap((response) => {
         if (response.token && response.user) {

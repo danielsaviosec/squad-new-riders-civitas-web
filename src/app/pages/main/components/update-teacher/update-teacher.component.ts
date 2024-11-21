@@ -4,7 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
-import { TeacherService, TeacherRegistrationData } from 'src/app/service/teachers/teachers.service';
+import { TeacherService } from 'src/app/service/teachers/teachers.service';
+
+import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
+import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 
 @Component({
   selector: 'app-update-teacher',
@@ -13,7 +16,7 @@ import { TeacherService, TeacherRegistrationData } from 'src/app/service/teacher
 })
 export class UpdateTeacherComponent implements OnInit {
   form!: FormGroup;
-  turmaOptions: any[] = []; // Variável para armazenar as turmas
+  turmaOptions: ClassesResponse[] = []; // Variável para armazenar as turmas
   isLoading = true; // Variável para controlar o carregamento
 
   constructor(
@@ -39,7 +42,7 @@ export class UpdateTeacherComponent implements OnInit {
 
     // Chama o serviço para buscar as turmas
     this.classService.getClasses().subscribe(
-      (data) => {
+      (data: ClassesResponse[]) => {
         // Armazena o array de turmas para uso no template
         this.turmaOptions = data;
         this.isLoading = false; // Desativa o carregamento após receber os dados

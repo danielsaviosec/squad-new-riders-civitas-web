@@ -1,14 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
+import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 import { ClassService } from 'src/app/service/classes/classes.service';
-
-// Defina o tipo para a Turma
-interface Turma {
-  schoolYear: string; // Ano Letivo
-  schoolShift: string; // Período Letivo
-  educationType: string; // Tipo de Ensino
-  name: string;
-}
 
 interface AnoLetivoOption {
   value: string;
@@ -63,7 +56,7 @@ export class ClassListComponent implements OnInit {
     { value: 'ensinoFundamental', label: 'Ensino Fundamental 1', backName: 'Elementary school 1' },
   ];
 
-  turmaOptions: Turma[] = []; // Agora a variável turmaOptions tem o tipo Turma
+  turmaOptions: ClassesResponse[] = []; // Agora a variável turmaOptions tem o tipo Turma
   isLoading: boolean = false;
 
   constructor(private classService: ClassService) { }
@@ -72,8 +65,8 @@ export class ClassListComponent implements OnInit {
     this.isLoading = true; // Define isLoading como true antes da requisição
     // Chama o serviço para obter as turmas
     this.classService.getClasses().subscribe(
-      (data: Turma[]) => {
-        this.turmaOptions = data.map((turma: Turma) => {
+      (data: ClassesResponse[]) => {
+        this.turmaOptions = data.map((turma: ClassesResponse) => {
           return {
             ...turma,
             schoolYear: this.translateAnoLetivo(turma.schoolYear), // Traduz anoLetivo

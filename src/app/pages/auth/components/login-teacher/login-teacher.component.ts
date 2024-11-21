@@ -3,8 +3,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthService, LoginProfessorCredentials, LoginResponse } from '../../../../service/auth/auth.service';
+import { AuthService } from '../../../../service/auth/auth.service';
 
+import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
+import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCredentials.interface';
 
 @Component({
   selector: 'app-login-teacher',
@@ -30,9 +32,9 @@ export class LoginTeacherComponent {
     $event.preventDefault();
     this.authForm.markAsPending();
 
-    const credentials = this.authForm.value as LoginProfessorCredentials;
+    const credentials = this.authForm.value as LoginTeacherCredentials;
 
-    this.authService.loginProfessor(credentials).subscribe({
+    this.authService.loginTeacher(credentials).subscribe({
       next: (response) => this.handleLoginSuccess(response),
       error: (error: HttpErrorResponse) => this.handleLoginError(error),
     });

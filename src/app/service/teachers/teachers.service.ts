@@ -3,23 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
-export interface TeacherRegistrationData {
-  fullName: string;
-  cpf: string;
-  registrationNumber: string;
-  classes: number[];
-}
-
-export interface Teacher {
-  fullName: string;
-  registrationNumber: string;
-  classes: Class[];
-}
-
-export interface Class {
-  id: number;
-  name: string;
-}
+import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
+import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
+import { TeachersResponse } from 'src/app/interface/response/TeachersResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,17 +14,17 @@ export class TeacherService {
   constructor(private http: HttpClient) {}
 
   // Função para cadastrar professor
-  registerTeacher(data: TeacherRegistrationData): Observable<any> {
+  registerTeacher(data: TeacherRegistrationData): Observable<CreateResponse> {
     console.log(data);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${environment.apiUrl}teachers/register`, data, { headers });
+    return this.http.post<CreateResponse>(`${environment.apiUrl}teachers/register`, data, { headers });
   }
 
   // Função para listar professores
-  getTeachers(): Observable<Teacher[]> {
-    const token = localStorage.getItem('token');
+  getTeachers(): Observable<TeachersResponse[]> {
+    const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Teacher[]>(`${environment.apiUrl}admin/teachers/all`, { headers });
+    return this.http.get<TeachersResponse[]>(`${environment.apiUrl}admin/teachers/all`, { headers });
   }
 }

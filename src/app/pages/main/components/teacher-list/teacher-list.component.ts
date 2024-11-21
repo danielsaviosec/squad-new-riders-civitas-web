@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
-import { TeacherService, Teacher, Class } from '../../../../service/teachers/teachers.service';
+import { TeacherService } from '../../../../service/teachers/teachers.service';
+
+import { Teacher } from 'src/app/interface/register/Teacher.interface';
+import { Class } from 'src/app/interface/register/Class.interface';
 @Component({
   selector: 'app-teacher-list',
   templateUrl: './teacher-list.component.html',

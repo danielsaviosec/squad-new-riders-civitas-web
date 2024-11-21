@@ -4,7 +4,9 @@ import { AnoLetivoOption, PeriodoLetivoOption, EnsinoOption } from 'src/app/inte
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
-import { ClassService, ClassRegistrationData } from 'src/app/service/classes/classes.service';
+import { ClassService } from 'src/app/service/classes/classes.service';
+
+import { ClassRegistrationData } from 'src/app/interface/register/ClassRegistrationData.interface';
 
 @Component({
   selector: 'app-update-class',
