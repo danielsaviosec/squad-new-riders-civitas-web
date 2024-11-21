@@ -3,7 +3,12 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
-import { StudentService, StudentRegistrationData } from '../../../../service/students/student.service';
+import { StudentService } from '../../../../service/students/student.service';
+import { ClassService } from 'src/app/service/classes/classes.service';
+
+import { IStudentRegistrationData } from 'src/app/interface/register/IStudentRegistrationData.interface';
+import { IClassesResponse } from 'src/app/interface/response/IClassesResponse.interface';
+import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
 
 @Component({
   selector: 'app-student-registration',
@@ -12,14 +17,17 @@ import { StudentService, StudentRegistrationData } from '../../../../service/stu
 })
 export class StudentRegistrationComponent implements OnInit {
   form!: FormGroup;
+  turmaOptions: IClassesResponse[] = [];
+  isLoading = true;
 
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private snackbarErrorService: SnackbarErrorService,
     private router: Router,
-    private studentService: StudentService // Adiciona o serviço StudentService
-  ) {}
+    private studentService: StudentService,
+    private classService: ClassService
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -29,6 +37,17 @@ export class StudentRegistrationComponent implements OnInit {
       cpfResponsavel: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/), Validators.maxLength(14)]],
       cpfOrRg: ['', [Validators.required, this.cpfOrRgValidator, Validators.maxLength(14)]]
     });
+
+    this.classService.getClasses().subscribe(
+      (data: IClassesResponse[]) => {
+        this.turmaOptions = data;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Erro ao carregar turmas:', error);
+        this.isLoading = false;
+      }
+    );
   }
 
   cpfOrRgValidator(control: AbstractControl): ValidationErrors | null {
@@ -50,7 +69,7 @@ export class StudentRegistrationComponent implements OnInit {
   // Submissão do formulário
   onSubmit(): void {
     if (this.form.valid) {
-      const studentData: StudentRegistrationData = {
+      const studentData: IStudentRegistrationData = {
         fullName: this.form.value.nome,
         document: this.form.value.cpfOrRg,
         registrationNumber: this.form.value.matricula,
@@ -62,13 +81,13 @@ export class StudentRegistrationComponent implements OnInit {
         () => {
           this.showSuccessMessage();
         },
-        (error) => {
-          console.error('Erro ao cadastrar estudante:', error);
-          this.errorMessage();
+        (data) => {
+          console.error('Erro ao cadastrar estudante:', data?.error);
+          this.handleError(data?.error);
         }
       );
     } else {
-      this.errorMessage();
+      this.handleError({ message: "Erro ao cadastrar estudante. Tente novamente." });
     }
   }
 
@@ -84,10 +103,11 @@ export class StudentRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  errorMessage(): void {
+  handleError(error: ICreateResponse):void {
+    const errorMessage: string = error.message || "Erro ao cadastrar professor. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
-      'Erro ao cadastrar professor',
-      'Verifique os dados e tente novamente.'
+      errorMessage,
+      'Verifique as informações digitadas ou cadastre novos dados'
     );
   }
 }
