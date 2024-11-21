@@ -32,6 +32,7 @@ import { ListTeacherComponent } from './list-teacher/list-teacher.component';
     MatSnackBarModule,
     RouterModule,
     MatMenuModule
+    RouterModule
   ],
   exports: [
     ButtonComponent,

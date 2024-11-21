@@ -43,5 +43,4 @@ export class AuthGuard implements CanActivate {
     // Permite o acesso caso as condições acima não sejam atendidas
     return true;
   }
-
 }
