@@ -58,7 +58,7 @@ export class TeacherRegistrationComponent implements OnInit {
   //=================================
   //Botão voltar
   goBack(): void {
-    this.router.navigate(['/admin-screen'])
+    this.router.navigate(['/main/admin-screen'])
   }
 
   onSubmit(): void {
@@ -75,12 +75,12 @@ export class TeacherRegistrationComponent implements OnInit {
           this.showSuccessMessage();
         },
         (data) => {
-          console.error('Erro ao cadastrar professor:', data);
+          console.error('Erro ao cadastrar professor:', data?.error);
           this.handleError(data?.error);
         }
       );
     } else {
-      this.handleError({ message: "Erro ao cadastrar turma. Tente novamente." });
+      this.handleError({ message: "Erro ao cadastrar professor. Tente novamente." });
     }
   }
 
@@ -92,12 +92,12 @@ export class TeacherRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen'])
+      this.router.navigate(['/main/admin-screen'])
     }, 3500);
   }
 
   handleError(error: CreateResponse):void {
-    const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
+    const errorMessage: string = error.message || "Erro ao cadastrar professor. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
       'Verifique as informações digitadas ou cadastre novos dados'

@@ -4,6 +4,7 @@ import { ISelectOption } from 'src/app/interface/IClassRegistration.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 import { ClassService } from 'src/app/service/classes/classes.service';
 
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-class-list',
@@ -12,11 +13,12 @@ import { ClassService } from 'src/app/service/classes/classes.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ClassListComponent implements OnInit {
+
   icons: ISidebarIcons[] = [
-    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/teacher-screen' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
     { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
-    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route:'main/student-list' }
+    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
   anoLetivo: ISelectOption[] = [
@@ -42,29 +44,37 @@ export class ClassListComponent implements OnInit {
 
   turmaOptions: ClassesResponse[] = []; // Agora a variável turmaOptions tem o tipo Turma
   isLoading: boolean = false;
+  userRole: string | null = null;
 
-  constructor(private classService: ClassService) { }
+  constructor(private classService: ClassService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.isLoading = true; // Define isLoading como true antes da requisição
+
+    this.userRole = this.authService.getRole();
+
     // Chama o serviço para obter as turmas
-    this.classService.getClasses().subscribe(
-      (data: ClassesResponse[]) => {
-        this.turmaOptions = data.map((turma: ClassesResponse) => {
-          return {
-            ...turma,
-            schoolYear: this.translateAnoLetivo(turma.schoolYear), // Traduz anoLetivo
-            schoolShift: this.translatePeriodoLetivo(turma.schoolShift), // Traduz periodoLetivo
-            educationType: this.translateEnsino(turma.educationType) // Traduz ensino
-          };
-        });
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Erro ao buscar turmas:', error);
-        this.isLoading = false;
-      }
-    );
+    if(this.userRole === "admin") {
+      this.classService.getClasses().subscribe(
+        (data: ClassesResponse[]) => {
+          this.turmaOptions = data.map((turma: ClassesResponse) => {
+            return {
+              ...turma,
+              schoolYear: this.translateAnoLetivo(turma.schoolYear), // Traduz anoLetivo
+              schoolShift: this.translatePeriodoLetivo(turma.schoolShift), // Traduz periodoLetivo
+              educationType: this.translateEnsino(turma.educationType) // Traduz ensino
+            };
+          });
+          this.isLoading = false;
+        },
+        (error) => {
+          console.error('Erro ao buscar turmas:', error);
+          this.isLoading = false;
+        }
+      );
+    } else if(this.userRole === "teacher") {
+      console.log("Turmas do professor");
+    }
   }
 
   // Método para traduzir o ano letivo (backName -> label)

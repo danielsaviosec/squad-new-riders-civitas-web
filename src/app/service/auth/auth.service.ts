@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment.development';
 
-import { LoginAdminCredentials } from 'src/app/interface/auth/loginAdminCredentials.interface';
+import { LoginAdminCredentials } from 'src/app/interface/auth/LoginAdminCredentials.interface';
 import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
 import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCredentials.interface';
 import { DecodedToken } from 'src/app/interface/auth/DecodedToken.interface';
@@ -43,7 +43,7 @@ export class AuthService {
   loginTeacher(credentials: LoginTeacherCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}teachers/login`, credentials).pipe(
       tap((response) => {
-        if (response.token && response.user) {
+        if (response.token) {
           this.saveUserToStorage(response.token);
         }
       })
@@ -79,6 +79,26 @@ export class AuthService {
   }
 
   /**
+   * Retorna o papel do usuário autenticado.
+   *
+   * @returns O papel do usuário (e.g., 'admin', 'teacher', 'guardian') ou null.
+   */
+  getRole(): string | null {
+    const userJson = this.getUser(); // Retorna o valor armazenado.
+
+    if (!userJson) return null;
+
+    try {
+      // Verifica se o valor já é um objeto
+      const user = typeof userJson === 'string' ? JSON.parse(userJson) : userJson;
+      return user.role || null; // Retorna o papel, se existir.
+    } catch (error) {
+      console.error('Erro ao decodificar os dados do usuário:', error);
+      return null;
+    }
+  }
+
+  /**
    * Retorna o token do `localStorage`, se disponível.
    *
    * @returns O token do usuário ou `null`.
@@ -92,7 +112,7 @@ export class AuthService {
    *
    * @returns O objeto `user` ou `null`.
    */
-  getUser(): string | null {
+  getUser(): object | null {
     return JSON.parse(localStorage.getItem(this.userKey) || 'null');
   }
 
@@ -114,7 +134,10 @@ export class AuthService {
 
   private saveUserToStorage(token: string): void {
     // Decodifica o token para obter informações do usuário
-    const decodedToken = jwtDecode(token);
+    const decodedToken = jwtDecode<DecodedToken>(token);
+
+    // Adiciona manualmente o parâmetro 'role' para fins de teste
+    decodedToken.role = 'admin'; // Ou qualquer outro valor que você desejar
     localStorage.setItem(this.tokenKey, token);
     localStorage.setItem(this.userKey, JSON.stringify(decodedToken));
   }

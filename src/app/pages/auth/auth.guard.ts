@@ -10,20 +10,39 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const isAuthenticated = this.authService.isAuthenticated();
+    const userRole = this.authService.getRole();
 
-    if (route.routeConfig?.path === 'auth' && isAuthenticated) {
-      // Se autenticado e tentando acessar 'auth', redireciona para 'main'
-      this.router.navigate(['/main']);
+    // Verifica se o usuário está tentando acessar as rotas de autenticação
+    if (route.routeConfig?.path?.startsWith('auth')) {
+      if (isAuthenticated) {
+        if (this.router.url !== '/main') {
+          this.router.navigate(['/main']);
+        }
+        return false;
+      }
+      return true; // Permite acesso às rotas públicas
+    }
+
+    // Verifica se o usuário está tentando acessar as rotas principais
+    if (!isAuthenticated) {
+      if (this.router.url !== '/auth') {
+        this.router.navigate(['/auth']);
+      }
       return false;
     }
 
-    if (route.routeConfig?.path === 'main' && !isAuthenticated) {
-      // Se não autenticado e tentando acessar 'main', redireciona para 'auth'
-      this.router.navigate(['/auth']);
+    // Verifica se o papel do usuário é permitido na rota
+    const allowedRoles: string[] = route.data['allowedRoles'] || [];
+    if (allowedRoles.length && (!userRole || !allowedRoles.includes(userRole))) {
+      console.log(userRole);
+      if (this.router.url !== '/main') {
+        this.router.navigate(['/main']);
+      }
       return false;
     }
 
     // Permite o acesso caso as condições acima não sejam atendidas
     return true;
   }
+
 }

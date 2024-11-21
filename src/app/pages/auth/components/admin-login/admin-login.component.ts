@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../service/auth/auth.service';
 
-import { LoginAdminCredentials } from 'src/app/interface/auth/loginAdminCredentials.interface';
+import { LoginAdminCredentials } from 'src/app/interface/auth/LoginAdminCredentials.interface';
 import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
 
 @Component({

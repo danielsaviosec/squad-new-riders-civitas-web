@@ -8,10 +8,11 @@ import { ISidebarIcons } from 'src/app/interface';
   encapsulation: ViewEncapsulation.None
 })
 export class StudentListComponent {
+
   icons: ISidebarIcons[] = [
-    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: '/' },
-    { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: '#' },
-    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: '#' },
-    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route:'#' }
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
+    { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
+    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 }

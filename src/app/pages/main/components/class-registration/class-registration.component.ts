@@ -96,7 +96,7 @@ export class ClassRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen'])
+      this.router.navigate(['/main/admin-screen'])
     }, 3500);
   }
 

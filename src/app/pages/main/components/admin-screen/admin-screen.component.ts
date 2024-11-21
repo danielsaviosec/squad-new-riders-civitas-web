@@ -11,7 +11,7 @@ import { IAdminScreenCard, ISidebarIcons } from 'src/app/interface';
 export class AdminScreenComponent {
 
   icons: ISidebarIcons[] = [
-    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/admin-screen' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
     { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }

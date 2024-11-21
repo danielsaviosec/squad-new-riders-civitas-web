@@ -1,4 +1,9 @@
-<div class="container">
+<div *ngIf="isLoading" class="loading-spinner">
+  <!-- Spinner de carregamento -->
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!isLoading" class="container">
   <app-back-button (click)="goBack()" class="back-button"></app-back-button>
   <div class="card">
       <div class="text-card">
@@ -42,19 +47,17 @@
               </mat-form-field>
           </div>
 
-          <!-- Campo de Turma (comentado por enquanto, descomente para ativar) -->
 
-          <!-- <div class="form-card">
+          <div class="form-card">
               <mat-form-field appearance="outline" floatLabel="always">
                   <mat-label>Turmas</mat-label>
                   <mat-select formControlName="turma" placeholder="Selecione a turma">
-                      <mat-option *ngFor="let option of turma" [value]="option.value">
-                          {{ option.label }}
+                      <mat-option *ngFor="let option of turmaOptions" [value]="option.id">
+                          {{option.name}} ({{option.schoolShift}}, {{option.educationType}}, {{option.schoolYear}})
                       </mat-option>
                   </mat-select>
               </mat-form-field>
-          </div> -->
-
+          </div>
 
           <!-- Campo de CPF do Responsável -->
           <div class="form-card">
