@@ -18,7 +18,7 @@ import { IClassesResponse } from 'src/app/interface/response/IClassesResponse.in
 export class UpdateTeacherComponent implements OnInit {
   form!: FormGroup;
   turmaOptions: IClassesResponse[] = []; // Variável para armazenar as turmas
-  isLoading = true; // Variável para controlar o carregamento
+  isLoading!: boolean; // Variável para controlar o carregamento
 
   constructor(
     private fb: FormBuilder,

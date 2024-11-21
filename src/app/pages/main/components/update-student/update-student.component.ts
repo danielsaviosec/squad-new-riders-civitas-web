@@ -35,7 +35,7 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   cpfOrRgValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
+    const value: string = control.value;
     const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
     const rgRegex = /^(\d{1,2}\.?\d{3}\.?\d{3}-?\d{1,2}|\d{7,14})$/;
 
