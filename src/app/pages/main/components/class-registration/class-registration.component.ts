@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 
 import { ClassRegistrationData } from 'src/app/interface/register/ClassRegistrationData.interface';
+import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
 
 @Component({
   selector: 'app-class-registration',
@@ -83,7 +84,7 @@ export class ClassRegistrationComponent implements OnInit {
 
     this.classService.registerClass(classData).subscribe({
       next: () => this.handleSuccess(),
-      error: () => this.handleError()
+      error: (data) => this.handleError(data?.error)
     });
   }
 
@@ -99,9 +100,10 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError():void {
+  handleError(error: CreateResponse):void {
+    const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
-      'Erro ao cadastrar turma. Tente novamente.',
+      errorMessage,
       'Verifique as informações digitadas ou cadastre novos dados'
     );
   }

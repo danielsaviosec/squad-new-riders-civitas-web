@@ -8,6 +8,7 @@ import { TeacherService } from 'src/app/service/teachers/teachers.service';
 
 import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
+import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
 
 @Component({
   selector: 'app-teacher-registration',
@@ -73,13 +74,13 @@ export class TeacherRegistrationComponent implements OnInit {
         () => {
           this.showSuccessMessage();
         },
-        (error) => {
-          console.error('Erro ao cadastrar professor:', error);
-          this.errorMessage();
+        (data) => {
+          console.error('Erro ao cadastrar professor:', data);
+          this.handleError(data?.error);
         }
       );
     } else {
-      this.errorMessage();
+      this.handleError({ message: "Erro ao cadastrar turma. Tente novamente." });
     }
   }
 
@@ -95,10 +96,11 @@ export class TeacherRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  errorMessage(): void {
+  handleError(error: CreateResponse):void {
+    const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
-      'Erro ao cadastrar professor',
-      'Verifique os dados e tente novamente.'
+      errorMessage,
+      'Verifique as informações digitadas ou cadastre novos dados'
     );
   }
 }

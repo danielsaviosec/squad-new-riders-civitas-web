@@ -1,25 +1,9 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
+import { ISelectOption } from 'src/app/interface/IClassRegistration.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 import { ClassService } from 'src/app/service/classes/classes.service';
 
-interface AnoLetivoOption {
-  value: string;
-  label: string;
-  backName: string;
-}
-
-interface PeriodoLetivoOption {
-  value: string;
-  label: string;
-  backName: string;
-}
-
-interface EnsinoOption {
-  value: string;
-  label: string;
-  backName: string;
-}
 
 @Component({
   selector: 'app-class-list',
@@ -35,7 +19,7 @@ export class ClassListComponent implements OnInit {
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route:'main/student-list' }
   ];
 
-  anoLetivo: AnoLetivoOption[] = [
+  anoLetivo: ISelectOption[] = [
     { value: '1-ano', label: '1º ano', backName: '1st year' },
     { value: '2-ano', label: '2º ano', backName: '2nd year' },
     { value: '3-ano', label: '3º ano', backName: '3rd year' },
@@ -44,13 +28,13 @@ export class ClassListComponent implements OnInit {
     { value: '6-ano', label: '6º ano', backName: '6th year' }
   ];
 
-  periodoLetivo: PeriodoLetivoOption[] = [
+  periodoLetivo: ISelectOption[] = [
     { value: 'manha', label: 'Manhã', backName: 'Morning' },
     { value: 'tarde', label: 'Tarde', backName: 'Afternoon' },
     { value: 'noite', label: 'Noite', backName: 'Night' },
   ];
 
-  ensino: EnsinoOption[] = [
+  ensino: ISelectOption[] = [
     { value: 'maternal', label: 'Maternal', backName: 'Nursery' },
     { value: 'preEscola', label: 'Pré-escola', backName: 'Preschool' },
     { value: 'ensinoFundamental', label: 'Ensino Fundamental 1', backName: 'Elementary school 1' },
