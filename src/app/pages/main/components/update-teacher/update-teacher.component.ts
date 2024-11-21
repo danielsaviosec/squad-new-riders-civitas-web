@@ -45,11 +45,11 @@ export class UpdateTeacherComponent implements OnInit {
       (data: ClassesResponse[]) => {
         // Armazena o array de turmas para uso no template
         this.turmaOptions = data;
-        this.isLoading = false; // Desativa o carregamento após receber os dados
+        // this.isLoading = false; // Desativa o carregamento após receber os dados
       },
       (error) => {
         console.error('Erro ao buscar as turmas:', error);
-        this.isLoading = false; // Desativa o carregamento após receber os dados
+        // this.isLoading = false; // Desativa o carregamento após receber os dados
       }
     );
   }

@@ -14,6 +14,9 @@
                 {{option.label}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="form.get('anoLetivo')?.hasError('required')">
+              Ano letivo é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="form-card">
@@ -24,6 +27,9 @@
                 {{option.label}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="form.get('periodoLetivo')?.hasError('required')">
+              Período letivo é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="form-card">
@@ -34,12 +40,18 @@
                 {{option.label}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="form.get('ensino')?.hasError('required')">
+              Ensino é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="form-card">
           <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>Apelido da turma</mat-label>
             <input matInput formControlName="apelidoTurma" placeholder="6º ano B" maxlength="20">
+            <mat-error *ngIf="form.get('apelidoTurma')?.hasError('required')">
+              Apelido da turma é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="btn-wrapper">

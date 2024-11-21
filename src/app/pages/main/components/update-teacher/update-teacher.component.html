@@ -1,8 +1,8 @@
-<div *ngIf="isLoading" class="loading-spinner">
+<!-- <div *ngIf="isLoading" class="loading-spinner"> -->
     <!-- Spinner de carregamento -->
-    <mat-spinner></mat-spinner>
-  </div>
-  <div *ngIf="!isLoading" class="container">
+    <!-- <mat-spinner></mat-spinner>
+  </div> -->
+  <div  class="container">
     <app-back-button (click)="goBack()" class="back-button"></app-back-button>
     <div class="card">
       <div class="text-card">
@@ -14,6 +14,9 @@
           <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>Nome completo</mat-label>
             <input matInput formControlName="nome" placeholder="Nome do professor" maxlength="50" />
+            <mat-error *ngIf="form.get('nome')?.hasError('required')">
+              Nome é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="form-card">
@@ -23,12 +26,18 @@
             <mat-error *ngIf="form.get('cpf')?.hasError('pattern')">
               CPF inválido. Verifique as informações digitadas.
             </mat-error>
+            <mat-error *ngIf="form.get('cpf')?.hasError('required')">
+              CPF é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="form-card">
           <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>Número de matrícula</mat-label>
             <input matInput formControlName="matricula" placeholder="Registro do professor na escola" maxlength="20">
+            <mat-error *ngIf="form.get('matricula')?.hasError('required')">
+              Número de matrícula é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="form-card">
@@ -39,6 +48,9 @@
                 {{ option.name }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="form.get('turma')?.hasError('required')">
+              Escolher turma é obrigatório.
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="btn-wrapper">
