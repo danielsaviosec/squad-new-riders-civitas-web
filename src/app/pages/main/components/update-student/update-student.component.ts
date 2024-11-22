@@ -5,13 +5,14 @@ import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar
 import { Router } from '@angular/router';
 import { StudentService } from '../../../../service/students/student.service';
 
-import { StudentRegistrationData } from 'src/app/interface/register/StudentRegistrationData.interface';
+import { IStudentRegistrationData } from 'src/app/interface/register/IStudentRegistrationData.interface';
 
 @Component({
   selector: 'app-update-student',
   templateUrl: './update-student.component.html',
   styleUrls: ['./update-student.component.scss']
 })
+
 export class UpdateStudentComponent implements OnInit {
   form!: FormGroup;
 
@@ -34,7 +35,7 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   cpfOrRgValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
+    const value: string = control.value;
     const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
     const rgRegex = /^(\d{1,2}\.?\d{3}\.?\d{3}-?\d{1,2}|\d{7,14})$/;
 
@@ -52,7 +53,7 @@ export class UpdateStudentComponent implements OnInit {
   // Submissão do formulário
   onSubmit(): void {
     if (this.form.valid) {
-      const studentData: StudentRegistrationData = {
+      const studentData: IStudentRegistrationData = {
         fullName: this.form.value.nome,
         document: this.form.value.cpfOrRg,
         registrationNumber: this.form.value.matricula,
@@ -92,5 +93,4 @@ export class UpdateStudentComponent implements OnInit {
       'Verifique os dados e tente novamente.'
     );
   }
-
 }

@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 import { TeacherService } from 'src/app/service/teachers/teachers.service';
 
-import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
-import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
-import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
+import { ITeacherRegistrationData } from 'src/app/interface/register/ITeacherRegistrationData.interface';
+import { IClassesResponse } from 'src/app/interface/response/IClassesResponse.interface';
+import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
 
 @Component({
   selector: 'app-teacher-registration',
@@ -17,7 +17,7 @@ import { CreateResponse } from 'src/app/interface/response/CreateResponse.interf
 })
 export class TeacherRegistrationComponent implements OnInit {
   form!: FormGroup;
-  turmaOptions: ClassesResponse[] = []; // Variável para armazenar as turmas
+  turmaOptions: IClassesResponse[] = []; // Variável para armazenar as turmas
   isLoading = true; // Variável para controlar o carregamento
 
   constructor(
@@ -43,7 +43,7 @@ export class TeacherRegistrationComponent implements OnInit {
 
     // Chama o serviço para buscar as turmas
     this.classService.getClasses().subscribe(
-      (data: ClassesResponse[]) => {
+      (data: IClassesResponse[]) => {
         // Armazena o array de turmas para uso no template
         this.turmaOptions = data;
         this.isLoading = false; // Desativa o carregamento após receber os dados
@@ -63,7 +63,7 @@ export class TeacherRegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const teacherData: TeacherRegistrationData = {
+      const teacherData: ITeacherRegistrationData = {
         fullName: this.form.value.nome,
         cpf: this.form.value.cpf,
         registrationNumber: this.form.value.matricula,
@@ -96,7 +96,7 @@ export class TeacherRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: CreateResponse):void {
+  handleError(error: ICreateResponse): void {
     const errorMessage: string = error.message || "Erro ao cadastrar professor. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
