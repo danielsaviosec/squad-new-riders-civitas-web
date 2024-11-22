@@ -10,6 +10,9 @@ import { TeacherScreenComponent } from "./components/teacher-screen/teacher-scre
 import { StudentListComponent } from "./components/student-list/student-list.component";
 import { SearchClassComponent } from "./components/search-class/search-class.component";
 import { SearchStudentComponent } from "./components/search-student/search-student.component";
+import { UpdateStudentComponent } from "./components/update-student/update-student.component";
+import { UpdateTeacherComponent } from "./components/update-teacher/update-teacher.component";
+import { UpdateClassComponent } from "./components/update-class/update-class.component";
 
 const routes: Routes = [
   { path: 'class-list', component: ClassListComponent },
@@ -21,7 +24,10 @@ const routes: Routes = [
   { path: 'teacher-screen', component: TeacherScreenComponent },
   { path: 'student-list', component: StudentListComponent }, 
   { path: 'search-class', component: SearchClassComponent }, 
-  { path: 'search-student', component: SearchStudentComponent }
+  { path: 'search-student', component: SearchStudentComponent },
+  { path: 'update-student', component: UpdateStudentComponent },
+  { path: 'update-teacher', component: UpdateTeacherComponent },
+  { path: 'update-class', component: UpdateClassComponent },
 ];
 
 @NgModule({

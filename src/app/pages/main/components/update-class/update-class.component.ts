@@ -7,15 +7,14 @@ import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 
 import { IClassRegistrationData } from 'src/app/interface/register/IClassRegistrationData.interface';
-import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
 
 @Component({
-  selector: 'app-class-registration',
-  templateUrl: './class-registration.component.html',
-  styleUrls: ['./class-registration.component.scss']
+  selector: 'app-update-class',
+  templateUrl: './update-class.component.html',
+  styleUrls: ['./update-class.component.scss']
 })
 
-export class ClassRegistrationComponent implements OnInit {
+export class UpdateClassComponent implements OnInit {
   form = new FormGroup({
     anoLetivo: new FormControl('', Validators.required),
     periodoLetivo: new FormControl('', Validators.required),
@@ -85,7 +84,7 @@ export class ClassRegistrationComponent implements OnInit {
 
     this.classService.registerClass(classData).subscribe({
       next: () => this.handleSuccess(),
-      error: (data) => this.handleError(data?.error)
+      error: () => this.handleError()
     });
   }
 
@@ -101,10 +100,9 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: ICreateResponse): void {
-    const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
+  handleError(): void {
     this.snackbarErrorService.showErrorMessage(
-      errorMessage,
+      'Erro ao cadastrar turma. Tente novamente.',
       'Verifique as informações digitadas ou cadastre novos dados'
     );
   }

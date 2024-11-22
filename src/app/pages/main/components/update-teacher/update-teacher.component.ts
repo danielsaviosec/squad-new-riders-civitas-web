@@ -8,17 +8,17 @@ import { TeacherService } from 'src/app/service/teachers/teachers.service';
 
 import { ITeacherRegistrationData } from 'src/app/interface/register/ITeacherRegistrationData.interface';
 import { IClassesResponse } from 'src/app/interface/response/IClassesResponse.interface';
-import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
 
 @Component({
-  selector: 'app-teacher-registration',
-  templateUrl: './teacher-registration.component.html',
-  styleUrls: ['./teacher-registration.component.scss']
+  selector: 'app-update-teacher',
+  templateUrl: './update-teacher.component.html',
+  styleUrls: ['./update-teacher.component.scss']
 })
-export class TeacherRegistrationComponent implements OnInit {
+
+export class UpdateTeacherComponent implements OnInit {
   form!: FormGroup;
   turmaOptions: IClassesResponse[] = []; // Variável para armazenar as turmas
-  isLoading = true; // Variável para controlar o carregamento
+  isLoading!: boolean; // Variável para controlar o carregamento
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +29,7 @@ export class TeacherRegistrationComponent implements OnInit {
     private teacherService: TeacherService
   ) { }
 
-  ngOnInit() {
+  ngOnInit():void {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(50)]],
       matricula: ['', [Validators.required, Validators.maxLength(20)]],
@@ -74,18 +74,18 @@ export class TeacherRegistrationComponent implements OnInit {
         () => {
           this.showSuccessMessage();
         },
-        (data) => {
-          console.error('Erro ao cadastrar professor:', data?.error);
-          this.handleError(data?.error);
+        (error) => {
+          console.error('Erro ao cadastrar professor:', error);
+          this.errorMessage();
         }
       );
     } else {
-      this.handleError({ message: "Erro ao cadastrar professor. Tente novamente." });
+      this.errorMessage();
     }
   }
 
   showSuccessMessage(): void {
-    this.snackBar.open('Professor(a) cadastrado com sucesso!', '', {
+    this.snackBar.open('Dados do(a) professor(a) atualizados!', '', {
       duration: 3000,
       panelClass: ['sucess-snackbar'],
       horizontalPosition: 'right',
@@ -96,11 +96,10 @@ export class TeacherRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: ICreateResponse): void {
-    const errorMessage: string = error.message || "Erro ao cadastrar professor. Tente novamente."
+  errorMessage(): void {
     this.snackbarErrorService.showErrorMessage(
-      errorMessage,
-      'Verifique as informações digitadas ou cadastre novos dados'
+      'Erro ao cadastrar professor',
+      'Verifique os dados e tente novamente.'
     );
   }
 }
