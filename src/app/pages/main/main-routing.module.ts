@@ -13,6 +13,7 @@ import { SearchStudentComponent } from "./components/search-student/search-stude
 import { UpdateStudentComponent } from "./components/update-student/update-student.component";
 import { UpdateTeacherComponent } from "./components/update-teacher/update-teacher.component";
 import { UpdateClassComponent } from "./components/update-class/update-class.component";
+import { FormRegistrationComponent } from "./components/form-registration/form-registration.component";
 
 const routes: Routes = [
   { path: 'class-list', component: ClassListComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'update-student', component: UpdateStudentComponent },
   { path: 'update-teacher', component: UpdateTeacherComponent },
   { path: 'update-class', component: UpdateClassComponent },
+  { path: 'form-registration', component: FormRegistrationComponent },
 ];
 
 @NgModule({
