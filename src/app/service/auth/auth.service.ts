@@ -136,8 +136,6 @@ export class AuthService {
     // Decodifica o token para obter informações do usuário
     const decodedToken = jwtDecode<DecodedToken>(token);
 
-    // Adiciona manualmente o parâmetro 'role' para fins de teste
-    decodedToken.role = 'admin'; // Ou qualquer outro valor que você desejar
     localStorage.setItem(this.tokenKey, token);
     localStorage.setItem(this.userKey, JSON.stringify(decodedToken));
   }

@@ -20,6 +20,27 @@ export class TeacherRegistrationComponent implements OnInit {
   turmaOptions: ClassesResponse[] = []; // Variável para armazenar as turmas
   isLoading = true; // Variável para controlar o carregamento
 
+  anoLetivo = [
+    { value: '1-ano', label: '1º ano', backName: '1st year' },
+    { value: '2-ano', label: '2º ano', backName: '2nd year' },
+    { value: '3-ano', label: '3º ano', backName: '3rd year' },
+    { value: '4-ano', label: '4º ano', backName: '4th year' },
+    { value: '5-ano', label: '5º ano', backName: '5th year' },
+    { value: '6-ano', label: '6º ano', backName: '6th year' }
+  ];
+
+  periodoLetivo = [
+    { value: 'manha', label: 'Manhã', backName: 'Morning' },
+    { value: 'tarde', label: 'Tarde', backName: 'Afternoon' },
+    { value: 'noite', label: 'Noite', backName: 'Night' },
+  ];
+
+  ensino = [
+    { value: 'maternal', label: 'Maternal', backName: 'Nursery' },
+    { value: 'preEscola', label: 'Pré-escola', backName: 'Preschool' },
+    { value: 'ensinoFundamental', label: 'Ensino Fundamental 1', backName: 'Elementary school 1' },
+  ];
+
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -41,16 +62,20 @@ export class TeacherRegistrationComponent implements OnInit {
       ]]
     });
 
-    // Chama o serviço para buscar as turmas
     this.classService.getClasses().subscribe(
       (data: ClassesResponse[]) => {
-        // Armazena o array de turmas para uso no template
-        this.turmaOptions = data;
-        this.isLoading = false; // Desativa o carregamento após receber os dados
+        // Traduzir os campos antes de atribuir a `turmaOptions`
+        this.turmaOptions = data.map((turma: ClassesResponse) => ({
+          ...turma,
+          schoolYear: this.translateAnoLetivo(turma.schoolYear),
+          schoolShift: this.translatePeriodoLetivo(turma.schoolShift),
+          educationType: this.translateEnsino(turma.educationType)
+        }));
+        this.isLoading = false;
       },
       (error) => {
-        console.error('Erro ao buscar as turmas:', error);
-        this.isLoading = false; // Desativa o carregamento após receber os dados
+        console.error('Erro ao carregar turmas:', error);
+        this.isLoading = false;
       }
     );
   }
@@ -58,7 +83,22 @@ export class TeacherRegistrationComponent implements OnInit {
   //=================================
   //Botão voltar
   goBack(): void {
-    this.router.navigate(['/main/admin-screen'])
+    this.router.navigate(['/main'])
+  }
+
+  translateAnoLetivo(backName: string): string {
+    const option = this.anoLetivo.find(option => option.backName === backName);
+    return option ? option.label : backName;
+  }
+
+  translatePeriodoLetivo(backName: string): string {
+    const option = this.periodoLetivo.find(option => option.backName === backName);
+    return option ? option.label : backName;
+  }
+
+  translateEnsino(backName: string): string {
+    const option = this.ensino.find(option => option.backName === backName);
+    return option ? option.label : backName;
   }
 
   onSubmit(): void {
@@ -92,7 +132,7 @@ export class TeacherRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/main/admin-screen'])
+      this.router.navigate(['/main'])
     }, 3500);
   }
 

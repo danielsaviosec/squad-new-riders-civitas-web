@@ -37,7 +37,7 @@
           <mat-label>Turmas</mat-label>
           <mat-select formControlName="turma" placeholder="6 série B" multiple>
             <mat-option *ngFor="let option of turmaOptions" [value]="option.id">
-              {{ option.name }}
+              {{option.name}} ({{option.schoolShift}}, {{option.educationType}}, {{option.schoolYear}})
             </mat-option>
           </mat-select>
         </mat-form-field>

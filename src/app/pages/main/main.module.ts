@@ -26,6 +26,8 @@ import { SearchStudentComponent } from './components/search-student/search-stude
 import { UpdateStudentComponent } from './components/update-student/update-student.component';
 import { UpdateTeacherComponent } from './components/update-teacher/update-teacher.component';
 import { UpdateClassComponent } from './components/update-class/update-class.component'
+import { NgxEchartsModule } from 'ngx-echarts';
+import { AdiComponent } from './components/adi/adi.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     SearchStudentComponent,
     UpdateStudentComponent,
     UpdateTeacherComponent,
-    UpdateClassComponent
+    UpdateClassComponent,
+    AdiComponent,
   ],
   imports: [
     MainRoutingModule,
@@ -56,7 +59,10 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     MatFormFieldModule,
     MatIconModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    })
   ]
 })
 export class MainModule {}
