@@ -9,6 +9,7 @@ import { ClassService } from 'src/app/service/classes/classes.service';
 import { StudentRegistrationData } from 'src/app/interface/register/StudentRegistrationData.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-student-registration',
@@ -111,6 +112,8 @@ export class StudentRegistrationComponent implements OnInit {
   // Submissão do formulário
   onSubmit(): void {
     if (this.form.valid) {
+      this.form.markAsPending();
+
       const studentData: StudentRegistrationData = {
         fullName: this.form.value.nome,
         document: this.form.value.cpfOrRg,
@@ -119,7 +122,14 @@ export class StudentRegistrationComponent implements OnInit {
         cpfGuardian: this.form.value.cpfResponsavel
       };
 
-      this.studentService.registerStudent(studentData).subscribe(
+      this.studentService.registerStudent(studentData)
+      .pipe(
+        finalize(() => {
+          this.form.updateValueAndValidity();
+          console.log(this.form.pending);
+        })
+      )
+      .subscribe(
         () => {
           this.showSuccessMessage();
         },

@@ -16,6 +16,7 @@ import { ListTeacherComponent } from './list-teacher/list-teacher.component';
 import { AdminScreenComponent } from './admin-screen/admin-screen.component';
 import { TeacherScreenComponent } from './teacher-screen/teacher-screen.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     MatInputModule,
     MatSnackBarModule,
     RouterModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ButtonComponent,
