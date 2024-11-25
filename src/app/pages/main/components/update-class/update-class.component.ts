@@ -3,10 +3,14 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { AnoLetivoOption, PeriodoLetivoOption, EnsinoOption } from 'src/app/interface/IClassRegistration.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
+import { finalize } from 'rxjs';
 
 import { ClassRegistrationData } from 'src/app/interface/register/ClassRegistrationData.interface';
+import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
+import { IClassRegistrationData } from 'src/app/interface/register/IClassRegistrationData.interface';
+import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
 
 @Component({
   selector: 'app-update-class',
@@ -40,21 +44,59 @@ export class UpdateClassComponent implements OnInit {
     { value: 'ensinoFundamental', label: 'Ensino Fundamental 1', backName: 'Elementary school 1' },
   ];
 
+  turmaOptions: ClassesResponse[] = [];
+  isLoading: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private snackbarErrorService: SnackbarErrorService,
     private router: Router,
+    private route: ActivatedRoute,
     private classService: ClassService
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+
     this.form = this.fb.group({
       anoLetivo: ['', Validators.required],
       periodoLetivo: ['', Validators.required],
       ensino: ['', Validators.required],
       apelidoTurma: ['', [Validators.required, Validators.maxLength(20)]]
     });
+
+    this.classService.getClasses().subscribe(
+      (data: ClassesResponse[]) => {
+        this.turmaOptions = data.map((turma: ClassesResponse) => {
+          return {
+            ...turma,
+            schoolYear: this.translateAnoLetivo(turma.schoolYear),
+            schoolShift: this.translatePeriodoLetivo(turma.schoolShift),
+            educationType: this.translateEnsino(turma.educationType)
+          };
+        });
+
+
+        const classId: number | null = Number(this.route.snapshot.paramMap.get('id'));
+        const filterClass: IClassRegistrationData | undefined = this.turmaOptions.find(turma => turma.id === classId);
+
+        if (filterClass) {
+          this.form.patchValue({
+            anoLetivo: filterClass.schoolYear,
+            periodoLetivo: filterClass.schoolShift,
+            ensino: filterClass.educationType,
+            apelidoTurma: filterClass.name
+          });
+        }
+
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Erro ao buscar turmas:', error);
+        this.isLoading = false;
+      }
+    );
   }
 
   //=================================
@@ -63,10 +105,9 @@ export class UpdateClassComponent implements OnInit {
     this.router.navigate(['/admin-screen'])
   }
 
-  //===================
-  //Lógicas do cadastro enviado ou repetição de nomes
   onSubmit(): void {
     if (this.form.invalid) return;
+    this.form.markAsPending();
 
     const formValues = this.form.value;
 
@@ -81,28 +122,53 @@ export class UpdateClassComponent implements OnInit {
       educationType: selectedEnsino
     };
 
-    this.classService.registerClass(classData).subscribe({
+    const classId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.classService.updateClass(classId, classData)
+    .pipe(
+      finalize(() => {
+        this.form.updateValueAndValidity();
+        console.log(this.form.pending);
+      })
+    )
+    .subscribe({
       next: () => this.handleSuccess(),
-      error: () => this.handleError()
+      error: (error) => this.handleError(error?.data)
     });
   }
 
   private handleSuccess() {
-    this._snackBar.open('Turma cadastrada com sucesso!', '', {
+    this._snackBar.open('Turma atualizada com sucesso!', '', {
       duration: 3000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen'])
+      this.router.navigate(['/main'])
     }, 3500);
   }
 
-  handleError(): void {
+  handleError(error: CreateResponse):void {
+    const errorMessage: string = error?.message || "Erro ao atualizar turma. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
-      'Erro ao cadastrar turma. Tente novamente.',
+      errorMessage,
       'Verifique as informações digitadas ou cadastre novos dados'
     );
+  }
+
+  translateAnoLetivo(backName: string): string {
+    const option = this.anoLetivo.find(option => option.backName === backName);
+    return option ? option.value : backName;
+  }
+
+  translatePeriodoLetivo(backName: string): string {
+    const option = this.periodoLetivo.find(option => option.backName === backName);
+    return option ? option.value : backName;
+  }
+
+  translateEnsino(backName: string): string {
+    const option = this.ensino.find(option => option.backName === backName);
+    return option ? option.value : backName;
   }
 }

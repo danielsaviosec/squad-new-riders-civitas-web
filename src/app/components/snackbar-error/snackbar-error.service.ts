@@ -12,7 +12,6 @@ export class SnackbarErrorService {
   showErrorMessage(message: string, subMessage: string):void {
     this.snackBar.openFromComponent(SnackbarErrorComponent, {
       data: { message, subMessage },
-      duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
       panelClass: ['error-snackbar']
