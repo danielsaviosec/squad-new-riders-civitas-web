@@ -28,6 +28,7 @@ import { UpdateTeacherComponent } from './components/update-teacher/update-teach
 import { UpdateClassComponent } from './components/update-class/update-class.component'
 import { NgxEchartsModule } from 'ngx-echarts';
 import { AdiComponent } from './components/adi/adi.component';
+import { StudentClassListComponent } from './components/student-class-list/student-class-list.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AdiComponent } from './components/adi/adi.component';
     UpdateTeacherComponent,
     UpdateClassComponent,
     AdiComponent,
+    StudentClassListComponent
   ],
   imports: [
     MainRoutingModule,

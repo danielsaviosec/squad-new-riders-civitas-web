@@ -29,4 +29,11 @@ export class ClassService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<ClassesResponse[]>(`${environment.apiUrl}classes`, { headers });
   }
+
+  // Novo método para obter a lista de professores
+  getClassesTeacher(): Observable<ClassesResponse[]> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ClassesResponse[]>(`${environment.apiUrl}teachers/me/classes`, { headers });
+  }
 }

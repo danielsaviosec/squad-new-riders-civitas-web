@@ -110,7 +110,7 @@ main {
 }
 
 .sub-title {
-  padding-left: 50px;
+  padding-left: 60px;
   position: relative;
   top: 50px;
   grid-area: search;
@@ -136,5 +136,37 @@ main {
 
   @media (max-width: 820px) {
     overflow-y: inherit;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  color: #5E17EB; // Cor principal do tema
+  font-family: 'Arial', sans-serif;
+  gap: 15px;
+
+  svg {
+    width: 80px;
+    height: 80px;
+    fill: #5E17EB; // Mesma cor do tema para consistência
+    opacity: 0.8;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #6c757d; // Cor para texto secundário
+    margin: 0;
+    max-width: 400px;
   }
 }

@@ -15,6 +15,7 @@ import { UpdateTeacherComponent } from "./components/update-teacher/update-teach
 import { UpdateStudentComponent } from "./components/update-student/update-student.component";
 import { AuthGuard } from "../auth/auth.guard";
 import { AdiComponent } from "./components/adi/adi.component";
+import { StudentClassListComponent } from "./components/student-class-list/student-class-list.component";
 
 const routes: Routes = [
   {
@@ -64,6 +65,12 @@ const routes: Routes = [
     data: { allowedRoles: ['admin'] }
   },
   {
+    path: 'student-class-list/:id',
+    component: StudentClassListComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['teacher'] }
+  },
+  {
     path: 'search-class',
     component: SearchClassComponent,
     canActivate: [AuthGuard],
@@ -97,7 +104,7 @@ const routes: Routes = [
     path: 'adi',
     component: AdiComponent,
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['admin'] }
+    data: { allowedRoles: ['admin', 'teacher'] }
   }
 ];
 

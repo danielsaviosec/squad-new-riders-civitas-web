@@ -5,7 +5,7 @@
 
 <main *ngIf="!isLoading">
   <section class="sidebar-section">
-    <app-sidebar [homeLink]="{ route: 'main/teacher-screen' }" [menuIcons]="icons"></app-sidebar>
+    <app-sidebar [homeLink]="{ route: '/main' }" [menuIcons]="icons"></app-sidebar>
   </section>
 
   <div class="title" *ngIf="userRole === 'admin'">
@@ -18,7 +18,7 @@
 
   <div class="search">
     <app-back-button></app-back-button>
-    <div class="input-wrapper">
+    <div class="input-wrapper" *ngIf="userRole === 'admin'">
       <input type="text" />
       <span class="icon-search">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -48,9 +48,14 @@
       </div>
 
       <div *ngIf="userRole === 'teacher'">
-        <ng-container>
+        <ng-container *ngFor="let turma of turmaOptions">
           <app-list-teacher
-            tipo="turma">
+            tipo="turma"
+            [apelidoTurma]="turma.name"
+            [anoLetivo]="turma.schoolYear"
+            [periodoLetivo]="turma.schoolShift"
+            [idTurma]="turma.id"
+            (turmaSelecionada)="onNavigateToStudentClassList($event)">
           </app-list-teacher>
         </ng-container>
       </div>

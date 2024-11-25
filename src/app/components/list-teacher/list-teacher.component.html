@@ -1,19 +1,17 @@
-<div class="card">
+<div (click)="onTurmaClick()" class="card">
   <div class="section-text">
     <ng-container *ngIf="tipo === 'turma'; else tipoTemplate">
       <!-- Exibir dados da turma -->
-      <!-- <h3>{{ apelidoTurma }}</h3> -->
-      <h3>[apelidoTurma]</h3>
-      <!-- <span>{{ anoLetivo }} - {{ periodoLetivo }}</span> -->
-      <span>[anoLetivo] - [periodoLetivo]</span>
+      <h3>{{ apelidoTurma }}</h3>
+      <span>Ano Letivo: {{ anoLetivo }} - Período: {{ periodoLetivo }}</span>
     </ng-container>
 
     <!-- Template para dados do estudante -->
     <ng-template #tipoTemplate>
       <ng-container >
         <!-- Exibir dados do estudante -->
-        <h3>[nomeDoEstudante]</h3>
-        <span>[matriculaDoEstudante]</span>
+        <h3>{{ nomeDoEstudante }}</h3>
+        <span>Matrícula: {{ matriculaDoEstudante }}</span>
       </ng-container>
     </ng-template>
 

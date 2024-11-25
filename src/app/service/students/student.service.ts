@@ -25,4 +25,10 @@ export class StudentService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<IStudentResponse[]>(`${environment.apiUrl}admin/me/students`, { headers });
   }
+
+  getStudentsByClassId(classId: string): Observable<IStudentResponse[]> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<IStudentResponse[]>(`${environment.apiUrl}teachers/me/classes/${classId}/students`, { headers });
+  }
 }

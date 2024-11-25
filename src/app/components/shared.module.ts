@@ -13,7 +13,7 @@ import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListTeacherComponent } from './list-teacher/list-teacher.component';
-
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -21,7 +21,8 @@ import { ListTeacherComponent } from './list-teacher/list-teacher.component';
     BackButtonComponent,
     ListComponent,
     ListTeacherComponent,
-    SidebarComponent
+    SidebarComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,8 @@ import { ListTeacherComponent } from './list-teacher/list-teacher.component';
     ListComponent,
     ListTeacherComponent,
     SidebarComponent,
-    RouterModule
+    RouterModule,
+    BreadcrumbComponent
   ],
   providers: [MatSnackBar]
 })

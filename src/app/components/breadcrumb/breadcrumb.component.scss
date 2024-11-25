@@ -1,0 +1,27 @@
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #6c757d; // Cor secundária
+
+  .breadcrumb-link {
+    text-decoration: none;
+    color: #5e17eb; // Cor principal
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-separator {
+    margin: 0 5px;
+    color: #888e94; // Cor de separação
+    font-weight: 600;
+  }
+
+  .breadcrumb-current {
+    font-weight: bold;
+    color: #212529; // Texto ativo
+  }
+}
