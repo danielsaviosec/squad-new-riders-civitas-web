@@ -10,6 +10,7 @@ import { LoginAdminCredentials } from 'src/app/interface/auth/LoginAdminCredenti
 import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
 import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCredentials.interface';
 import { DecodedToken } from 'src/app/interface/auth/DecodedToken.interface';
+import { IUser } from 'src/app/interface/auth/IUser.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -112,7 +113,7 @@ export class AuthService {
    *
    * @returns O objeto `user` ou `null`.
    */
-  getUser(): object | null {
+  getUser(): IUser | null {
     return JSON.parse(localStorage.getItem(this.userKey) || 'null');
   }
 
