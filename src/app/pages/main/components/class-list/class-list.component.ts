@@ -107,6 +107,10 @@ export class ClassListComponent implements OnInit {
     }
   }
 
+  onNavigateToUpdateClass(turmaId: number) {
+    this.router.navigate([`/main/update-class/${turmaId}`]);
+  }
+
   onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }) {
     // Armazena o apelido da turma no serviço compartilhado
     this.sharedDataService.setData({ apelidoTurma: turma.apelidoTurma });
