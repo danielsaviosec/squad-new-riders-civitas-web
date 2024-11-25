@@ -91,7 +91,7 @@ const routes: Routes = [
     data: { allowedRoles: ['admin'] }
   },
   {
-    path: 'update-teacher',
+    path: 'update-teacher/:id',
     component: UpdateTeacherComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin'] }

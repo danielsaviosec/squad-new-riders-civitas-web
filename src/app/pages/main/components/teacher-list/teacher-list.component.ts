@@ -4,6 +4,7 @@ import { TeacherService } from '../../../../service/teachers/teachers.service';
 
 import { Teacher } from 'src/app/interface/register/Teacher.interface';
 import { Class } from 'src/app/interface/register/Class.interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-teacher-list',
   templateUrl: './teacher-list.component.html',
@@ -20,7 +21,9 @@ export class TeacherListComponent implements OnInit {
 
   teachers: Teacher[] = [];
   teacherClassesNames: { [key: string]: string[] } = {};
-  isLoading = true;constructor(private teacherService: TeacherService) {}
+  isLoading = true;
+
+  constructor(private teacherService: TeacherService, private router: Router) {}
 
   ngOnInit() {
     this.teacherService.getTeachers().subscribe(
@@ -37,5 +40,9 @@ export class TeacherListComponent implements OnInit {
         this.isLoading = false;
       }
     );
+  }
+
+  onNavigateToUpdateTeacher(id: number) {
+    this.router.navigate([`/main/update-teacher/${id}`]);
   }
 }
