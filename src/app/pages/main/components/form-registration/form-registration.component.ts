@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Question, QuestionOption } from 'src/app/interface/register/FormRegistration.interface';
+import { IQuestion, IQuestionOption } from 'src/app/interface/register/IFormRegistration.interface';
 
 @Component({
   selector: 'app-form-registration',
@@ -14,7 +14,7 @@ export class FormRegistrationComponent implements OnInit {
   form!: FormGroup;
   textTeacher: string = '';
 
-  questions: Question[] = [
+  questions: IQuestion[] = [
     {
       id: 'autoconhecimento',
       title: 'Autoconhecimento',
@@ -42,7 +42,7 @@ export class FormRegistrationComponent implements OnInit {
     },
   ];
 
-  options: QuestionOption[] = [
+  options: IQuestionOption[] = [
     { value: 'discordoTotalmente', text: 'Discordo totalmente' },
     { value: 'discordo', text: 'Discordo' },
     { value: 'neutro', text: 'Neutro' },
@@ -84,7 +84,7 @@ export class FormRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  goBack():void {
+  goBack(): void {
     this.router.navigate(['/'])
   }
 }

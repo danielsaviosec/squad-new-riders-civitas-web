@@ -70,6 +70,7 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     })
+    FormsModule
   ]
 })
 export class MainModule {}

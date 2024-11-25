@@ -18,6 +18,7 @@ import { AdiComponent } from "./components/adi/adi.component";
 import { StudentClassListComponent } from "./components/student-class-list/student-class-list.component";
 import { FormRegistrationComponent } from "./components/form-registration/form-registration.component";
 import { HomeScreenComponent } from "./components/home-screen/home-screen.component";
+import { FormRegistrationComponent } from "./components/form-registration/form-registration.component";
 
 const routes: Routes = [
   {
