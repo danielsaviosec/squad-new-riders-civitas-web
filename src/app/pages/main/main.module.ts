@@ -12,7 +12,7 @@ import { TeacherRegistrationComponent } from "./components/teacher-registration/
 import { StudentRegistrationComponent } from "./components/student-registration/student-registration.component";
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,7 +25,8 @@ import { SearchClassComponent } from './components/search-class/search-class.com
 import { SearchStudentComponent } from './components/search-student/search-student.component';
 import { UpdateStudentComponent } from './components/update-student/update-student.component';
 import { UpdateTeacherComponent } from './components/update-teacher/update-teacher.component';
-import { UpdateClassComponent } from './components/update-class/update-class.component'
+import { UpdateClassComponent } from './components/update-class/update-class.component';
+import { FormRegistrationComponent } from './components/form-registration/form-registration.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     SearchStudentComponent,
     UpdateStudentComponent,
     UpdateTeacherComponent,
-    UpdateClassComponent
+    UpdateClassComponent,
+    FormRegistrationComponent
   ],
   imports: [
     MainRoutingModule,
@@ -56,7 +58,8 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     MatFormFieldModule,
     MatIconModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class MainModule {}
