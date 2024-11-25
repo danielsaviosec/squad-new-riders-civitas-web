@@ -122,7 +122,7 @@ export class UpdateClassComponent implements OnInit {
       educationType: selectedEnsino
     };
 
-    const classId = Number(this.route.snapshot.paramMap.get('id'));
+    const classId: number | null = Number(this.route.snapshot.paramMap.get('id'));
 
     this.classService.updateClass(classId, classData)
     .pipe(
@@ -133,7 +133,7 @@ export class UpdateClassComponent implements OnInit {
     )
     .subscribe({
       next: () => this.handleSuccess(),
-      error: (error) => this.handleError(error?.data)
+      error: (data) => this.handleError(data?.error)
     });
   }
 
@@ -145,7 +145,7 @@ export class UpdateClassComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/main'])
+      this.router.navigate(['/main/class-list'])
     }, 3500);
   }
 

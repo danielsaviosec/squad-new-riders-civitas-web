@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { ISidebarIcons } from 'src/app/interface';
 import { IStudentResponse } from 'src/app/interface/response/IStudentsResponse.interface';
 import { StudentService } from 'src/app/service/students/student.service';
@@ -19,7 +20,7 @@ export class StudentListComponent {
   ];
 
   students: IStudentResponse[] = [];
-  isLoading = true;constructor(private studentService: StudentService) {}
+  isLoading = true;constructor(private studentService: StudentService, private router: Router) {}
 
   ngOnInit() {
     this.studentService.getStudents().subscribe(
@@ -32,5 +33,9 @@ export class StudentListComponent {
         this.isLoading = false;
       }
     );
+  }
+
+  onNavigateToUpdateStudent(id: number) {
+    this.router.navigate([`/main/update-student/${id}`]);
   }
 }

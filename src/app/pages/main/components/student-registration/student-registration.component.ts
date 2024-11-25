@@ -126,7 +126,6 @@ export class StudentRegistrationComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.form.updateValueAndValidity();
-          console.log(this.form.pending);
         })
       )
       .subscribe(
@@ -156,7 +155,7 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   handleError(error: CreateResponse):void {
-    const errorMessage: string = error.message || "Erro ao cadastrar professor. Tente novamente."
+    const errorMessage: string = error.message || "Erro ao cadastrar estudante. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
       'Verifique as informações digitadas ou cadastre novos dados'

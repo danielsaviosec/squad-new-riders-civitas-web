@@ -100,7 +100,7 @@ export class UpdateTeacherComponent implements OnInit {
       classes: this.form.value.turma
     };
 
-    const teacherId = Number(this.route.snapshot.paramMap.get('id'));
+    const teacherId: number | null = Number(this.route.snapshot.paramMap.get('id'));
 
     this.teacherService.updateTeacher(teacherId, teacherData)
     .pipe(
@@ -110,7 +110,7 @@ export class UpdateTeacherComponent implements OnInit {
     )
     .subscribe({
       next: () => this.handleSuccess(),
-      error: (error) => this.handleError(error?.data)
+      error: (error) => this.handleError(error?.error)
     });
   }
 
@@ -122,7 +122,7 @@ export class UpdateTeacherComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/main'])
+      this.router.navigate(['/main/teacher-list'])
     }, 3500);
   }
 
