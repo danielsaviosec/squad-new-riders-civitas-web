@@ -6,19 +6,18 @@ import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 import { TeacherService } from 'src/app/service/teachers/teachers.service';
 
-import { ITeacherRegistrationData } from 'src/app/interface/register/ITeacherRegistrationData.interface';
-import { IClassesResponse } from 'src/app/interface/response/IClassesResponse.interface';
+import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
+import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 
 @Component({
   selector: 'app-update-teacher',
   templateUrl: './update-teacher.component.html',
   styleUrls: ['./update-teacher.component.scss']
 })
-
 export class UpdateTeacherComponent implements OnInit {
   form!: FormGroup;
-  turmaOptions: IClassesResponse[] = []; // Variável para armazenar as turmas
-  isLoading!: boolean; // Variável para controlar o carregamento
+  turmaOptions: ClassesResponse[] = []; // Variável para armazenar as turmas
+  isLoading = true; // Variável para controlar o carregamento
 
   constructor(
     private fb: FormBuilder,
@@ -43,14 +42,14 @@ export class UpdateTeacherComponent implements OnInit {
 
     // Chama o serviço para buscar as turmas
     this.classService.getClasses().subscribe(
-      (data: IClassesResponse[]) => {
+      (data: ClassesResponse[]) => {
         // Armazena o array de turmas para uso no template
         this.turmaOptions = data;
-        this.isLoading = false; // Desativa o carregamento após receber os dados
+        // this.isLoading = false; // Desativa o carregamento após receber os dados
       },
       (error) => {
         console.error('Erro ao buscar as turmas:', error);
-        this.isLoading = false; // Desativa o carregamento após receber os dados
+        // this.isLoading = false; // Desativa o carregamento após receber os dados
       }
     );
   }
@@ -63,7 +62,7 @@ export class UpdateTeacherComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const teacherData: ITeacherRegistrationData = {
+      const teacherData: TeacherRegistrationData = {
         fullName: this.form.value.nome,
         cpf: this.form.value.cpf,
         registrationNumber: this.form.value.matricula,

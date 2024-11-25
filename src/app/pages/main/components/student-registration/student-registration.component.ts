@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { StudentService } from '../../../../service/students/student.service';
 import { ClassService } from 'src/app/service/classes/classes.service';
 
-import { IStudentRegistrationData } from 'src/app/interface/register/IStudentRegistrationData.interface';
-import { IClassesResponse } from 'src/app/interface/response/IClassesResponse.interface';
-import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
+import { StudentRegistrationData } from 'src/app/interface/register/StudentRegistrationData.interface';
+import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
+import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
 
 @Component({
   selector: 'app-student-registration',
@@ -17,8 +17,8 @@ import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.inte
 })
 export class StudentRegistrationComponent implements OnInit {
   form!: FormGroup;
-  turmaOptions: IClassesResponse[] = [];
-  isLoading!: boolean;
+  turmaOptions: ClassesResponse[] = [];
+  isLoading = true;
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +27,7 @@ export class StudentRegistrationComponent implements OnInit {
     private router: Router,
     private studentService: StudentService,
     private classService: ClassService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -39,7 +39,7 @@ export class StudentRegistrationComponent implements OnInit {
     });
 
     this.classService.getClasses().subscribe(
-      (data: IClassesResponse[]) => {
+      (data: ClassesResponse[]) => {
         this.turmaOptions = data;
         this.isLoading = false;
       },
@@ -51,7 +51,7 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   cpfOrRgValidator(control: AbstractControl): ValidationErrors | null {
-    const value: string = control.value;
+    const value = control.value;
     const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
     const rgRegex = /^(\d{1,2}\.?\d{3}\.?\d{3}-?\d{1,2}|\d{7,14})$/;
 
@@ -69,7 +69,7 @@ export class StudentRegistrationComponent implements OnInit {
   // Submissão do formulário
   onSubmit(): void {
     if (this.form.valid) {
-      const studentData: IStudentRegistrationData = {
+      const studentData: StudentRegistrationData = {
         fullName: this.form.value.nome,
         document: this.form.value.cpfOrRg,
         registrationNumber: this.form.value.matricula,
@@ -103,7 +103,7 @@ export class StudentRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: ICreateResponse):void {
+  handleError(error: CreateResponse):void {
     const errorMessage: string = error.message || "Erro ao cadastrar professor. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,

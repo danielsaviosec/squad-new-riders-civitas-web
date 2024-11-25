@@ -1,6 +1,6 @@
-<button mat-flat-button [ngClass]="customClass" [disabled]="disabled || loading" (click)="onClick()">
+<button mat-flat-button [ngClass]="customClass" [disabled]="disabled" (click)="onClick()">
   {{ label }}
-  <mat-icon *ngIf="loading">
+  <!-- <mat-icon *ngIf="authForm.pending">
     <mat-spinner diameter="18"></mat-spinner>
-  </mat-icon>
+  </mat-icon> -->
 </button>

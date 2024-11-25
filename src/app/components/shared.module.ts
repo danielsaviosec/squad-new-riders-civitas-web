@@ -13,7 +13,6 @@ import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListTeacherComponent } from './list-teacher/list-teacher.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -32,9 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatSnackBarModule,
     RouterModule,
-    MatMenuModule,
-    RouterModule,
-    MatProgressSpinnerModule
+    MatMenuModule
   ],
   exports: [
     ButtonComponent,
