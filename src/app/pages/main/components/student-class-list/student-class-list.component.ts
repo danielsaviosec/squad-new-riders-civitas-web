@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentService } from '../../../../service/students/student.service';
 import { IStudentResponse } from 'src/app/interface/response/IStudentsResponse.interface';
@@ -7,7 +7,8 @@ import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 @Component({
   selector: 'app-student-class-list',
   templateUrl: './student-class-list.component.html',
-  styleUrls: ['./student-class-list.component.scss']
+  styleUrls: ['./student-class-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class StudentClassListComponent implements OnInit {
   students: IStudentResponse[] = [];

@@ -12,7 +12,7 @@ import { TeacherRegistrationComponent } from "./components/teacher-registration/
 import { StudentRegistrationComponent } from "./components/student-registration/student-registration.component";
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,10 +25,12 @@ import { SearchClassComponent } from './components/search-class/search-class.com
 import { SearchStudentComponent } from './components/search-student/search-student.component';
 import { UpdateStudentComponent } from './components/update-student/update-student.component';
 import { UpdateTeacherComponent } from './components/update-teacher/update-teacher.component';
-import { UpdateClassComponent } from './components/update-class/update-class.component'
 import { NgxEchartsModule } from 'ngx-echarts';
 import { AdiComponent } from './components/adi/adi.component';
 import { StudentClassListComponent } from './components/student-class-list/student-class-list.component';
+import { FormRegistrationComponent } from './components/form-registration/form-registration.component';
+import { HomeScreenComponent } from './components/home-screen/home-screen.component'
+import { UpdateClassComponent } from './components/update-class/update-class.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +48,11 @@ import { StudentClassListComponent } from './components/student-class-list/stude
     UpdateStudentComponent,
     UpdateTeacherComponent,
     UpdateClassComponent,
+    FormRegistrationComponent,
+    HomeScreenComponent,
     AdiComponent,
-    StudentClassListComponent
+    StudentClassListComponent,
+    FormRegistrationComponent
   ],
   imports: [
     MainRoutingModule,

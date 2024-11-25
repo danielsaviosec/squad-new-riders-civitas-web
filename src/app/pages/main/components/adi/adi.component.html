@@ -4,8 +4,73 @@
     <app-sidebar [homeLink]="{ route: 'main/teacher-screen' }" [menuIcons]="icons"></app-sidebar>
   </section>
 
-  <div class="chart-container">
-    <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
-    <echarts [options]="chartOptions" class="echart"></echarts>
+  <div class="title">
+    <h2>Plano de Desenvolvimento Individual</h2>
+  </div>
+
+  <div class="navigate">
+    <div class="content-left">
+      <app-back-button></app-back-button>
+
+      <div>
+        <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+      </div>
+    </div>
+
+    <div class="new-adi-btn" (click)="onVisualizarClick()">
+      Registrar novo PDI
+      <mat-icon>add_circle_outline</mat-icon>
+    </div>
+  </div>
+
+  <div class="student-informations">
+    <h4>[Nome completo do aluno]</h4>
+    <span>[Apelido da turma a qual pertence]</span>
+  </div>
+
+  <div class="history-ADIs">
+    <h4>Histórico de ADIs</h4>
+
+    <div class="ADIs-list">
+      <div class="ADI-item">
+        ADI 3 [data]
+        <mat-icon>search</mat-icon>
+      </div>
+      <div class="ADI-item">
+        ADI 3 [data]
+        <mat-icon>search</mat-icon>
+      </div>
+      <div class="ADI-item">
+        ADI 3 [data]
+        <mat-icon>search</mat-icon>
+      </div>
+      <div class="ADI-item">
+        ADI 3 [data]
+        <mat-icon>search</mat-icon>
+      </div>
+      <div class="ADI-item">
+        ADI 3 [data]
+        <mat-icon>search</mat-icon>
+      </div>
+      <div class="ADI-item">
+        ADI 3 [data]
+        <mat-icon>search</mat-icon>
+      </div>
+      <div class="ADI-item">
+        ADI 3 [data]
+        <mat-icon>search</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="last-ADI">
+    <h4>Última avaliação</h4>
+    <span>[Data da última avaliação]</span>
+
+    <div class="chart-container">
+      <echarts [options]="chartOptions" class="echart"></echarts>
+    </div>
+
+    <button>Visualizar</button>
   </div>
 </main>

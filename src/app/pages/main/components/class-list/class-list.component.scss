@@ -22,11 +22,11 @@ main {
     margin-right: 0;
   }
 
-  app-list .card {
+  app-list .card, app-list-teacher .card {
     border-top: 0 !important;
   }
 
-  app-list:first-of-type .card {
+  app-list:first-of-type .card, app-list-teacher:first-of-type .card {
     border-top: 1px solid #cac4d0 !important;
   }
 }

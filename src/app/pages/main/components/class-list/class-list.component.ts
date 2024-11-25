@@ -60,6 +60,13 @@ export class ClassListComponent implements OnInit {
 
     this.userRole = this.authService.getRole();
 
+    // Filtra os ícones com base no papel do usuário
+    if (this.userRole !== "admin") {
+        this.icons = this.icons.filter(icon =>
+            icon.name === "Início" || icon.name === "Turmas"
+        );
+    }
+
     // Chama o serviço para obter as turmas
     if(this.userRole === "admin") {
       this.classService.getClasses().subscribe(

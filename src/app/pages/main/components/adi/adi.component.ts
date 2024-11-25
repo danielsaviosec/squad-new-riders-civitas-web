@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 
 @Component({
@@ -20,7 +20,11 @@ export class AdiComponent implements OnInit {
     { label: '', link: '' }   // Nome do estudante será dinâmico
   ];
 
-  constructor(private route: ActivatedRoute, private sharedDataService: SharedDataService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private sharedDataService: SharedDataService
+  ) {}
 
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
@@ -35,21 +39,25 @@ export class AdiComponent implements OnInit {
     this.chartOptions = {
       title: {
         text: 'Mínimo e real',
-        left: 'center',
+        top: '5%',
+        left: '5%'
       },
       tooltip: {},
       legend: {
         data: ['Ideal', 'Real'],
-        bottom: 0,
+        bottom: '5%',
         textStyle: {
           fontSize: 12,
         },
       },
       radar: {
+        radius: '50%',
         indicator: [
-          { name: 'Colaboração e trabalho em equipe', max: 5 },
+          { name: 'Autoconhecimento', max: 5 },
           { name: 'Empatia', max: 5 },
-          { name: 'Competência', max: 5 },
+          { name: 'Comunicação', max: 5 },
+          { name: 'Trabalho em equipe', max: 5 },
+          { name: 'Autonomia', max: 5 },
         ],
         shape: 'circle',
         splitNumber: 5,
@@ -84,7 +92,7 @@ export class AdiComponent implements OnInit {
           type: 'radar',
           data: [
             {
-              value: [3, 2, 4], // Dados reais
+              value: [3, 2, 4, 4, 5], // Dados reais
               name: 'Real',
               lineStyle: {
                 color: '#9368e9',
@@ -96,10 +104,10 @@ export class AdiComponent implements OnInit {
               symbolSize: 6,
             },
             {
-              value: [4, 4, 5], // Dados ideais
+              value: [3, 3, 3, 3, 3], // Dados ideais
               name: 'Ideal',
               lineStyle: {
-                color: '#f3b63a',
+                color: 'rgb(240,194,50)',
                 type: 'dashed',
               },
               areaStyle: {
@@ -116,13 +124,17 @@ export class AdiComponent implements OnInit {
     // Altere o valor 'show' do axisLabel para `false` nos raios que você não quer mostrar
     // Exemplo para desabilitar para o primeiro e terceiro raio, mas manter o segundo visível:
     this.chartOptions.radar.indicator.forEach((indicator: any, index: number) => {
-      if (index !== 1) { // Deixe o segundo raio visível
+      if (index !== 4) { // Deixe o segundo raio visível
         indicator.axisLabel = {
           show: false, // Desativa a exibição dos números
         };
       }
     });
 
+  }
+  onVisualizarClick() {
+    // Redirecionando para a página do estudante
+    this.router.navigate([`/main/form-registration`]);
   }
 
   updateBreadcrumb() {
@@ -134,7 +146,7 @@ export class AdiComponent implements OnInit {
       this.nomeDoEstudante = data.nomeDoEstudante;
 
       // Atualizando o breadcrumb com as informações
-      this.breadcrumbItems[1].label = this.apelidoTurma || 'Turma Desconhecida';
+      this.breadcrumbItems[1].label = this.apelidoTurma || 'Turma C';
       this.breadcrumbItems[2].label = this.nomeDoEstudante || 'Estudante Desconhecido';
     }
   }

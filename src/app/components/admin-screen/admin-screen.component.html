@@ -1,0 +1,29 @@
+<main>
+    <section class="sidebar-section">
+        <app-sidebar [homeLink]="{ route: '/' }" [menuIcons]="icons"></app-sidebar>
+    </section>
+    <div class="content-wrapper">
+        <h1>
+            Cadastro de informações sobre a escola
+        </h1>
+        <div class="content">
+            <p>
+                Prazer, somos o Civitas! <br><br>
+                Vamos juntos nessa missão de desenvolver nossos estudantes para que desenvolvam habilidades
+                comportamentais importantes para o dia a dia da vida deles.<br><br>
+                Nosso primeiro passo é o cadastro de informações necessárias para que os usuários sejam registrados
+                para que acessem à plataforma. <br>
+                Vamos lá?
+            </p>
+        </div>
+        <button class="btn-content" (click)="intoToVideo()">Ficou com alguma dúvida? Clique aqui</button>
+    </div>
+    <div class="card-wrapper">
+        <div class="card" *ngFor="let option of cardsAdmin">
+            <img alt="Cadastro" [src]="option.image">
+            <button (click)="navigateTo(option.route)" class="btn-card">
+                {{option.title}}
+            </button>
+        </div>
+    </div>
+</main>
