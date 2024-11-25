@@ -69,7 +69,7 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     MatSelectModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
-    })
+    }),
     FormsModule
   ]
 })
