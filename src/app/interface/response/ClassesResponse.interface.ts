@@ -10,7 +10,7 @@ export interface ClassesResponse {
 }
 
 interface School {
-  id: 1,
+  id: number,
   name: string,
   address: string,
   createdAt: string,
