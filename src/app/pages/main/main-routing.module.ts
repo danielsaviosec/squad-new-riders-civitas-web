@@ -101,7 +101,7 @@ const routes: Routes = [
     data: { allowedRoles: ['admin'] }
   },
   {
-    path: 'adi',
+    path: 'adi/:id',
     component: AdiComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin', 'teacher'] }

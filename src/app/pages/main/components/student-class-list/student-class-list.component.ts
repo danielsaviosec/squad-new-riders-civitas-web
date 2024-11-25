@@ -30,8 +30,6 @@ export class StudentClassListComponent implements OnInit {
     // Recupera o apelido da turma do serviço compartilhado
     this.turma.name = this.sharedDataService.getData()?.apelidoTurma;
 
-    console.log('Apelido da Turma no Breadcrumb:', this.turma.name);
-
     if (classId) {
       this.fetchStudentsByClassId(classId);
     }

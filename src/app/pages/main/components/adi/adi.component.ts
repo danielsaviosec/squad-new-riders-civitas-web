@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
+import { ActivatedRoute } from '@angular/router';
+import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 
 @Component({
   selector: 'app-adi',
@@ -8,6 +10,17 @@ import { ISidebarIcons } from 'src/app/interface';
 })
 export class AdiComponent implements OnInit {
   chartOptions: any;
+  idEstudante!: number;
+  nomeDoEstudante!: string;
+  apelidoTurma!: string;
+
+  breadcrumbItems = [
+    { label: 'Suas Turmas', link: '/main' },
+    { label: '', link: '' },  // Nome da turma será dinâmico
+    { label: '', link: '' }   // Nome do estudante será dinâmico
+  ];
+
+  constructor(private route: ActivatedRoute, private sharedDataService: SharedDataService) {}
 
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
@@ -15,6 +28,10 @@ export class AdiComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.idEstudante = +this.route.snapshot.paramMap.get('id')!;  // Obtém o id do estudante
+    this.updateBreadcrumb();
+
+
     this.chartOptions = {
       title: {
         text: 'Mínimo e real',
@@ -105,5 +122,20 @@ export class AdiComponent implements OnInit {
         };
       }
     });
+
+  }
+
+  updateBreadcrumb() {
+    // Obtendo os dados armazenados no SharedDataService
+    const data = this.sharedDataService.getData();
+
+    if (data) {
+      this.apelidoTurma = data.apelidoTurma;
+      this.nomeDoEstudante = data.nomeDoEstudante;
+
+      // Atualizando o breadcrumb com as informações
+      this.breadcrumbItems[1].label = this.apelidoTurma || 'Turma Desconhecida';
+      this.breadcrumbItems[2].label = this.nomeDoEstudante || 'Estudante Desconhecido';
+    }
   }
 }
