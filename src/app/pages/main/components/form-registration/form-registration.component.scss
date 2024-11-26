@@ -118,22 +118,10 @@ h3 {
   resize: vertical;
 }
 
-button[type="submit"] {
-  display: block;
-  margin: 20px auto 0;
-  padding: 10px 20px;
-  background: $button-register-color;
-  color: #fff;
-  width: 40%;
-  border: none;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  transition: background 0.3s ease;
-  cursor: pointer;
-}
-
-button:hover {
-  background: $button-register-hover;
+.btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .header-teacher {

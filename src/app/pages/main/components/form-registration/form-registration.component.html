@@ -6,17 +6,17 @@
       <p class="form-subtitle">Preencha as informações da avaliação do estudante</p>
     </div>
   </div>
-  
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-card" *ngFor="let question of questions">
       <h3>{{ question.title }}</h3>
       <p class="description">{{ question.description }}</p>
-      
+
       <div class="options-wrapper">
         <div class="option" *ngFor="let option of options">
           <label [for]="question.id + '-' + option.value" class="option-label">
-            <input 
-              type="radio" 
+            <input
+              type="radio"
               [id]="question.id + '-' + option.value"
               [formControlName]="question.id"
               [value]="option.value"
@@ -31,16 +31,20 @@
       <div class="header-teacher">
         <strong>Observações do professor</strong>
       </div>
-      <textarea 
+      <textarea
         id="text-id"
         formControlName="textTeacher"
         required></textarea>
     </div>
 
-    <button 
-      type="submit" 
-      [disabled]="form.invalid || form.get('textTeacher')?.value?.trim().length === 0">
-      Salvar
-    </button>
+    <div class="btn-wrapper">
+      <app-button
+        label="Salvar"
+        [customClass]="'primary'"
+        color="primary"
+        [disabled]="form.invalid"
+        [loading]="form.pending">
+      </app-button>
+    </div>
   </form>
 </div>
