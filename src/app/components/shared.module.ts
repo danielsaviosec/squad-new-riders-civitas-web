@@ -14,6 +14,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatDividerModule } from '@angular/material/divider';
     InputComponent,
     BackButtonComponent,
     ListComponent,
-    SidebarComponent
+    SidebarComponent,
+    MenuHamburguerComponent
   ],
   imports: [
     CommonModule,
