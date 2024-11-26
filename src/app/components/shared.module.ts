@@ -17,6 +17,8 @@ import { AdminScreenComponent } from './admin-screen/admin-screen.component';
 import { TeacherScreenComponent } from './teacher-screen/teacher-screen.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SidebarComponent,
     AdminScreenComponent,
     TeacherScreenComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     RouterModule,
     MatMenuModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   exports: [
     ButtonComponent,

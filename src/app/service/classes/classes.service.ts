@@ -44,4 +44,12 @@ export class ClassService {
 
     return this.http.put<CreateResponse>(`${environment.apiUrl}admin/classes/${id}`, data, { headers });
   }
+
+  // Novo método para excluir a turma
+  deleteClass(id: number): Observable<CreateResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<CreateResponse>(`${environment.apiUrl}admin/classes/${id}`, { headers });
+  }
 }
