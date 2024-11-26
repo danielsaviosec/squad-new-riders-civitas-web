@@ -50,6 +50,6 @@ export class ClassService {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.delete<CreateResponse>(`${environment.apiUrl}admin/classes/${id}`, { headers });
+    return this.http.delete<CreateResponse>(`${environment.apiUrl}classes/${id}`, { headers });
   }
 }
