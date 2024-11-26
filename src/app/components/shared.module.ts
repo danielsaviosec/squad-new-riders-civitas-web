@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatInputModule,
     MatSnackBarModule,
-    RouterModule
+    RouterModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatDividerModule
   ],
   exports: [
     ButtonComponent,
@@ -40,4 +46,4 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   providers: [MatSnackBar]
 })
 
-export class SharedModule {}
+export class SharedModule { }
