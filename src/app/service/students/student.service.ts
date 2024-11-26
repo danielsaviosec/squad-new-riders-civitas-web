@@ -26,6 +26,14 @@ export class StudentService {
     return this.http.get<IStudentResponse[]>(`${environment.apiUrl}admin/me/students`, { headers });
   }
 
+  // Novo método para atualizar o estudante
+  updateStudent(id: number, data: StudentRegistrationData): Observable<CreateResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.put<CreateResponse>(`${environment.apiUrl}admin/students/${id}`, data, { headers });
+  }
+
   getStudentsByClassId(classId: string): Observable<IStudentResponse[]> {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

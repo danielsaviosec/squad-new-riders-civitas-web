@@ -134,7 +134,9 @@ export class UpdateStudentComponent implements OnInit {
         cpfGuardian: this.form.value.cpfResponsavel
       };
 
-      this.studentService.registerStudent(studentData)
+      const studentId: number | null = Number(this.route.snapshot.paramMap.get('id'));
+
+      this.studentService.updateStudent(studentId, studentData)
       .pipe(
         finalize(() => {
           this.form.updateValueAndValidity();
