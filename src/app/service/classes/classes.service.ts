@@ -42,6 +42,6 @@ export class ClassService {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.put<CreateResponse>(`${environment.apiUrl}admin/classes/${id}`, data, { headers });
+    return this.http.put<CreateResponse>(`${environment.apiUrl}classes/${id}`, data, { headers });
   }
 }
