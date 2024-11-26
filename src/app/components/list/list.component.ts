@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 import { StudentService } from 'src/app/service/students/student.service';
 import { TeacherService } from 'src/app/service/teachers/teachers.service';
@@ -41,7 +43,9 @@ export class ListComponent {
     private dialogService: DialogService,
     private classService: ClassService,
     private studentService: StudentService,
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private _snackBar: MatSnackBar,
+    private router: Router,
   ) {}
 
   onUpdateClick() {
@@ -64,24 +68,36 @@ export class ListComponent {
         switch(this.tipo) {
           case 'turma':
             this.classService.deleteClass(this.id).subscribe({
-              next: () => console.log('Turma excluída com sucesso.'),
+              next: () => this.handleSuccess(),
               error: (err) => this.onDeleteError(err, 'turma'),
             });
             break;
           case 'estudante':
             this.studentService.deleteStudent(this.id).subscribe({
-              next: () => console.log('Estudante excluído com sucesso.'),
+              next: () => this.handleSuccess(),
               error: (data) => this.onDeleteError(data.error.message, 'estudante'),
             })
             break;
           case 'professor':
             this.teacherService.deleteTeacher(this.id).subscribe({
-              next: () => console.log('Professor excluído com sucesso.'),
+              next: () => this.handleSuccess(),
               error: (data) => this.onDeleteError(data.error.message, 'professor'),
             })
         }
       }
     })
+  }
+
+  private handleSuccess() {
+    this._snackBar.open(`${this.tipo} excluido com sucesso.`, '', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      panelClass: 'snackbar-success'
+    });
+
+    setTimeout(() => {
+      location.reload();
+    }, 1500);
   }
 
   // TODO: Corrigir any
