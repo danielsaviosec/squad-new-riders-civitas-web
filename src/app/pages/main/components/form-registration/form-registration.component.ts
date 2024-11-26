@@ -62,6 +62,12 @@ export class FormRegistrationComponent implements OnInit {
     this.form = this.fb.group(formControls);
   }
 
+  onSubmit(): void {
+    if (this.form.valid) {
+      this.handleSuccess();
+    }
+  }
+
   private handleSuccess(): void {
     this._snackBar.open('PDI registrado com sucesso!', '', {
       duration: 3000,
