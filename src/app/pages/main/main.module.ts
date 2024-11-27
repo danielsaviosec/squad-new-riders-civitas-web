@@ -6,7 +6,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ClassListComponent } from './components/class-list/class-list.component';
 import { SharedModule } from 'src/app/components/shared.module';
 import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
-import { AdminScreenComponent } from "./components/admin-screen/admin-screen.component";
 import { ClassRegistrationComponent } from "./components/class-registration/class-registration.component";
 import { TeacherRegistrationComponent } from "./components/teacher-registration/teacher-registration.component";
 import { StudentRegistrationComponent } from "./components/student-registration/student-registration.component";
@@ -18,7 +17,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
 import { SnackbarErrorComponent } from 'src/app/components/snackbar-error/snackbar-error.component';
-import { TeacherScreenComponent } from './components/teacher-screen/teacher-screen.component';
 import { MatSelectModule } from '@angular/material/select';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { SearchClassComponent } from './components/search-class/search-class.component';
@@ -36,11 +34,9 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
   declarations: [
     ClassListComponent,
     TeacherListComponent,
-    AdminScreenComponent,
     ClassRegistrationComponent,
     TeacherRegistrationComponent,
     StudentRegistrationComponent,
-    TeacherScreenComponent,
     SnackbarErrorComponent,
     StudentListComponent,
     SearchClassComponent,

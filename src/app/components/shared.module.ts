@@ -53,7 +53,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ListTeacherComponent,
     SidebarComponent,
     RouterModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    AdminScreenComponent,
+    TeacherScreenComponent,
   ],
   providers: [MatSnackBar]
 })

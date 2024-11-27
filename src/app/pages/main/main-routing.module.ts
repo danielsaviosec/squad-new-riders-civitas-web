@@ -5,7 +5,6 @@ import { TeacherListComponent } from "./components/teacher-list/teacher-list.com
 import { ClassRegistrationComponent } from "./components/class-registration/class-registration.component";
 import { TeacherRegistrationComponent } from "./components/teacher-registration/teacher-registration.component";
 import { StudentRegistrationComponent } from "./components/student-registration/student-registration.component";
-import { TeacherScreenComponent } from "./components/teacher-screen/teacher-screen.component";
 import { StudentListComponent } from "./components/student-list/student-list.component";
 import { SearchClassComponent } from "./components/search-class/search-class.component";
 import { SearchStudentComponent } from "./components/search-student/search-student.component";
@@ -52,12 +51,6 @@ const routes: Routes = [
     component: StudentRegistrationComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin'] }
-  },
-  {
-    path: 'teacher-screen',
-    component: TeacherScreenComponent,
-    canActivate: [AuthGuard],
-    data: { allowedRoles: ['teacher'] }
   },
   {
     path: 'student-list',
