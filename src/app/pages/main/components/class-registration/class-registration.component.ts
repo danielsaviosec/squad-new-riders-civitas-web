@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
-
 import { IClassRegistrationData } from 'src/app/interface/register/IClassRegistrationData.interface';
 import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
 
@@ -97,7 +96,7 @@ export class ClassRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen'])
+      this.router.navigate(['/main/admin-screen'])
     }, 3500);
   }
 

@@ -5,12 +5,15 @@ import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { BackButtonComponent } from './back-button/back-button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ListTeacherComponent } from './list-teacher/list-teacher.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     InputComponent,
     BackButtonComponent,
     ListComponent,
+    ListTeacherComponent,
     SidebarComponent
   ],
   imports: [
@@ -27,13 +31,17 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatInputModule,
     MatSnackBarModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule,
+    RouterModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ButtonComponent,
     InputComponent,
     BackButtonComponent,
     ListComponent,
+    ListTeacherComponent,
     SidebarComponent,
     RouterModule
   ],

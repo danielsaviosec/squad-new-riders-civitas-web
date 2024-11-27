@@ -3,28 +3,20 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment.development';
 
-export interface LoginAdminCredentials {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  message: string;
-  token: string;
-  user: string;
-}
-
-export interface LoginProfessorCredentials {
-  registrationNumber: string;
-}
+import { LoginAdminCredentials } from 'src/app/interface/auth/LoginAdminCredentials.interface';
+import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
+import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCredentials.interface';
+import { DecodedToken } from 'src/app/interface/auth/DecodedToken.interface';
+import { IUser } from 'src/app/interface/auth/IUser.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'token';
+  private tokenKey = '@civitas:token';
   private userKey = '@civitas:user';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -41,19 +33,19 @@ export class AuthService {
   loginAdmin(credentials: LoginAdminCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(environment.apiUrl+'admin/login', credentials).pipe(
       tap((response) => {
-        if(response.token && response.user) {
-          this.saveUserToStorage(response.token, response.user);
+        if(response.token) {
+          this.saveUserToStorage(response.token);
         }
       })
     );
   }
 
   // Novo método de login para o professor
-  loginProfessor(credentials: LoginProfessorCredentials): Observable<LoginResponse> {
+  loginTeacher(credentials: LoginTeacherCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}teachers/login`, credentials).pipe(
       tap((response) => {
-        if (response.token && response.user) {
-          this.saveUserToStorage(response.token, response.user);
+        if (response.token) {
+          this.saveUserToStorage(response.token);
         }
       })
     );
@@ -65,7 +57,46 @@ export class AuthService {
    * @returns `true` se o usuário está autenticado, caso contrário, `false`.
    */
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.tokenKey);
+    const token = this.getToken();
+
+    if(!token) {
+      return false;
+    }
+
+    try {
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      const currentTime: number = Math.floor(Date.now() / 1000);
+
+      if(decodedToken.exp < currentTime) {
+        this.logout();
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      this.logout();
+      return false;
+    }
+  }
+
+  /**
+   * Retorna o papel do usuário autenticado.
+   *
+   * @returns O papel do usuário (e.g., 'admin', 'teacher', 'guardian') ou null.
+   */
+  getRole(): string | null {
+    const userJson = this.getUser(); // Retorna o valor armazenado.
+
+    if (!userJson) return null;
+
+    try {
+      // Verifica se o valor já é um objeto
+      const user = typeof userJson === 'string' ? JSON.parse(userJson) : userJson;
+      return user.role || null; // Retorna o papel, se existir.
+    } catch (error) {
+      console.error('Erro ao decodificar os dados do usuário:', error);
+      return null;
+    }
   }
 
   /**
@@ -82,7 +113,7 @@ export class AuthService {
    *
    * @returns O objeto `user` ou `null`.
    */
-  getUser(): string | null {
+  getUser(): IUser | null {
     return JSON.parse(localStorage.getItem(this.userKey) || 'null');
   }
 
@@ -102,9 +133,14 @@ export class AuthService {
    * @param user - Dados do usuário autenticado.
    */
 
-  private saveUserToStorage(token: string, user: string): void {
+  private saveUserToStorage(token: string): void {
+    // Decodifica o token para obter informações do usuário
+    const decodedToken = jwtDecode<DecodedToken>(token);
+
+    // Adiciona manualmente o parâmetro 'role' para fins de teste
+    decodedToken.role = 'admin'; // Ou qualquer outro valor que você desejar
     localStorage.setItem(this.tokenKey, token);
-    localStorage.setItem(this.userKey, JSON.stringify(user));
+    localStorage.setItem(this.userKey, JSON.stringify(decodedToken));
   }
 
   /**

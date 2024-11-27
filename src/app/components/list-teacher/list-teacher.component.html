@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="section-text">
+    <ng-container *ngIf="tipo === 'turma'; else tipoTemplate">
+      <!-- Exibir dados da turma -->
+      <h3>[apelidoTurma]</h3>
+      <span>[anoLetivo] - [periodoLetivo]</span>
+    </ng-container>
+
+    <!-- Template para dados do estudante -->
+    <ng-template #tipoTemplate>
+      <ng-container >
+        <!-- Exibir dados do estudante -->
+        <h3>[nomeDoEstudante]</h3>
+        <span>[matriculaDoEstudante]</span>
+      </ng-container>
+    </ng-template>
+
+
+  </div>
+
+  <div *ngIf="tipo === 'estudante'" class="section-controllers">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu Professor">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item>
+        <span>Visualizar</span>
+      </button>
+      <button mat-menu-item>
+        <span>Cadastrar PDI</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

@@ -3,11 +3,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import {
-  AuthService,
-  LoginAdminCredentials,
-  LoginResponse,
-} from '../../../../service/auth/auth.service';
+import { AuthService } from '../../../../service/auth/auth.service';
+
+import { LoginAdminCredentials } from 'src/app/interface/auth/LoginAdminCredentials.interface';
+import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
 
 @Component({
   selector: 'app-admin-login',
@@ -59,7 +58,6 @@ export class AdminLoginComponent {
 
   private handleLoginSuccess(response: LoginResponse) {
     if (response.token) {
-      localStorage.setItem('token', response.token);
       this.router.navigate(['/main']);
     }
   }

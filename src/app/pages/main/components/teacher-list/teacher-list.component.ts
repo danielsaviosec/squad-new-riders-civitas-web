@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
-import { TeacherService, Teacher, Class } from '../../../../service/teachers/teachers.service';
+import { TeacherService } from '../../../../service/teachers/teachers.service';
+
+import { Teacher } from 'src/app/interface/register/Teacher.interface';
+import { Class } from 'src/app/interface/register/Class.interface';
 @Component({
   selector: 'app-teacher-list',
   templateUrl: './teacher-list.component.html',
@@ -9,10 +12,10 @@ import { TeacherService, Teacher, Class } from '../../../../service/teachers/tea
 })
 export class TeacherListComponent implements OnInit {
   icons: ISidebarIcons[] = [
-    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/teacher-screen' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
     { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
-    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route:'main/student-list' }
+    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
   teachers: Teacher[] = [];
