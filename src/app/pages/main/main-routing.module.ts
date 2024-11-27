@@ -16,6 +16,7 @@ import { AdiComponent } from "./components/adi/adi.component";
 import { StudentClassListComponent } from "./components/student-class-list/student-class-list.component";
 import { HomeScreenComponent } from "./components/home-screen/home-screen.component";
 import { FormRegistrationComponent } from "./components/form-registration/form-registration.component";
+import { AdiDetailsComponent } from "./components/adi-details/adi-details.component";
 
 const routes: Routes = [
   {
@@ -98,19 +99,19 @@ const routes: Routes = [
     path: 'adi/:id',
     component: AdiComponent,
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['admin', 'teacher'] }
+    data: { allowedRoles: ['teacher'] }
+  },
+  {
+    path: 'adi-details/:id',
+    component: AdiDetailsComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['teacher'] },
   },
   {
     path: 'form-registration/:id',
     component: FormRegistrationComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin', 'teacher'] }
-  },
-  {
-    path: 'home-screen',
-    component: HomeScreenComponent,
-    canActivate: [AuthGuard],
-    data: { allowedRoles: ['admin'] },
   }
 ];
 

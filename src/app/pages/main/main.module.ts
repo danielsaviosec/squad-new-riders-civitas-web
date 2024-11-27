@@ -29,6 +29,7 @@ import { StudentClassListComponent } from './components/student-class-list/stude
 import { FormRegistrationComponent } from './components/form-registration/form-registration.component';
 import { HomeScreenComponent } from './components/home-screen/home-screen.component'
 import { UpdateClassComponent } from './components/update-class/update-class.component';
+import { AdiDetailsComponent } from './components/adi-details/adi-details.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     HomeScreenComponent,
     AdiComponent,
     StudentClassListComponent,
-    FormRegistrationComponent
+    FormRegistrationComponent,
+    AdiDetailsComponent
   ],
   imports: [
     MainRoutingModule,

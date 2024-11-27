@@ -1,0 +1,46 @@
+
+<main>
+  <section class="sidebar-section">
+    <app-sidebar [homeLink]="{ route: '/main' }" [menuIcons]="icons"></app-sidebar>
+  </section>
+
+  <div class="title">
+    <h2>Avaliação de Desenvolvimento Individual</h2>
+  </div>
+
+  <div class="navigate">
+    <app-back-button></app-back-button>
+
+    <div class="new-adi-btn" (click)="onVisualizarClick()" (keydown)="onVisualizarClick()" tabindex="0">
+      Registrar novo PDI
+      <mat-icon>add_circle_outline</mat-icon>
+    </div>
+  </div>
+
+  <div class="informations">
+
+    <div class="student-informations">
+      <h4>[Nome completo do aluno]</h4>
+      <span>[Apelido da turma a qual pertence]</span>
+    </div>
+
+    <div class="adi-informations">
+      <h4>[Número do ADI]</h4>
+      <span>Realizado em [data]</span>
+    </div>
+
+  </div>
+
+  <div class="last-ADI">
+    <h4>Última avaliação</h4>
+
+    <div class="chart-container">
+      <echarts [options]="chartOptions" class="echart"></echarts>
+    </div>
+  </div>
+
+  <div class="teacher-comments">
+    <h4>Observações do professor</h4>
+    <p>Voluptate aute deserunt Lorem sit. Excepteur nulla occaecat pariatur fugiat Lorem consectetur cupidatat qui sint. Fugiat duis Lorem elit eiusmod et ipsum occaecat proident exercitation in sunt dolore aute. Deserunt magna quis labore velit deserunt ea laboris.</p>
+  </div>
+</main>
