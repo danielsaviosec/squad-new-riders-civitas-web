@@ -63,7 +63,7 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/admin-screen']);
+    this.router.navigate(['/main/admin-screen']);
   }
 
   // Submissão do formulário
@@ -99,7 +99,7 @@ export class StudentRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen']);
+      this.router.navigate(['/main/admin-screen']);
     }, 3500);
   }
 

@@ -5,6 +5,7 @@ import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { BackButtonComponent } from './back-button/back-button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -15,6 +16,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.component';
+import { ListTeacherComponent } from './list-teacher/list-teacher.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.compo
     BackButtonComponent,
     ListComponent,
     SidebarComponent,
-    MenuHamburguerComponent
+    MenuHamburguerComponent,
+    ListTeacherComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -35,13 +40,17 @@ import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.compo
     RouterModule,
     MatSidenavModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule,
+    RouterModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ButtonComponent,
     InputComponent,
     BackButtonComponent,
     ListComponent,
+    ListTeacherComponent,
     SidebarComponent,
     MenuHamburguerComponent,
     RouterModule

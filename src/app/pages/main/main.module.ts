@@ -44,7 +44,7 @@ import { FormRegistrationComponent } from './components/form-registration/form-r
     UpdateStudentComponent,
     UpdateTeacherComponent,
     UpdateClassComponent,
-    FormRegistrationComponent // Certifique-se de declarar o componente
+    FormRegistrationComponent
   ],
   imports: [
     MainRoutingModule,
@@ -52,7 +52,7 @@ import { FormRegistrationComponent } from './components/form-registration/form-r
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSnackBarModule, // Certifique-se de importar o MatSnackBarModule
+    MatSnackBarModule,
     MatProgressSpinnerModule,
     SharedModule,
     MatFormFieldModule,

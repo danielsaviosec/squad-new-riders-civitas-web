@@ -58,7 +58,7 @@ export class TeacherRegistrationComponent implements OnInit {
   //=================================
   //Botão voltar
   goBack(): void {
-    this.router.navigate(['/admin-screen'])
+    this.router.navigate(['/main/admin-screen'])
   }
 
   onSubmit(): void {
@@ -92,7 +92,7 @@ export class TeacherRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen'])
+      this.router.navigate(['/main/admin-screen'])
     }, 3500);
   }
 
