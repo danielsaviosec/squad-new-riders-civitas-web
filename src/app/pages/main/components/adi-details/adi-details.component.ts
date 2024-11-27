@@ -1,7 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedDataService } from 'src/app/service/utils/shared-data.service';
+import { AdiService } from 'src/app/service/adi/adi.service';
+import { IAdiResponse, Reviews } from 'src/app/interface/response/IAdiResponse.interface';
 
 @Component({
   selector: 'app-adi-details',
@@ -10,9 +11,12 @@ import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 })
 export class AdiDetailsComponent implements OnInit {
   chartOptions: any;
-  idEstudante!: number;
+  idAdi!: number;
   nomeDoEstudante!: string;
+  data!: string;
   apelidoTurma!: string;
+  teacherComments!: string;
+  reviews: Reviews = { teamwork: 0, empathy: 0, selfAwareness: 0, communication: 0, autonomy: 0 };
 
   breadcrumbItems = [
     { label: 'Suas Turmas', link: '/main' },
@@ -23,7 +27,7 @@ export class AdiDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private sharedDataService: SharedDataService
+    private adiService: AdiService
   ) {}
 
   icons: ISidebarIcons[] = [
@@ -32,15 +36,97 @@ export class AdiDetailsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.idEstudante = +this.route.snapshot.paramMap.get('id')!;
-    this.updateBreadcrumb();
-    this.setChartOptions(); // Inicializa o gráfico com o tamanho correto
+    this.idAdi = +this.route.snapshot.paramMap.get('id')!;
+    this.setChartOptions();
+    this.loadAdiData(this.idAdi);
   }
 
-  // Listener para monitorar alterações no tamanho da tela
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.setChartOptions();
+  }
+
+  loadAdiData(id: number): void {
+    /* Ativar trecho de código quanto comunicar com API
+    this.adiService.getAdi(id).subscribe({
+      next: (data: IAdiResponse) => {
+        this.nomeDoEstudante = data.student.fullName;
+        this.apelidoTurma = data.student.studentClass;
+        this.reviews = data.reviews;
+        this.setChartOptions();
+      },
+      error: (err) => console.error('Erro ao carregar dados:', err),
+    });
+
+    ------------------------------------------------  */
+
+    // Array de dados fictícios
+    const fakeDataArray: IAdiResponse[] = [
+      {
+        id: 1,
+        date: '23/11/24',
+        student: {
+          id: 2,
+          fullName: 'Milla',
+          studentClass: '1 ano C',
+        },
+        reviews: {
+          selfAwareness: 4,
+          empathy: 5,
+          communication: 3,
+          teamwork: 4,
+          autonomy: 2,
+        },
+        teacherComments: 'O estudante apresentou bom progresso, mas precisa melhorar na comunicação e autonomia.',
+      },
+      {
+        id: 2,
+        date: '24/11/24',
+        student: {
+          id: 3,
+          fullName: 'Lucas',
+          studentClass: '2 ano B',
+        },
+        reviews: {
+          selfAwareness: 5,
+          empathy: 4,
+          communication: 5,
+          teamwork: 5,
+          autonomy: 4,
+        },
+        teacherComments: 'Excelente desempenho em todas as áreas.',
+      },
+      {
+        id: 3,
+        date: '25/11/24',
+        student: {
+          id: 4,
+          fullName: 'Sofia',
+          studentClass: '3 ano A',
+        },
+        reviews: {
+          selfAwareness: 3,
+          empathy: 3,
+          communication: 4,
+          teamwork: 3,
+          autonomy: 3,
+        },
+        teacherComments: 'Progresso regular, precisa de mais incentivo em autonomia.',
+      },
+    ];
+
+    const selectedAdi = fakeDataArray.find((adi) => adi.id === id);
+
+    if (selectedAdi) {
+      this.nomeDoEstudante = selectedAdi.student.fullName;
+      this.apelidoTurma = selectedAdi.student.studentClass;
+      this.data = selectedAdi.date;
+      this.teacherComments = selectedAdi.teacherComments
+      this.reviews = selectedAdi.reviews;
+      this.setChartOptions();
+    } else {
+      console.error('ADI não encontrada para o ID:', id);
+    }
   }
 
   setChartOptions(): void {
@@ -57,7 +143,7 @@ export class AdiDetailsComponent implements OnInit {
         data: ['Ideal', 'Real'],
         bottom: '5%',
         textStyle: {
-          fontSize: fontSize, // Dinamicamente alterado
+          fontSize: fontSize,
         },
       },
       radar: {
@@ -71,11 +157,11 @@ export class AdiDetailsComponent implements OnInit {
         ],
         axisName: {
           color: '#000',
-          fontSize: fontSize, // Dinamicamente alterado
+          fontSize: fontSize,
         },
         axisLabel: {
           show: true,
-          fontSize: fontSize, // Dinamicamente alterado
+          fontSize: fontSize,
           color: '#000',
         },
         splitLine: {
@@ -95,7 +181,13 @@ export class AdiDetailsComponent implements OnInit {
           type: 'radar',
           data: [
             {
-              value: [3, 2, 4, 4, 5],
+              value: [
+                this.reviews.teamwork,
+                this.reviews.empathy,
+                this.reviews.selfAwareness,
+                this.reviews.communication,
+                this.reviews.autonomy,
+              ],
               name: 'Real',
               lineStyle: {
                 color: '#9368e9',
@@ -125,25 +217,16 @@ export class AdiDetailsComponent implements OnInit {
     };
 
     this.chartOptions.radar.indicator.forEach((indicator: any, index: number) => {
-      if (index !== 4) { // Deixe o segundo raio visível
+      if (index !== 4) {
         indicator.axisLabel = {
-          show: false, // Desativa a exibição dos números
+          show: false,
         };
       }
     });
   }
 
   onVisualizarClick() {
+    // Redirecionando para a página do estudante
     this.router.navigate([`/main/form-registration`]);
-  }
-
-  updateBreadcrumb() {
-    const data = this.sharedDataService.getData();
-    if (data) {
-      this.apelidoTurma = data.apelidoTurma;
-      this.nomeDoEstudante = data.nomeDoEstudante;
-      this.breadcrumbItems[1].label = this.apelidoTurma || 'Turma C';
-      this.breadcrumbItems[2].label = this.nomeDoEstudante || 'Estudante Desconhecido';
-    }
   }
 }

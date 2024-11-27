@@ -20,13 +20,13 @@
   <div class="informations">
 
     <div class="student-informations">
-      <h4>[Nome completo do aluno]</h4>
-      <span>[Apelido da turma a qual pertence]</span>
+      <h4>{{ nomeDoEstudante }}</h4>
+      <span>{{ apelidoTurma }}</span>
     </div>
 
     <div class="adi-informations">
-      <h4>[Número do ADI]</h4>
-      <span>Realizado em [data]</span>
+      <h4>ADI</h4>
+      <span>Realizado em {{ data }}</span>
     </div>
 
   </div>
@@ -41,6 +41,6 @@
 
   <div class="teacher-comments">
     <h4>Observações do professor</h4>
-    <p>Voluptate aute deserunt Lorem sit. Excepteur nulla occaecat pariatur fugiat Lorem consectetur cupidatat qui sint. Fugiat duis Lorem elit eiusmod et ipsum occaecat proident exercitation in sunt dolore aute. Deserunt magna quis labore velit deserunt ea laboris.</p>
+    <p>{{ teacherComments }}</p>
   </div>
 </main>
