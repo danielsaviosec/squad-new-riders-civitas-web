@@ -93,7 +93,7 @@ export class FormRegistrationComponent implements OnInit {
         })
       )
       .subscribe({
-        next: () => this.handleSuccess(),
+        next: (response) => this.handleSuccess(response?.data?.id),
         error: (data) => this.handleError(data?.error)
       })
     }
@@ -118,7 +118,7 @@ export class FormRegistrationComponent implements OnInit {
     return option ? option.grade : 0;
   }
 
-  private handleSuccess() {
+  private handleSuccess(id: number | undefined) {
     this._snackBar.open('ADI registrado com sucesso!', '', {
       duration: 3000,
       horizontalPosition: 'right',
@@ -126,7 +126,7 @@ export class FormRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate([`/main/adi-details}`])
+      this.router.navigate([`/main/adi-details/${id}}`])
     }, 3500);
   }
 
