@@ -13,22 +13,9 @@
                 </button>
             </div>
         </div>
-        <div class="mobile">
-            <button mat-icon-button [matMenuTriggerFor]="mobileMenu">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <img *ngFor="let option of logoMobile" alt="image mobile" [src]="option.image">
-            <mat-menu #mobileMenu="matMenu">
-                <button class="btn-mobile" mat-menu-item *ngFor="let option of menuIcons" (click)="navigateTo(option.route)">
-                    <!-- <img alt="image icons" class="svg" [src]="option.image"> -->
-                    <span>{{option.name}}</span>
-                </button>
-                <mat-divider></mat-divider>
-                <button mat-menu-item (click)="logout()">
-                    <mat-icon>exit_to_app</mat-icon>
-                    <span>Sair</span>
-                </button>
-            </mat-menu>
+        <div class="mobile" *ngFor="let option of logoMobile">
+            <app-menu-hamburguer [menuIcons]="menuIcons"></app-menu-hamburguer>
+            <img alt="image mobile" [src]="option.image">
         </div>
         <div class="logout-box">
             <button (click)="logout()">Sair</button>

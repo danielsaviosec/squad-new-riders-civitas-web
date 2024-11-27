@@ -1,1 +1,26 @@
-<p>menu-hamburguer works!</p>
+<button class="hamburger-button" (click)="toggleMenu()">
+  <div class="hamburger-icon">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+</button>
+
+<div class="menu-overlay" [class.is-open]="isMenuOpen" (click)="toggleMenu()"></div>
+<div class="menu-items" [class.is-open]="isMenuOpen">
+  <button (click)="toggleMenu()" class="close-menu">✖</button>
+  <div class="menu" *ngFor="let option of menuIcons">
+    <button (click)="navigateTo(option.route)" class="btn-menu">
+      <img alt="image icons" class="svg" [src]="option.image" />
+      {{ option.name }}
+    </button>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="logout-box">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Sair</span>
+    </button>
+    <span class="version">V.1.0.0</span>
+  </div>
+</div>

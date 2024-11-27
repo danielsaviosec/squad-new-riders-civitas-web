@@ -43,6 +43,7 @@ import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.compo
     BackButtonComponent,
     ListComponent,
     SidebarComponent,
+    MenuHamburguerComponent,
     RouterModule
   ],
   providers: [MatSnackBar]
