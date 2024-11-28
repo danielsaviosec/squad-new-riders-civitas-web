@@ -75,7 +75,13 @@
 
           <!-- Botão de Submissão -->
           <div class="btn-wrapper">
-              <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Cadastrar</button>
+              <app-button
+                label="Cadastrar"
+                [customClass]="'primary'"
+                color="primary"
+                [disabled]="form.invalid"
+                [loading]="form.pending">
+              </app-button>
           </div>
       </form>
   </div>

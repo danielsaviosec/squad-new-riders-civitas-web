@@ -1,0 +1,121 @@
+@import '../../styles/variables.scss';
+
+main {
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "sidebar description-section"
+        "sidebar cards-section";
+    grid-template-columns: 172px auto;
+    grid-template-rows: 350px auto;
+    margin-right: 10%;
+
+    .content-wrapper {
+        grid-area: description-section;
+        width: 100%;
+        flex-direction: column;
+        padding-left: 4rem;
+        margin-top: 4rem;
+
+        .title-wrapper {
+            h1 {
+                font-size: 3.2rem;
+                font-weight: 500;
+                margin-bottom: 3rem;
+                color: $fourth-color;
+            }
+        }
+
+        .content {
+            display: flex;
+            font-size: 1rem;
+            font-weight: 400;
+            width: 100%;
+            gap: 40px;
+
+            .text-wrapper {
+                h2 {
+                    font-size: 2rem;
+                    margin-bottom: 0.8rem;
+                    font-weight: 400;
+                }
+
+                .btn-content {
+                    background: $primary-color;
+                    border: none;
+                    border-radius: 25px;
+                    margin-top: 0.8rem;
+                    font-weight: 400;
+                    font-size: 0.7rem;
+                    padding: 0.2rem;
+                    height: 30px;
+                    width: 190px;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                }
+
+                .btn-content:hover {
+                    background: $button-register-color;
+                    color: #fff;
+                }
+            }
+
+            .video-wrapper {
+                display: flex;
+
+                iframe {
+                    width: 100%;
+                    width: 460px;
+                    height: 320px;
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 810px) {
+        width: 100%;
+        grid-template-areas:
+            "sidebar"
+            "description-section"
+            "cards-section";
+        grid-template-columns: auto;
+        grid-template-rows: 100px auto;
+
+        .content-wrapper .title-wrapper h1 {
+            margin-inline: 12px;
+            font-size: 1.8rem;
+            width: 50%;
+        }
+
+        .content-wrapper {
+            padding-left: 15px;
+        }
+
+        .content .text-wrapper {
+            margin-inline: 12px;
+        }
+
+        .content-wrapper .content {
+            flex-direction: column;
+            flex-wrap: nowrap;
+            width: 100%;
+
+            .text-wrapper h2 {
+                font-size: 1.5rem;
+            }
+
+            .video-wrapper {
+                padding: 10px 10px 20px 0;
+                margin-bottom: 2rem;
+
+                iframe {
+                    overflow: hidden;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+        }
+    }
+}

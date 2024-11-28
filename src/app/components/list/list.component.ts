@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -18,6 +18,9 @@ export class ListComponent {
   @Input() anoLetivo?: string;
   @Input() periodoLetivo?: string;
   @Input() ensino?: string;
+  @Input() idTurma!: number;
+
+  @Output() turmaSelecionada = new EventEmitter<number>();
 
   // Inputs para estudante
   @Input() nomeDoEstudante?: string;
@@ -25,4 +28,10 @@ export class ListComponent {
   @Input() apelidoTurmaEstudante?: string;
   @Input() rgCpfDoEstudante?: string;
   @Input() cpfResponsavel?: string;
+
+  // Funções
+
+  onTurmaClick() {
+    this.turmaSelecionada.emit(this.idTurma);
+  }
 }

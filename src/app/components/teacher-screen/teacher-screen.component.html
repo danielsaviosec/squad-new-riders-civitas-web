@@ -1,0 +1,31 @@
+<main>
+    <section class="sidebar-section">
+        <app-sidebar [homeLink]="{ route: '/' }" [menuIcons]="icons"></app-sidebar>
+    </section>
+        <div class="content-wrapper">
+            <div class="title-wrapper">
+                <h1>Plano de Desenvolvimento Individual</h1>
+            </div>
+            <div class="content">
+                <div class="text-wrapper">
+                    <h2>{{ greeting }}, professor(a)!</h2>
+                    <p>Vamos juntos acompanhar a evolução dos nossos estudantes? <br><br>
+
+                        O objetivo da Civitas é ter alunos em foco para crescer inteligente com os PDIs! Nos
+                        comprometemos
+                        em te ajudar a identificar e desenvolver as habilidades humanas dos nossos estudantes, fugindo
+                        do
+                        ensino tradicional e focando em formar pessoas com maior autoconhecimento, inteligência
+                        emocional,
+                        responsabilidade e organização. <br><br>
+
+                        Acesse suas turmas para começar a criar PDIs para os seus
+                        estudantes!</p>
+                    <button (click)="intoToListingClasses()" class="btn-content">Acessar minhas turmas</button>
+                </div>
+                <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/k85mRPqvMbE?si=H6be5XbmeJNzgsw-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                  </div>
+            </div>
+        </div>
+</main>

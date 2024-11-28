@@ -1,5 +1,9 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <!-- Spinner de carregamento -->
+  <mat-spinner></mat-spinner>
+</div>
 
-<main>
+<main *ngIf="!isLoading">
   <section class="sidebar-section">
     <app-sidebar [homeLink]="{ route: '/' }" [menuIcons]="icons"></app-sidebar>
   </section>
@@ -22,67 +26,13 @@
 
   <section class="main-section">
       <div class="content-wrapper">
-        <app-list
+        <app-list  *ngFor="let student of students"
         tipo="estudante"
-        [nomeDoEstudante]="'João Silva'"
-        [matriculaDoEstudante]="'123456'"
-        [apelidoTurmaEstudante]="'Turma A'"
-        [rgCpfDoEstudante]="'123.456.789-00'"
-        [cpfResponsavel]="'987.654.321-00'"
-        ></app-list>
-
-        <app-list
-        tipo="estudante"
-        [nomeDoEstudante]="'Maria Oliveira'"
-        [matriculaDoEstudante]="'654321'"
-        [apelidoTurmaEstudante]="'Turma B'"
-        [rgCpfDoEstudante]="'987.654.321-11'"
-        [cpfResponsavel]="'123.456.789-11'"
-        ></app-list>
-
-        <app-list
-        tipo="estudante"
-        [nomeDoEstudante]="'Carlos Pereira'"
-        [matriculaDoEstudante]="'789123'"
-        [apelidoTurmaEstudante]="'Turma C'"
-        [rgCpfDoEstudante]="'456.789.123-22'"
-        [cpfResponsavel]="'321.654.987-22'"
-        ></app-list>
-
-        <app-list
-        tipo="estudante"
-        [nomeDoEstudante]="'Ana Costa'"
-        [matriculaDoEstudante]="'321789'"
-        [apelidoTurmaEstudante]="'Turma D'"
-        [rgCpfDoEstudante]="'321.789.456-33'"
-        [cpfResponsavel]="'654.321.987-33'"
-        ></app-list>
-
-        <app-list
-        tipo="estudante"
-        [nomeDoEstudante]="'João Silva'"
-        [matriculaDoEstudante]="'123456'"
-        [apelidoTurmaEstudante]="'Turma A'"
-        [rgCpfDoEstudante]="'123.456.789-00'"
-        [cpfResponsavel]="'987.654.321-00'"
-        ></app-list>
-
-        <app-list
-        tipo="estudante"
-        [nomeDoEstudante]="'Maria Oliveira'"
-        [matriculaDoEstudante]="'654321'"
-        [apelidoTurmaEstudante]="'Turma B'"
-        [rgCpfDoEstudante]="'987.654.321-11'"
-        [cpfResponsavel]="'123.456.789-11'"
-        ></app-list>
-
-        <app-list
-        tipo="estudante"
-        [nomeDoEstudante]="'Carlos Pereira'"
-        [matriculaDoEstudante]="'789123'"
-        [apelidoTurmaEstudante]="'Turma C'"
-        [rgCpfDoEstudante]="'456.789.123-22'"
-        [cpfResponsavel]="'321.654.987-22'"
+        [nomeDoEstudante]="student.fullName"
+        [matriculaDoEstudante]="student.registrationNumber"
+        [apelidoTurmaEstudante]="student.studentClass.name"
+        [rgCpfDoEstudante]="student.document"
+        [cpfResponsavel]="student.cpfGuardian"
         ></app-list>
       </div>
   </section>

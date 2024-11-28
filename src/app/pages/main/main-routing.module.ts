@@ -14,6 +14,10 @@ import { UpdateClassComponent } from "./components/update-class/update-class.com
 import { UpdateTeacherComponent } from "./components/update-teacher/update-teacher.component";
 import { UpdateStudentComponent } from "./components/update-student/update-student.component";
 import { AuthGuard } from "../auth/auth.guard";
+import { AdiComponent } from "./components/adi/adi.component";
+import { StudentClassListComponent } from "./components/student-class-list/student-class-list.component";
+import { HomeScreenComponent } from "./components/home-screen/home-screen.component";
+import { FormRegistrationComponent } from "./components/form-registration/form-registration.component";
 
 const routes: Routes = [
   {
@@ -30,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: AdminScreenComponent
+    component: HomeScreenComponent
   },
   {
     path: 'class-registration',
@@ -63,6 +67,12 @@ const routes: Routes = [
     data: { allowedRoles: ['admin'] }
   },
   {
+    path: 'student-class-list/:id',
+    component: StudentClassListComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['teacher'] }
+  },
+  {
     path: 'search-class',
     component: SearchClassComponent,
     canActivate: [AuthGuard],
@@ -75,7 +85,7 @@ const routes: Routes = [
     data: { allowedRoles: ['admin'] }
   },
   {
-    path: 'update-class',
+    path: 'update-class/:id',
     component: UpdateClassComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin'] }
@@ -92,6 +102,24 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin'] }
   },
+  {
+    path: 'adi/:id',
+    component: AdiComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'teacher'] }
+  },
+  {
+    path: 'form-registration',
+    component: FormRegistrationComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'teacher'] }
+  },
+  {
+    path: 'home-screen',
+    component: HomeScreenComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] },
+  }
 ];
 
 @NgModule({

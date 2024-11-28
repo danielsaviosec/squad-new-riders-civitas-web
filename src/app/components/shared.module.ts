@@ -17,6 +17,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.component';
 import { ListTeacherComponent } from './list-teacher/list-teacher.component';
+import { AdminScreenComponent } from './admin-screen/admin-screen.component';
+import { TeacherScreenComponent } from './teacher-screen/teacher-screen.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -28,7 +31,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SidebarComponent,
     MenuHamburguerComponent,
     ListTeacherComponent,
-    SidebarComponent
+    SidebarComponent,
+    AdminScreenComponent,
+    TeacherScreenComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +48,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatMenuModule,
     MatDividerModule,
     MatMenuModule,
-    RouterModule,
     MatProgressSpinnerModule
   ],
   exports: [
@@ -52,6 +57,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ListComponent,
     ListTeacherComponent,
     SidebarComponent,
+    BreadcrumbComponent
     MenuHamburguerComponent,
     RouterModule
   ],

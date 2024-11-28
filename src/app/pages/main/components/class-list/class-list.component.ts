@@ -3,8 +3,10 @@ import { ISidebarIcons } from 'src/app/interface';
 import { ISelectOption } from 'src/app/interface/IClassRegistration.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 import { ClassService } from 'src/app/service/classes/classes.service';
+import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/service/auth/auth.service';
+import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 
 @Component({
   selector: 'app-class-list',
@@ -46,12 +48,24 @@ export class ClassListComponent implements OnInit {
   isLoading: boolean = false;
   userRole: string | null = null;
 
-  constructor(private classService: ClassService, private authService: AuthService) { }
+  constructor(
+    private classService: ClassService,
+    private authService: AuthService,
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) { }
 
   ngOnInit(): void {
     this.isLoading = true; // Define isLoading como true antes da requisição
 
     this.userRole = this.authService.getRole();
+
+    // Filtra os ícones com base no papel do usuário
+    if (this.userRole !== "admin") {
+        this.icons = this.icons.filter(icon =>
+            icon.name === "Início" || icon.name === "Turmas"
+        );
+    }
 
     // Chama o serviço para obter as turmas
     if(this.userRole === "admin") {
@@ -73,8 +87,36 @@ export class ClassListComponent implements OnInit {
         }
       );
     } else if(this.userRole === "teacher") {
-      this.isLoading = false;
+      this.classService.getClassesTeacher().subscribe(
+        (data: ClassesResponse[]) => {
+          this.turmaOptions = data.map((turma: ClassesResponse) => {
+            return {
+              ...turma,
+              schoolYear: this.translateAnoLetivo(turma.schoolYear), // Traduz anoLetivo
+              schoolShift: this.translatePeriodoLetivo(turma.schoolShift), // Traduz periodoLetivo
+              educationType: this.translateEnsino(turma.educationType) // Traduz ensino
+            };
+          });
+          this.isLoading = false;
+        },
+        (error) => {
+          console.error('Erro ao buscar turmas:', error);
+          this.isLoading = false;
+        }
+      );
     }
+  }
+
+  onNavigateToUpdateClass(turmaId: number) {
+    this.router.navigate([`/main/update-class/${turmaId}`]);
+  }
+
+  onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }) {
+    // Armazena o apelido da turma no serviço compartilhado
+    this.sharedDataService.setData({ apelidoTurma: turma.apelidoTurma });
+
+    // Navega para a página de estudantes
+    this.router.navigate([`/main/student-class-list/${turma.idTurma}`]);
   }
 
   // Método para traduzir o ano letivo (backName -> label)

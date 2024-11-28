@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.development';
 
 import { StudentRegistrationData } from 'src/app/interface/register/StudentRegistrationData.interface';
 import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
+import { IStudentResponse } from 'src/app/interface/response/IStudentsResponse.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +17,18 @@ export class StudentService {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<CreateResponse>(`${environment.apiUrl}students/register`, data, { headers });
+  }
+
+  // Função para listar professores
+  getStudents(): Observable<IStudentResponse[]> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<IStudentResponse[]>(`${environment.apiUrl}admin/me/students`, { headers });
+  }
+
+  getStudentsByClassId(classId: string): Observable<IStudentResponse[]> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<IStudentResponse[]>(`${environment.apiUrl}teachers/me/classes/${classId}/students`, { headers });
   }
 }

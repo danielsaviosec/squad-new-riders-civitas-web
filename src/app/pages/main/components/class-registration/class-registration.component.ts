@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
+
 import { IClassRegistrationData } from 'src/app/interface/register/IClassRegistrationData.interface';
 import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
 
@@ -13,7 +14,6 @@ import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.inte
   templateUrl: './class-registration.component.html',
   styleUrls: ['./class-registration.component.scss']
 })
-
 export class ClassRegistrationComponent implements OnInit {
   form = new FormGroup({
     anoLetivo: new FormControl('', Validators.required),
@@ -49,7 +49,7 @@ export class ClassRegistrationComponent implements OnInit {
     private classService: ClassService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit():void {
     this.form = this.fb.group({
       anoLetivo: ['', Validators.required],
       periodoLetivo: ['', Validators.required],
@@ -60,13 +60,13 @@ export class ClassRegistrationComponent implements OnInit {
 
   //=================================
   //Botão voltar
-  goBack(): void {
+  goBack():void {
     this.router.navigate(['/admin-screen'])
   }
 
   //===================
   //Lógicas do cadastro enviado ou repetição de nomes
-  onSubmit(): void {
+  onSubmit():void {
     if (this.form.invalid) return;
 
     const formValues = this.form.value;
@@ -75,7 +75,7 @@ export class ClassRegistrationComponent implements OnInit {
     const selectedPeriodoLetivo = this.periodoLetivo.find(option => option.value === formValues.periodoLetivo)?.backName ?? '';
     const selectedEnsino = this.ensino.find(option => option.value === formValues.ensino)?.backName ?? '';
 
-    const classData: IClassRegistrationData = {
+    const classData: ClassRegistrationData = {
       name: formValues.apelidoTurma ?? '',
       schoolYear: selectedAnoLetivo,
       schoolShift: selectedPeriodoLetivo,
@@ -100,7 +100,7 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: ICreateResponse): void {
+  handleError(error: CreateResponse):void {
     const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
