@@ -13,7 +13,6 @@ import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.component';
 import { ListTeacherComponent } from './list-teacher/list-teacher.component';
@@ -62,7 +61,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ListTeacherComponent,
     SidebarComponent,
     RouterModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
     MenuHamburguerComponent,
     RouterModule
   ],
