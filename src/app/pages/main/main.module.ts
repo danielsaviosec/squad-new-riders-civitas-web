@@ -31,6 +31,7 @@ import { StudentClassListComponent } from './components/student-class-list/stude
 import { FormRegistrationComponent } from './components/form-registration/form-registration.component';
 import { HomeScreenComponent } from './components/home-screen/home-screen.component'
 import { UpdateClassComponent } from './components/update-class/update-class.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [

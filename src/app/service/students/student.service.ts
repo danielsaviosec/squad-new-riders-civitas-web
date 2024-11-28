@@ -39,4 +39,12 @@ export class StudentService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<IStudentResponse[]>(`${environment.apiUrl}teachers/me/classes/${classId}/students`, { headers });
   }
+
+  // Novo método para excluir o estudante
+  deleteStudent(id: number): Observable<CreateResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<CreateResponse>(`${environment.apiUrl}admin/students/${id}`, { headers });
+  }
 }
