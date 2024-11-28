@@ -75,7 +75,7 @@ export class ClassRegistrationComponent implements OnInit {
     const selectedPeriodoLetivo = this.periodoLetivo.find(option => option.value === formValues.periodoLetivo)?.backName ?? '';
     const selectedEnsino = this.ensino.find(option => option.value === formValues.ensino)?.backName ?? '';
 
-    const classData: IClassRegistrationData = {
+    const classData: ClassRegistrationData = {
       name: formValues.apelidoTurma ?? '',
       schoolYear: selectedAnoLetivo,
       schoolShift: selectedPeriodoLetivo,

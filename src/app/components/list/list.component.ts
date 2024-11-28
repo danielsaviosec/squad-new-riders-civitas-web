@@ -20,14 +20,12 @@ export class ListComponent {
   @Input() ensino?: string;
   @Input() idTurma!: number;
 
-
   // Inputs para estudante
   @Input() nomeDoEstudante?: string;
   @Input() matriculaDoEstudante?: string;
   @Input() apelidoTurmaEstudante?: string;
   @Input() rgCpfDoEstudante?: string;
   @Input() cpfResponsavel?: string;
-
 
   // Update
   @Output() selecionado = new EventEmitter<number>();

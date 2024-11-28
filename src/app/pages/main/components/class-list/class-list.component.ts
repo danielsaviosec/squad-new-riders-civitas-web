@@ -97,7 +97,7 @@ export class ClassListComponent implements OnInit {
               educationType: this.translateEnsino(turma.educationType) // Traduz ensino
             };
           });
-
+          
           this.isLoading = false;
         },
         (error) => {
