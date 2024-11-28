@@ -91,7 +91,7 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/main/admin-screen']);
+    this.router.navigate(['/main']);
   }
 
   translateAnoLetivo(backName: string): string {
