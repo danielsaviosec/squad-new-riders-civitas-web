@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/service/auth/auth.service';
   templateUrl: './home-screen.component.html',
   styleUrls: ['./home-screen.component.scss']
 })
-export class HomeScreenComponent {
+export class HomeScreenComponent implements OnInit {
   userRole: string | null = null;
 
   constructor(

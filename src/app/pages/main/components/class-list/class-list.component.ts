@@ -97,6 +97,7 @@ export class ClassListComponent implements OnInit {
               educationType: this.translateEnsino(turma.educationType) // Traduz ensino
             };
           });
+          
           this.isLoading = false;
         },
         (error) => {
@@ -107,8 +108,8 @@ export class ClassListComponent implements OnInit {
     }
   }
 
-  onNavigateToUpdateClass(turmaId: number) {
-    this.router.navigate([`/main/update-class/${turmaId}`]);
+  onNavigateToUpdateClass(id: number) {
+    this.router.navigate([`/main/update-class/${id}`]);
   }
 
   onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }) {

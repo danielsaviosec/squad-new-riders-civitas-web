@@ -43,8 +43,8 @@
             [periodoLetivo]="turma.schoolShift"
             [ensino]="turma.educationType"
             [apelidoTurma]="turma.name"
-            [idTurma]="turma.id"
-            (turmaSelecionada)="onNavigateToUpdateClass($event)">
+            [id]="turma.id"
+            (selecionado)="onNavigateToUpdateClass($event)">
           </app-list>
         </ng-container>
       </div>

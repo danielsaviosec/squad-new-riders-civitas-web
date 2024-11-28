@@ -57,6 +57,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ListComponent,
     ListTeacherComponent,
     SidebarComponent,
+    RouterModule,
     BreadcrumbComponent
     MenuHamburguerComponent,
     RouterModule

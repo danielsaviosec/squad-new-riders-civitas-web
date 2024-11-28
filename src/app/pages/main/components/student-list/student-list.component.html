@@ -33,6 +33,8 @@
         [apelidoTurmaEstudante]="student.studentClass.name"
         [rgCpfDoEstudante]="student.document"
         [cpfResponsavel]="student.cpfGuardian"
+        [id]="student.id"
+        (selecionado)="onNavigateToUpdateStudent($event)">
         ></app-list>
       </div>
   </section>

@@ -64,11 +64,7 @@ export class FormRegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const formData = {
-        ...this.form.value,
-        textTeacher: this.form.get('textTeacher')?.value
-      };
-      //lógica para enviar os dados para o back
+      this.handleSuccess();
     }
   }
 

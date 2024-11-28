@@ -20,8 +20,6 @@ export class ListComponent {
   @Input() ensino?: string;
   @Input() idTurma!: number;
 
-  @Output() turmaSelecionada = new EventEmitter<number>();
-
   // Inputs para estudante
   @Input() nomeDoEstudante?: string;
   @Input() matriculaDoEstudante?: string;
@@ -29,9 +27,11 @@ export class ListComponent {
   @Input() rgCpfDoEstudante?: string;
   @Input() cpfResponsavel?: string;
 
-  // Funções
+  // Update
+  @Output() selecionado = new EventEmitter<number>();
+  @Input() id!: number;
 
-  onTurmaClick() {
-    this.turmaSelecionada.emit(this.idTurma);
+  onUpdateClick() {
+    this.selecionado.emit(this.id);
   }
 }

@@ -61,7 +61,7 @@ export class ClassRegistrationComponent implements OnInit {
   //=================================
   //Botão voltar
   goBack():void {
-    this.router.navigate(['/admin-screen'])
+    this.router.navigate(['/main'])
   }
 
   //===================
@@ -100,7 +100,7 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: CreateResponse):void {
+  handleError(error: ICreateResponse):void {
     const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,

@@ -26,4 +26,12 @@ export class TeacherService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<TeachersResponse[]>(`${environment.apiUrl}admin/teachers/all`, { headers });
   }
+
+  // Novo método para atualizar professor
+  updateTeacher(id: number, data: TeacherRegistrationData): Observable<CreateResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.put<CreateResponse>(`${environment.apiUrl}admin/teachers/${id}`, data, { headers });
+  }
 }
