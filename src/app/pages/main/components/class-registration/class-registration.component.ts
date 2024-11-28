@@ -6,8 +6,8 @@ import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar
 import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 
-import { ClassRegistrationData } from 'src/app/interface/register/ClassRegistrationData.interface';
-import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
+import { IClassRegistrationData } from 'src/app/interface/register/IClassRegistrationData.interface';
+import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
 
 @Component({
   selector: 'app-class-registration',
@@ -61,7 +61,7 @@ export class ClassRegistrationComponent implements OnInit {
   //=================================
   //Botão voltar
   goBack():void {
-    this.router.navigate(['/admin-screen'])
+    this.router.navigate(['/main'])
   }
 
   //===================
@@ -100,7 +100,7 @@ export class ClassRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: CreateResponse):void {
+  handleError(error: ICreateResponse):void {
     const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,

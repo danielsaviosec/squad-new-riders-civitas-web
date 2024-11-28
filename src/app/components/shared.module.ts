@@ -12,6 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { ListComponent } from './list/list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.component';
 import { ListTeacherComponent } from './list-teacher/list-teacher.component';
 import { AdminScreenComponent } from './admin-screen/admin-screen.component';
 import { TeacherScreenComponent } from './teacher-screen/teacher-screen.component';
@@ -26,6 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     InputComponent,
     BackButtonComponent,
     ListComponent,
+    SidebarComponent,
+    MenuHamburguerComponent,
     ListTeacherComponent,
     SidebarComponent,
     AdminScreenComponent,
@@ -41,6 +47,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatSnackBarModule,
     RouterModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatDividerModule,
     MatMenuModule,
     MatProgressSpinnerModule,
     MatDialogModule
@@ -54,8 +63,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     SidebarComponent,
     RouterModule,
     BreadcrumbComponent
+    MenuHamburguerComponent,
+    RouterModule
   ],
   providers: [MatSnackBar]
 })
 
-export class SharedModule {}
+export class SharedModule { }

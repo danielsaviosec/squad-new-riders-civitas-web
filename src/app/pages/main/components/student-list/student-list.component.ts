@@ -20,7 +20,9 @@ export class StudentListComponent implements OnInit {
   ];
 
   students: IStudentResponse[] = [];
-  isLoading = true;constructor(private studentService: StudentService, private router: Router) {}
+  isLoading = true;
+  
+  constructor(private studentService: StudentService, private router: Router) {}
 
   ngOnInit() {
     this.studentService.getStudents().subscribe(
