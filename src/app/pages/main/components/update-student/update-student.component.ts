@@ -92,5 +92,4 @@ export class UpdateStudentComponent implements OnInit {
       'Verifique os dados e tente novamente.'
     );
   }
-
 }
