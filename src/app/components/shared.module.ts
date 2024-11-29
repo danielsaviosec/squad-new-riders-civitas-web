@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
     TeacherScreenComponent,
     BreadcrumbComponent,
     DialogComponent,
-    HomeAdminComponent
+    HomeAdminComponent,
+    HomeTeacherComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,8 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
     BreadcrumbComponent,
     MenuHamburguerComponent,
     RouterModule,
-    HomeAdminComponent
+    HomeAdminComponent,
+    HomeTeacherComponent
   ],
   providers: [MatSnackBar]
 })
