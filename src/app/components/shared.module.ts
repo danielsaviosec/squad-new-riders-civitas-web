@@ -63,7 +63,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterModule,
     BreadcrumbComponent,
     MenuHamburguerComponent,
-    RouterModule
+    RouterModule,
+    AdminScreenComponent,
+    TeacherScreenComponent
   ],
   providers: [MatSnackBar]
 })

@@ -96,7 +96,7 @@ const routes: Routes = [
     data: { allowedRoles: ['admin'] }
   },
   {
-    path: 'adi/:id',
+    path: 'class/:classId/student-adi/:studentId',
     component: AdiComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['teacher'] }
@@ -112,7 +112,9 @@ const routes: Routes = [
     component: FormRegistrationComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin', 'teacher'] }
-  }
+  },
+  { path: '', pathMatch: 'full', redirectTo: '/main' },
+  { path: '**', redirectTo: '/main' }
 ];
 
 @NgModule({

@@ -17,60 +17,38 @@
       </div>
     </div>
 
-    <div class="new-adi-btn" (click)="onVisualizarClick()" (keydown)="onVisualizarClick()" tabindex="0">
+    <div class="new-adi-btn" (click)="onRegisterNewAdi()" (keydown)="onRegisterNewAdi()" tabindex="0">
       Registrar novo PDI
       <mat-icon>add_circle_outline</mat-icon>
     </div>
   </div>
 
   <div class="student-informations">
-    <h4>[Nome completo do aluno]</h4>
-    <span>[Apelido da turma a qual pertence]</span>
+    <h4>{{ nomeDoEstudante }}</h4>
+    <span>{{ apelidoTurma }}</span>
   </div>
 
   <div class="history-ADIs">
     <h4>Histórico de ADIs</h4>
 
     <div class="ADIs-list">
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
+      <ng-container *ngFor="let adi of adisData.evaluations">
+        <div class="ADI-item">
+          {{ adi.label }}
+          <mat-icon>search</mat-icon>
+        </div>
+      </ng-container>
     </div>
   </div>
 
   <div class="last-ADI">
     <h4>Última avaliação</h4>
-    <span>[Data da última avaliação]</span>
+    <span>{{ adisData.latestEvaluation.date }}</span>
 
     <div class="chart-container">
       <echarts [options]="chartOptions" class="echart"></echarts>
     </div>
 
-    <button>Visualizar</button>
+    <button (click)="onVisualizarClick()" (keydown)="onVisualizarClick()" >Visualizar</button>
   </div>
 </main>

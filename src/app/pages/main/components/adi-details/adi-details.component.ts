@@ -12,6 +12,7 @@ import { IAdiResponse, Reviews } from 'src/app/interface/response/IAdiResponse.i
 export class AdiDetailsComponent implements OnInit {
   chartOptions: any;
   idAdi!: number;
+  idStudent!: number;
   nomeDoEstudante!: string;
   data!: string;
   apelidoTurma!: string;
@@ -63,7 +64,7 @@ export class AdiDetailsComponent implements OnInit {
     // Array de dados fictícios
     const fakeDataArray: IAdiResponse[] = [
       {
-        id: 1,
+        id: 5,
         date: '23/11/24',
         student: {
           id: 2,
@@ -80,7 +81,7 @@ export class AdiDetailsComponent implements OnInit {
         teacherComments: 'O estudante apresentou bom progresso, mas precisa melhorar na comunicação e autonomia.',
       },
       {
-        id: 2,
+        id: 6,
         date: '24/11/24',
         student: {
           id: 3,
@@ -97,7 +98,7 @@ export class AdiDetailsComponent implements OnInit {
         teacherComments: 'Excelente desempenho em todas as áreas.',
       },
       {
-        id: 3,
+        id: 7,
         date: '25/11/24',
         student: {
           id: 4,
@@ -121,8 +122,9 @@ export class AdiDetailsComponent implements OnInit {
       this.nomeDoEstudante = selectedAdi.student.fullName;
       this.apelidoTurma = selectedAdi.student.studentClass;
       this.data = selectedAdi.date;
-      this.teacherComments = selectedAdi.teacherComments
+      this.teacherComments = selectedAdi.teacherComments;
       this.reviews = selectedAdi.reviews;
+      this.idStudent = selectedAdi.student.id;
       this.setChartOptions();
     } else {
       console.error('ADI não encontrada para o ID:', id);
@@ -192,6 +194,9 @@ export class AdiDetailsComponent implements OnInit {
               lineStyle: {
                 color: '#9368e9',
               },
+              itemStyle: {
+                color: '#9368e9'
+              },
               areaStyle: {
                 color: 'rgba(147, 104, 233, 0.2)',
               },
@@ -204,6 +209,9 @@ export class AdiDetailsComponent implements OnInit {
               lineStyle: {
                 color: 'rgb(240,194,50)',
                 type: 'dashed',
+              },
+              itemStyle: {
+                color: 'rgb(240,194,50)'
               },
               areaStyle: {
                 opacity: 0,
@@ -227,6 +235,6 @@ export class AdiDetailsComponent implements OnInit {
 
   onVisualizarClick() {
     // Redirecionando para a página do estudante
-    this.router.navigate([`/main/form-registration`]);
+    this.router.navigate([`/main/form-registration/${this.idStudent}`]);
   }
 }
