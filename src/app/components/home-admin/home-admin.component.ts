@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ISidebarIcons, IAdminScreenCard } from 'src/app/interface';
+import { ISidebarIcons, IAdminScreenCard, ISidebarIconsMobile } from 'src/app/interface';
 
 @Component({
   selector: 'app-home-admin',
@@ -14,6 +14,13 @@ export class HomeAdminComponent {
     { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
+
+  menuIconsMobile: ISidebarIconsMobile[] = [
+    { name: "Início", route: 'main' },
+    { name: "Turmas", route: 'main/class-list' },
+    { name: "Professores", route: 'main/teacher-list' },
+    { name: "Estudantes", route: 'main/student-list' }
+  ]
 
   cardsAdmin: IAdminScreenCard[] = [
     { title: 'Cadastrar Turmas', image: 'assets/admin-screen-cards/cadastro-turmas.png', route: 'main/class-registration' },
