@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ISidebarIcons, IAdminScreenCard } from 'src/app/interface';
+import { DecodedToken } from 'src/app/interface/auth/DecodedToken.interface';
 
 @Component({
   selector: 'app-admin-screen',
   templateUrl: './admin-screen.component.html',
   styleUrls: ['./admin-screen.component.scss']
 })
-export class AdminScreenComponent {
+export class AdminScreenComponent implements OnInit {
+  user!: DecodedToken;
+
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
@@ -22,6 +25,10 @@ export class AdminScreenComponent {
   ];
 
   constructor(private router: Router) { }
+
+  ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem("@civitas:user") || 'null');
+  }
 
   // ======================================
   //Direcionamento do botão de "Acesse aqui".

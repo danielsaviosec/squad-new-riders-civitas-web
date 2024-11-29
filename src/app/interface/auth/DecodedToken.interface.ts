@@ -5,6 +5,9 @@ export interface DecodedToken extends JwtPayload {
   email: string,
   role?: string,
   schoolId?: number,
+  schoolName?: string,
+  studentId?: number,
+  classId?: number,
   iat: number,
   exp: number
 }

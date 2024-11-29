@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
 
 import { LoginAdminCredentials } from 'src/app/interface/auth/LoginAdminCredentials.interface';
 import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
-import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCredentials.interface';
+import { ILoginRegistrationNumberCredentials } from 'src/app/interface/auth/ILoginRegistrationNumberCredentials.interface';
 import { DecodedToken } from 'src/app/interface/auth/DecodedToken.interface';
 import { IUser } from 'src/app/interface/auth/IUser.interface';
 
@@ -40,9 +40,20 @@ export class AuthService {
     );
   }
 
-  // Novo método de login para o professor
-  loginTeacher(credentials: LoginTeacherCredentials): Observable<LoginResponse> {
+  // Método de login para o professor
+  loginTeacher(credentials: ILoginRegistrationNumberCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}teachers/login`, credentials).pipe(
+      tap((response) => {
+        if (response.token) {
+          this.saveUserToStorage(response.token);
+        }
+      })
+    );
+  }
+
+  // Método de login para o professor
+  loginGuardian(credentials: ILoginRegistrationNumberCredentials): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}students/guardian-login`, credentials).pipe(
       tap((response) => {
         if (response.token) {
           this.saveUserToStorage(response.token);

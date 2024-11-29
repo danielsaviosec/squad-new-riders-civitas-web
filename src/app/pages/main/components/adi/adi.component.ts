@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 import { StudentService } from 'src/app/service/students/student.service';
 import { AdiService } from 'src/app/service/adi/adi.service';
+import { AuthService } from 'src/app/service/auth/auth.service';
 import { forkJoin } from 'rxjs';
 
 import { IAdisReponse } from 'src/app/interface/response/IAdisResponse.interface';
@@ -14,6 +15,7 @@ import { IAdiResponse } from 'src/app/interface/response/IAdiResponse.interface'
   styleUrls: ['./adi.component.scss'],
 })
 export class AdiComponent implements OnInit {
+  userRole: string | null = null;
   chartOptions: any;
   idEstudante!: number;
   idTurma!: number;
@@ -31,6 +33,7 @@ export class AdiComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private classesService: ClassService,
     private studentsService: StudentService,
@@ -43,6 +46,11 @@ export class AdiComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.userRole = this.authService.getRole();
+
+    // Filtra os ícones com base no papel do usuário
+    if (this.userRole === "guardian") { this.icons = [] }
+
     this.route.params.subscribe(params => {
       this.idTurma = +params['classId'];
       this.idEstudante = +params['studentId'];

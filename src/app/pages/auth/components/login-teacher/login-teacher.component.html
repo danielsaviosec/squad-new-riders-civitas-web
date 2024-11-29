@@ -13,15 +13,17 @@
         type="text"
         label="Número de matrícula do professor"
         placeholder="Digite o número de matrícula"
-        [hasError]="isInvalidRequired()"
+        [hasError]="isInvalid"
         errorMessage="O número de matrícula está incorreta"
-        (inputValueChange)="authForm.get('registrationNumber')?.setValue($event)"
+        (inputValueChange)="authForm.get('registrationNumber')?.setValue($event); resetError()"
       >
       </app-input>
       <app-button
         label="Entrar"
         [disabled]="authForm.invalid"
+        [customClass]="'primary'"
         type="submit"
+        [loading]="authForm.pending">
       >
       </app-button>
     </form>

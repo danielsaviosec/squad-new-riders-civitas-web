@@ -11,7 +11,7 @@
     <h2>Avaliação de Desenvolvimento Individual</h2>
   </div>
 
-  <div class="navigate">
+  <div class="navigate" *ngIf="userRole !== 'guardian'">
     <div class="content-left">
       <app-back-button></app-back-button>
 
@@ -36,7 +36,7 @@
 
     <div class="ADIs-list" *ngIf="adisData?.latestEvaluation; else noHistoryData">
       <ng-container *ngFor="let adi of adisData?.evaluations">
-        <div class="ADI-item" (click)="onAdiClick(adi.id)">
+        <div class="ADI-item" (click)="onAdiClick(adi.id)" (keydown)="onAdiClick(adi.id)">
           {{ adi.label }}
           <mat-icon>search</mat-icon>
         </div>

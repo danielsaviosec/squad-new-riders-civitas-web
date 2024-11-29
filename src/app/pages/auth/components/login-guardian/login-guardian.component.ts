@@ -1,4 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../service/auth/auth.service';
+
+import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
+import { ILoginRegistrationNumberCredentials } from 'src/app/interface/auth/ILoginRegistrationNumberCredentials.interface';
 
 @Component({
   selector: 'app-login-guardian',
@@ -9,23 +17,62 @@ export class LoginGuardianComponent {
   isInvalid = false;
   inputValue = '';
 
-  onInputValueChange(value: string): void {
-    this.inputValue = value;
+  authForm = new FormGroup({
+    registrationNumber: new FormControl('', [Validators.required]),
+  });
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
+
+  onSubmit($event: SubmitEvent) {
+    $event.preventDefault();
+    this.authForm.markAsPending();
+
+    const credentials = this.authForm.value as ILoginRegistrationNumberCredentials;
+
+    this.authService.loginGuardian(credentials).subscribe({
+      next: (response) => this.handleLoginSuccess(response),
+      error: (error: HttpErrorResponse) => this.handleLoginError(error),
+    });
   }
 
-  validateInput(): void {
-    // Lógica para validação do input, apenas um exemplo:
-    this.isInvalid = this.inputValue !== '12345';
-
-    if (!this.isInvalid)
-      this.login();
+  private handleLoginSuccess(response: LoginResponse) {
+    if (response.token) {
+      this.router.navigate(['/main']);
+    }
   }
 
-  isButtonDisabled(): boolean {
-    return !this.inputValue;
+  private handleLoginError(error: HttpErrorResponse) {
+    this.authForm.reset();
+
+    console.log(error.status);
+
+    switch (error.status) {
+      case 401:
+        this.isInvalid = true;
+        break;
+
+      case 0:
+        this._snackBar.open('Sem conexão com a internet.', '', {
+          horizontalPosition: 'right',
+          duration: 5000,
+          panelClass: 'snackbar-error',
+        });
+        break;
+
+      default:
+        this._snackBar.open('Erro inesperado do servidor.', '', {
+          horizontalPosition: 'right',
+          duration: 5000,
+          panelClass: 'snackbar-error',
+        });
+    }
   }
 
-  login() {
-    alert('login realizado');
+  resetError() {
+    this.isInvalid = false;
   }
 }

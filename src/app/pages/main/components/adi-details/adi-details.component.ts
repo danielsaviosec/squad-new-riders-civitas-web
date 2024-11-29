@@ -2,6 +2,8 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdiService } from 'src/app/service/adi/adi.service';
+import { AuthService } from 'src/app/service/auth/auth.service';
+
 import { IAdiResponse, Reviews } from 'src/app/interface/response/IAdiResponse.interface';
 
 @Component({
@@ -10,6 +12,7 @@ import { IAdiResponse, Reviews } from 'src/app/interface/response/IAdiResponse.i
   styleUrls: ['./adi-details.component.scss'],
 })
 export class AdiDetailsComponent implements OnInit {
+  userRole: string | null = null;
   chartOptions: any;
   idAdi!: number;
   idStudent!: number;
@@ -29,7 +32,8 @@ export class AdiDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private adiService: AdiService
+    private adiService: AdiService,
+    private authService: AuthService
   ) {}
 
   icons: ISidebarIcons[] = [
@@ -38,6 +42,11 @@ export class AdiDetailsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.userRole = this.authService.getRole();
+
+    // Filtra os ícones com base no papel do usuário
+    if (this.userRole === "guardian") { this.icons = [] };
+
     this.idAdi = +this.route.snapshot.paramMap.get('id')!;
     this.setChartOptions();
     this.loadAdiData(this.idAdi);
