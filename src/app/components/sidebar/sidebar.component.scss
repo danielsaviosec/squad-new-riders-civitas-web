@@ -161,31 +161,13 @@
             .mobile {
                 display: flex;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: space-between;
                 width: 100%;
+                margin-right: 10px;
 
                 img {
                     width: 290px;
                 }
-
-                .mat-menu {
-                    border: 1px solid blue;
-
-                    .mat-menu-item {
-                        display: flex;
-                        align-items: center;
-                        border: 1px solid yellow;
-                        gap: 8px;
-                    }
-
-                    svg {
-                        width: 24px;
-                        border: 1px solid red;
-                        height: 24px;
-                    }
-                }
-
-
             }
         }
     }
