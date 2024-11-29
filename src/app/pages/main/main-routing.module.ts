@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ClassListComponent } from "./components/class-list/class-list.component";
 import { TeacherListComponent } from "./components/teacher-list/teacher-list.component";
-import { AdminScreenComponent } from "./components/admin-screen/admin-screen.component";
 import { ClassRegistrationComponent } from "./components/class-registration/class-registration.component";
 import { TeacherRegistrationComponent } from "./components/teacher-registration/teacher-registration.component";
 import { StudentRegistrationComponent } from "./components/student-registration/student-registration.component";
@@ -10,26 +9,116 @@ import { TeacherScreenComponent } from "./components/teacher-screen/teacher-scre
 import { StudentListComponent } from "./components/student-list/student-list.component";
 import { SearchClassComponent } from "./components/search-class/search-class.component";
 import { SearchStudentComponent } from "./components/search-student/search-student.component";
-import { UpdateStudentComponent } from "./components/update-student/update-student.component";
-import { UpdateTeacherComponent } from "./components/update-teacher/update-teacher.component";
 import { UpdateClassComponent } from "./components/update-class/update-class.component";
+import { UpdateTeacherComponent } from "./components/update-teacher/update-teacher.component";
+import { UpdateStudentComponent } from "./components/update-student/update-student.component";
+import { AuthGuard } from "../auth/auth.guard";
+import { AdiComponent } from "./components/adi/adi.component";
+import { StudentClassListComponent } from "./components/student-class-list/student-class-list.component";
+import { HomeScreenComponent } from "./components/home-screen/home-screen.component";
 import { FormRegistrationComponent } from "./components/form-registration/form-registration.component";
 
 const routes: Routes = [
-  { path: 'class-list', component: ClassListComponent },
-  { path: 'teacher-list', component: TeacherListComponent },
-  { path: '', component: AdminScreenComponent },
-  { path: 'class-registration', component: ClassRegistrationComponent },
-  { path: 'teacher-registration', component: TeacherRegistrationComponent },
-  { path: 'student-registration', component: StudentRegistrationComponent },
-  { path: 'teacher-screen', component: TeacherScreenComponent },
-  { path: 'student-list', component: StudentListComponent }, 
-  { path: 'search-class', component: SearchClassComponent }, 
-  { path: 'search-student', component: SearchStudentComponent },
-  { path: 'update-student', component: UpdateStudentComponent },
-  { path: 'update-teacher', component: UpdateTeacherComponent },
-  { path: 'update-class', component: UpdateClassComponent },
-  { path: 'form-registration', component: FormRegistrationComponent },
+  {
+    path: 'class-list',
+    component: ClassListComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'teacher'] }
+  },
+  {
+    path: 'teacher-list',
+    component: TeacherListComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: '',
+    component: HomeScreenComponent
+  },
+  {
+    path: 'class-registration',
+    component: ClassRegistrationComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'teacher-registration',
+    component: TeacherRegistrationComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'student-registration',
+    component: StudentRegistrationComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'teacher-screen',
+    component: TeacherScreenComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['teacher'] }
+  },
+  {
+    path: 'student-list',
+    component: StudentListComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'student-class-list/:id',
+    component: StudentClassListComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['teacher'] }
+  },
+  {
+    path: 'search-class',
+    component: SearchClassComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'search-student',
+    component: SearchStudentComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'update-class/:id',
+    component: UpdateClassComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'update-teacher/:id',
+    component: UpdateTeacherComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'update-student/:id',
+    component: UpdateStudentComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'adi/:id',
+    component: AdiComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'teacher'] }
+  },
+  {
+    path: 'form-registration/:id',
+    component: FormRegistrationComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'teacher'] }
+  },
+  {
+    path: 'home-screen',
+    component: HomeScreenComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] },
+  }
 ];
 
 @NgModule({

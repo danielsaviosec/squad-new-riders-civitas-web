@@ -14,7 +14,6 @@ import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.inte
   templateUrl: './class-registration.component.html',
   styleUrls: ['./class-registration.component.scss']
 })
-
 export class ClassRegistrationComponent implements OnInit {
   form = new FormGroup({
     anoLetivo: new FormControl('', Validators.required),
@@ -50,7 +49,7 @@ export class ClassRegistrationComponent implements OnInit {
     private classService: ClassService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit():void {
     this.form = this.fb.group({
       anoLetivo: ['', Validators.required],
       periodoLetivo: ['', Validators.required],
@@ -61,13 +60,13 @@ export class ClassRegistrationComponent implements OnInit {
 
   //=================================
   //Botão voltar
-  goBack(): void {
-    this.router.navigate(['/admin-screen'])
+  goBack():void {
+    this.router.navigate(['/main'])
   }
 
   //===================
   //Lógicas do cadastro enviado ou repetição de nomes
-  onSubmit(): void {
+  onSubmit():void {
     if (this.form.invalid) return;
 
     const formValues = this.form.value;
@@ -97,11 +96,11 @@ export class ClassRegistrationComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/admin-screen'])
+      this.router.navigate(['/main/admin-screen'])
     }, 3500);
   }
 
-  handleError(error: ICreateResponse): void {
+  handleError(error: ICreateResponse):void {
     const errorMessage: string = error.message || "Erro ao cadastrar turma. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,

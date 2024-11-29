@@ -10,7 +10,7 @@
     </p>
     <form [formGroup]="authForm" (ngSubmit)="onSubmit($event)" class="button-group">
       <app-input
-        type="number"
+        type="text"
         label="Número de matrícula do professor"
         placeholder="Digite o número de matrícula"
         [hasError]="isInvalidRequired()"

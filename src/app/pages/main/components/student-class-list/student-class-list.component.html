@@ -1,0 +1,47 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<main *ngIf="!isLoading">
+  <section class="sidebar-section">
+    <app-sidebar [homeLink]="{ route: '/main' }" [menuIcons]="icons"></app-sidebar>
+  </section>
+
+  <div class="title">
+    <h2>Alunos da Turma</h2>
+  </div>
+
+  <div class="search">
+    <app-back-button></app-back-button>
+  </div>
+
+  <div class="sub-title" *ngIf="students.length !== 0">
+    <app-breadcrumb
+      [breadcrumbItems]="[
+        { label: 'Suas turmas', link: '/main/class-list' },
+        { label: turma.name || 'Nome da Turma', link: '' }
+      ]"
+    ></app-breadcrumb>
+  </div>
+
+  <section class="main-section" >
+    <div class="content-wrapper">
+      <div *ngIf="students.length === 0" class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-.5-13H11v6l4.5 2.67.5-.867-4-2.303V7z" />
+        </svg>
+        <h3>Nenhum estudante registrado nesta turma</h3>
+        <p>Verifique com o administrador ou registre novos estudantes para começar a acompanhar.</p>
+      </div>
+
+      <ng-container *ngFor="let student of students">
+        <app-list-teacher
+          tipo="estudante"
+          [nomeDoEstudante]="student.fullName"
+          [matriculaDoEstudante]="student.registrationNumber"
+          [idTurma]="student.id">
+        </app-list-teacher>
+      </ng-container>
+    </div>
+  </section>
+</main>

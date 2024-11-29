@@ -9,6 +9,7 @@ export class ButtonComponent {
   @Input() label!: string; // Propriedade para definir o texto do botão
   @Input() customClass = ''; // Classe personalizada
   @Input() disabled = false;
+  @Input() loading = false;
   @Output() clickEvent = new EventEmitter<void>(); // Evento de clique
 
   onClick() {

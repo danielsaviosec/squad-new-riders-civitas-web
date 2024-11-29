@@ -16,9 +16,9 @@
 
       <!-- Template para dados do estudante -->
       <ng-template #estudanteTemplate>
-        <h3>{{ nomeDoEstudante }}, {{ matriculaDoEstudante }}</h3>
+        <h3>{{ nomeDoEstudante }}, Matrícula: {{ matriculaDoEstudante }}</h3>
         <span>
-          {{ apelidoTurmaEstudante }}, {{ rgCpfDoEstudante }},
+          {{ apelidoTurmaEstudante }} - Documento: {{ rgCpfDoEstudante }},
           CPF do Responsável: {{ cpfResponsavel }}
         </span>
       </ng-template>
@@ -26,11 +26,11 @@
   </div>
 
   <div class="section-controlers">
-    <button mat-icon-button aria-label="Editar" title="Editar">
+    <button mat-icon-button aria-label="Editar" title="Editar" (click)="onUpdateClick()">
       <mat-icon style="font-size: 18px">edit</mat-icon>
     </button>
 
-    <button mat-icon-button aria-label="Excluir" title="Excluir">
+    <button mat-icon-button aria-label="Excluir" title="Excluir" (click)="onDeleteClick()">
       <mat-icon style="font-size: 18px">delete</mat-icon>
     </button>
   </div>

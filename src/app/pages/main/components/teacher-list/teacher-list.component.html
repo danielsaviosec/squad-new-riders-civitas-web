@@ -27,10 +27,12 @@
   <section class="main-section">
     <div class="content-wrapper" *ngIf="!isLoading">
       <app-list *ngFor="let teacher of teachers"
-                tipo="professor"
-                [nomeCompleto]="teacher.fullName"
-                [matricula]="'Matrícula: ' + teacher.registrationNumber"
-                [apelidosTurmas]="teacherClassesNames[teacher.registrationNumber]">
+        tipo="professor"
+        [nomeCompleto]="teacher.fullName"
+        [matricula]="'Matrícula: ' + teacher.registrationNumber"
+        [apelidosTurmas]="teacherClassesNames[teacher.registrationNumber]"
+        [id]="teacher.id"
+        (selecionado)="onNavigateToUpdateTeacher($event)">
       </app-list>
     </div>
   </section>

@@ -11,14 +11,14 @@ import { IAdminScreenCard, ISidebarIcons } from 'src/app/interface';
 export class AdminScreenComponent {
 
   icons: ISidebarIcons[] = [
-    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/admin-screen' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
     { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
   cardsAdmin: IAdminScreenCard[] = [
-    { title: 'Cadastrar Turmas', image: 'assets/admin-screen-cards/cadastro.jpg', route: 'main/class-registration' },
+    { title: 'Cadastrar Turmas', image: 'assets/admin-screen-cards/cadastro-turmas.png', route: 'main/class-registration' },
     { title: 'Cadastrar Estudantes', image: 'assets/admin-screen-cards/cadastro.jpg', route: 'main/student-registration' },
     { title: 'Cadastrar Professores', image: 'assets/admin-screen-cards/cadastro.jpg', route: 'main/teacher-registration' },
   ];
