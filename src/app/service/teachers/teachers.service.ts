@@ -24,7 +24,7 @@ export class TeacherService {
   getTeacher(id: number): Observable<ITeacherResponse> {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<ITeacherResponse>(`${environment.apiUrl}student/${id}`, { headers });
+    return this.http.get<ITeacherResponse>(`${environment.apiUrl}teachers/${id}`, { headers });
   }
 
   // Função para listar professores

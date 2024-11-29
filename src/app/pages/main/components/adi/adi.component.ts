@@ -57,14 +57,6 @@ export class AdiComponent implements OnInit {
       this.updateBreadcrumb();
 
       if (this.idTurma && this.idEstudante) {
-        this.loadClassName();
-        this.loadStudentName();
-        this.loadAdisData(this.idEstudante);
-      }
-
-      /* Ativar com backend
-
-      if (this.idTurma && this.idEstudante) {
         this.isLoading = true;
 
         forkJoin({
@@ -95,80 +87,11 @@ export class AdiComponent implements OnInit {
         });
       }
 
-      */
-
     });
-  }
-
-
-  // Método para carregar o nome da turma (Temporário até API)
-  loadClassName(): void {
-    // Simulando resposta do backend com dados fictícios
-    const mockResponse = { id: this.idTurma, name: `Turma ${this.idTurma}` };
-    this.apelidoTurma = mockResponse.name;
-    this.updateBreadcrumb();
-  }
-
-  // Método para carregar o nome do estudante (Temporário até API)
-  loadStudentName(): void {
-    // Simulando resposta do backend com dados fictícios
-    const mockResponse = { id: this.idEstudante, fullName: `Estudante ${this.idEstudante}` };
-    this.nomeDoEstudante = mockResponse.fullName;
-    this.updateBreadcrumb();
-  }
-
-  // Método para carregar os dados da ADI (Temporário até API)
-  loadAdisData(id: number): void {
-    const mockResponse = {
-        studentInfo: {
-            fullName: "Carlos Eduardo",
-            className: "2 ano"
-        },
-        evaluations: [
-            {
-                id: 6,
-                date: "28/11/24",
-                label: "PDI28_11_2024_10h45"
-            },
-            {
-                id: 4,
-                date: "24/11/24",
-                label: "PDI24_11_2024_15h30"
-            },
-            {
-                id: 2,
-                date: "20/11/24",
-                label: "PDI20_11_2024_09h15"
-            },
-            {
-                id: 1,
-                date: "15/11/24",
-                label: "PDI15_11_2024_14h00"
-            }
-        ],
-        latestEvaluation: {
-            id: 6,
-            date: "28/11/24",
-            label: "PDI28_11_2024_10h45",
-            reviews: {
-                selfAwareness: 4,
-                empathy: 3,
-                communication: 5,
-                teamwork: 5,
-                autonomy: 3
-            }
-        }
-    }
-
-    this.adisData = mockResponse;
-    this.adiDate = mockResponse.latestEvaluation.date;
-    this.setChartOptions();
   }
 
   // Método para requisição de novos dados do gráfico
   onAdiClick(adiId: number): void {
-    /* Ativar trecho de código quanto comunicar com API
-
     this.adiService.getAdi(adiId).subscribe({
       next: (response: IAdiResponse) => {
         const reviews = response.reviews;
@@ -179,70 +102,6 @@ export class AdiComponent implements OnInit {
         console.error('Erro ao carregar os dados do ADI:', err);
       }
     });
-
-    ------------------------------------------------  */
-
-    // Array de dados fictícios
-    const fakeDataArray: IAdiResponse[] = [
-      {
-        id: 2,
-        date: '23/11/24',
-        student: {
-          id: 2,
-          fullName: 'Milla',
-          studentClass: '1 ano C',
-        },
-        reviews: {
-          selfAwareness: 4,
-          empathy: 5,
-          communication: 3,
-          teamwork: 4,
-          autonomy: 2,
-        },
-        teacherComments: 'O estudante apresentou bom progresso, mas precisa melhorar na comunicação e autonomia.',
-      },
-      {
-        id: 4,
-        date: '24/11/24',
-        student: {
-          id: 3,
-          fullName: 'Lucas',
-          studentClass: '2 ano B',
-        },
-        reviews: {
-          selfAwareness: 5,
-          empathy: 4,
-          communication: 5,
-          teamwork: 5,
-          autonomy: 4,
-        },
-        teacherComments: 'Excelente desempenho em todas as áreas.',
-      },
-      {
-        id: 6,
-        date: '25/11/24',
-        student: {
-          id: 4,
-          fullName: 'Sofia',
-          studentClass: '3 ano A',
-        },
-        reviews: {
-          selfAwareness: 3,
-          empathy: 3,
-          communication: 4,
-          teamwork: 3,
-          autonomy: 3,
-        },
-        teacherComments: 'Progresso regular, precisa de mais incentivo em autonomia.',
-      },
-    ];
-
-    const selectedAdi = fakeDataArray.find((adi) => adi.id === adiId);
-    const reviews = selectedAdi?.reviews;
-    if(reviews) {
-      this.adiDate = selectedAdi?.date;
-      this.updateChart(reviews);
-    }
   }
 
   // Método para atualizar o gráfico

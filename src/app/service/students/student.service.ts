@@ -22,7 +22,7 @@ export class StudentService {
   getStudent(id: number): Observable<IStudentResponse> {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<IStudentResponse>(`${environment.apiUrl}student/${id}`, { headers });
+    return this.http.get<IStudentResponse>(`${environment.apiUrl}students/${id}`, { headers });
   }
 
   // Função para listar professores

@@ -58,7 +58,6 @@ export class AdiDetailsComponent implements OnInit {
   }
 
   loadAdiData(id: number): void {
-    /* Ativar trecho de código quanto comunicar com API
     this.adiService.getAdi(id).subscribe({
       next: (data: IAdiResponse) => {
         this.nomeDoEstudante = data.student.fullName;
@@ -72,77 +71,6 @@ export class AdiDetailsComponent implements OnInit {
         this.isLoading = false; // Finaliza o carregamento em caso de erro
       },
     });
-
-    ------------------------------------------------  */
-
-    // Array de dados fictícios
-    const fakeDataArray: IAdiResponse[] = [
-      {
-        id: 5,
-        date: '23/11/24',
-        student: {
-          id: 2,
-          fullName: 'Milla',
-          studentClass: '1 ano C',
-        },
-        reviews: {
-          selfAwareness: 4,
-          empathy: 5,
-          communication: 3,
-          teamwork: 4,
-          autonomy: 2,
-        },
-        teacherComments: 'O estudante apresentou bom progresso, mas precisa melhorar na comunicação e autonomia.',
-      },
-      {
-        id: 6,
-        date: '24/11/24',
-        student: {
-          id: 3,
-          fullName: 'Lucas',
-          studentClass: '2 ano B',
-        },
-        reviews: {
-          selfAwareness: 5,
-          empathy: 4,
-          communication: 5,
-          teamwork: 5,
-          autonomy: 4,
-        },
-        teacherComments: 'Excelente desempenho em todas as áreas.',
-      },
-      {
-        id: 7,
-        date: '25/11/24',
-        student: {
-          id: 4,
-          fullName: 'Sofia',
-          studentClass: '3 ano A',
-        },
-        reviews: {
-          selfAwareness: 3,
-          empathy: 3,
-          communication: 4,
-          teamwork: 3,
-          autonomy: 3,
-        },
-        teacherComments: 'Progresso regular, precisa de mais incentivo em autonomia.',
-      },
-    ];
-
-    const selectedAdi = fakeDataArray.find((adi) => adi.id === id);
-
-    if (selectedAdi) {
-      this.nomeDoEstudante = selectedAdi.student.fullName;
-      this.apelidoTurma = selectedAdi.student.studentClass;
-      this.data = selectedAdi.date;
-      this.teacherComments = selectedAdi.teacherComments;
-      this.reviews = selectedAdi.reviews;
-      this.idStudent = selectedAdi.student.id;
-      this.setChartOptions();
-    } else {
-      console.error('ADI não encontrada para o ID:', id);
-    }
   }
 
   setChartOptions(): void {

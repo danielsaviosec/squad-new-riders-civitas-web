@@ -30,6 +30,6 @@ export class AdiService {
   getAdis(studentId: number): Observable<IAdisReponse> {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<IAdisReponse>(`${environment.apiUrl}students/${studentId}/details`, { headers });
+    return this.http.get<IAdisReponse>(`${environment.apiUrl}students/students/${studentId}/details`, { headers });
   }
 }

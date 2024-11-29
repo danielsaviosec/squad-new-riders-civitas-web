@@ -43,4 +43,8 @@ export class ListTeacherComponent {
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/class/${this.idTurma}/student-adi/${this.idEstudante}`]);
   }
+
+  onRegisterClick() {
+    this.router.navigate([`main/form-registration/${this.idEstudante}`]);
+  }
 }
