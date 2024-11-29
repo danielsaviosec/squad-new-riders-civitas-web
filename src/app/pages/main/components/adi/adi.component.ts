@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 import { ClassService } from 'src/app/service/classes/classes.service';
 import { StudentService } from 'src/app/service/students/student.service';
 import { AdiService } from 'src/app/service/adi/adi.service';
+import { forkJoin } from 'rxjs';
 
-import { IClassResponse } from 'src/app/interface/response/IClassResponse.interface';
-import { IStudentResponse } from 'src/app/interface/response/IStudentsResponse.interface';
 import { IAdisReponse } from 'src/app/interface/response/IAdisResponse.interface';
+import { IAdiResponse } from 'src/app/interface/response/IAdiResponse.interface';
 @Component({
   selector: 'app-adi',
   templateUrl: './adi.component.html',
@@ -20,7 +19,9 @@ export class AdiComponent implements OnInit {
   idTurma!: number;
   nomeDoEstudante!: string;
   apelidoTurma!: string;
+  adiDate!: string;
   adisData!: IAdisReponse;
+  isLoading: boolean = false;
 
   breadcrumbItems = [
     { label: 'Suas Turmas', link: '/main/class-list' },
@@ -52,57 +53,63 @@ export class AdiComponent implements OnInit {
         this.loadStudentName();
         this.loadAdisData(this.idEstudante);
       }
+
+      /* Ativar com backend
+
+      if (this.idTurma && this.idEstudante) {
+        this.isLoading = true;
+
+        forkJoin({
+          className: this.classesService.getClass(this.idTurma),
+          studentName: this.studentsService.getStudent(this.idEstudante),
+          adiData: this.adiService.getAdis(this.idEstudante),
+        }).subscribe({
+          next: ({ className, studentName, adiData }) => {
+            // Atualiza o nome da turma
+            this.apelidoTurma = className.name;
+            this.updateBreadcrumb();
+
+            // Atualiza o nome do estudante
+            this.nomeDoEstudante = studentName.fullName;
+            this.updateBreadcrumb();
+
+            // Atualiza os dados da ADI
+            this.adisData = adiData;
+            this.adiDate = adiData.latestEvaluation.date;
+            this.setChartOptions();
+
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.error('Erro ao carregar os dados:', err);
+            this.isLoading = false;
+          },
+        });
+      }
+
+      */
+
     });
   }
 
 
-  // Método para carregar o nome da turma usando dados fictícios
+  // Método para carregar o nome da turma (Temporário até API)
   loadClassName(): void {
     // Simulando resposta do backend com dados fictícios
     const mockResponse = { id: this.idTurma, name: `Turma ${this.idTurma}` };
     this.apelidoTurma = mockResponse.name;
     this.updateBreadcrumb();
-
-    // Para quando o backend estiver funcionando:
-    /*
-    this.classesService.getClass(this.idTurma).subscribe({
-      next: (response) => {
-        this.apelidoTurma = response.name;
-        this.updateBreadcrumb();
-      },
-      error: (err) => {
-        console.error('Erro ao carregar a turma:', err);
-        this.apelidoTurma = 'Turma Desconhecida';
-        this.updateBreadcrumb();
-      }
-    });
-    */
   }
 
-  // Método para carregar o nome do estudante usando dados fictícios
+  // Método para carregar o nome do estudante (Temporário até API)
   loadStudentName(): void {
     // Simulando resposta do backend com dados fictícios
     const mockResponse = { id: this.idEstudante, fullName: `Estudante ${this.idEstudante}` };
     this.nomeDoEstudante = mockResponse.fullName;
     this.updateBreadcrumb();
-
-    // Para quando o backend estiver funcionando:
-    /*
-    this.studentsService.getStudent(this.idEstudante).subscribe({
-      next: (response) => {
-        this.nomeDoEstudante = response.fullName;
-        this.updateBreadcrumb();
-      },
-      error: (err) => {
-        console.error('Erro ao carregar o estudante:', err);
-        this.nomeDoEstudante = 'Estudante Desconhecido';
-        this.updateBreadcrumb();
-      }
-    });
-    */
   }
 
-  // Método para carregar os dados da ADI
+  // Método para carregar os dados da ADI (Temporário até API)
   loadAdisData(id: number): void {
     const mockResponse = {
         studentInfo: {
@@ -146,21 +153,100 @@ export class AdiComponent implements OnInit {
     }
 
     this.adisData = mockResponse;
+    this.adiDate = mockResponse.latestEvaluation.date;
     this.setChartOptions();
+  }
 
-    // Para quando o backend estiver funcionando:
-    /*
-    this.adiService.getAdis(id).subscribe({
-      next: (response: IAdisReponse) => {
-        this.adisData = response;
-        console.log('Dados ADI:', this.adisData);
-        this.setChartOptions();
+  // Método para requisição de novos dados do gráfico
+  onAdiClick(adiId: number): void {
+    /* Ativar trecho de código quanto comunicar com API
+
+    this.adiService.getAdi(adiId).subscribe({
+      next: (response: IAdiResponse) => {
+        const reviews = response.reviews;
+        this.adiDate = response.date;
+        this.updateChart(reviews);
       },
       error: (err) => {
-        console.error('Erro ao carregar ADI:', err);
+        console.error('Erro ao carregar os dados do ADI:', err);
       }
     });
-    */
+
+    ------------------------------------------------  */
+
+    // Array de dados fictícios
+    const fakeDataArray: IAdiResponse[] = [
+      {
+        id: 2,
+        date: '23/11/24',
+        student: {
+          id: 2,
+          fullName: 'Milla',
+          studentClass: '1 ano C',
+        },
+        reviews: {
+          selfAwareness: 4,
+          empathy: 5,
+          communication: 3,
+          teamwork: 4,
+          autonomy: 2,
+        },
+        teacherComments: 'O estudante apresentou bom progresso, mas precisa melhorar na comunicação e autonomia.',
+      },
+      {
+        id: 4,
+        date: '24/11/24',
+        student: {
+          id: 3,
+          fullName: 'Lucas',
+          studentClass: '2 ano B',
+        },
+        reviews: {
+          selfAwareness: 5,
+          empathy: 4,
+          communication: 5,
+          teamwork: 5,
+          autonomy: 4,
+        },
+        teacherComments: 'Excelente desempenho em todas as áreas.',
+      },
+      {
+        id: 6,
+        date: '25/11/24',
+        student: {
+          id: 4,
+          fullName: 'Sofia',
+          studentClass: '3 ano A',
+        },
+        reviews: {
+          selfAwareness: 3,
+          empathy: 3,
+          communication: 4,
+          teamwork: 3,
+          autonomy: 3,
+        },
+        teacherComments: 'Progresso regular, precisa de mais incentivo em autonomia.',
+      },
+    ];
+
+    const selectedAdi = fakeDataArray.find((adi) => adi.id === adiId);
+    const reviews = selectedAdi?.reviews;
+    if(reviews) {
+      this.adiDate = selectedAdi?.date;
+      this.updateChart(reviews);
+    }
+  }
+
+  // Método para atualizar o gráfico
+  updateChart(reviews: { selfAwareness: number, empathy: number, communication: number, teamwork: number, autonomy: number }): void {
+    this.chartOptions.series[0].data[0].value = [
+      reviews.teamwork,
+      reviews.empathy,
+      reviews.selfAwareness,
+      reviews.communication,
+      reviews.autonomy
+    ];
+    this.chartOptions = { ...this.chartOptions }; // Trigger change detection
   }
 
   // Configuração das opções do gráfico com base nos dados de avaliações mais recentes

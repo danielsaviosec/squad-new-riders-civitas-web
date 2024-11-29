@@ -1,5 +1,8 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-<main>
+<section class="main" *ngIf="!isLoading">
   <section class="sidebar-section">
     <app-sidebar [homeLink]="{ route: '/main' }" [menuIcons]="icons"></app-sidebar>
   </section>
@@ -31,24 +34,33 @@
   <div class="history-ADIs">
     <h4>Histórico de ADIs</h4>
 
-    <div class="ADIs-list">
-      <ng-container *ngFor="let adi of adisData.evaluations">
-        <div class="ADI-item">
+    <div class="ADIs-list" *ngIf="adisData?.latestEvaluation; else noHistoryData">
+      <ng-container *ngFor="let adi of adisData?.evaluations">
+        <div class="ADI-item" (click)="onAdiClick(adi.id)">
           {{ adi.label }}
           <mat-icon>search</mat-icon>
         </div>
       </ng-container>
     </div>
+
+    <ng-template #noHistoryData>
+      <div class="no-history-data">Não há registros</div>
+    </ng-template>
+
   </div>
 
   <div class="last-ADI">
     <h4>Última avaliação</h4>
-    <span>{{ adisData.latestEvaluation.date }}</span>
+    <span>{{ adiDate ? adiDate : '--/--/--' }}</span>
 
-    <div class="chart-container">
+    <div class="chart-container" *ngIf="adisData?.latestEvaluation; else noChartData">
       <echarts [options]="chartOptions" class="echart"></echarts>
     </div>
 
+    <ng-template #noChartData>
+      <div class="no-chart-data">Não há registros</div>
+    </ng-template>
+
     <button (click)="onVisualizarClick()" (keydown)="onVisualizarClick()" >Visualizar</button>
   </div>
-</main>
+</section>

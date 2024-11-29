@@ -1,5 +1,8 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-<main>
+<section class="main" *ngIf="!isLoading">
   <section class="sidebar-section">
     <app-sidebar [homeLink]="{ route: '/main' }" [menuIcons]="icons"></app-sidebar>
   </section>
@@ -43,4 +46,4 @@
     <h4>Observações do professor</h4>
     <p>{{ teacherComments }}</p>
   </div>
-</main>
+</section>

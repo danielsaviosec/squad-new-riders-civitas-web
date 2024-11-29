@@ -18,6 +18,7 @@ export class AdiDetailsComponent implements OnInit {
   apelidoTurma!: string;
   teacherComments!: string;
   reviews: Reviews = { teamwork: 0, empathy: 0, selfAwareness: 0, communication: 0, autonomy: 0 };
+  isLoading: boolean = false;
 
   breadcrumbItems = [
     { label: 'Suas Turmas', link: '/main' },
@@ -55,8 +56,12 @@ export class AdiDetailsComponent implements OnInit {
         this.apelidoTurma = data.student.studentClass;
         this.reviews = data.reviews;
         this.setChartOptions();
+        this.isLoading = false;
       },
-      error: (err) => console.error('Erro ao carregar dados:', err),
+      error: (err) => {
+        console.error('Erro ao carregar dados:', err);
+        this.isLoading = false; // Finaliza o carregamento em caso de erro
+      },
     });
 
     ------------------------------------------------  */
