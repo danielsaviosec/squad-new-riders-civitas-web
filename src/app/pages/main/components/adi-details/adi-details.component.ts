@@ -63,6 +63,8 @@ export class AdiDetailsComponent implements OnInit {
         this.nomeDoEstudante = data.student.fullName;
         this.apelidoTurma = data.student.studentClass;
         this.reviews = data.reviews;
+        this.data = data.date;
+        this.teacherComments = data.teacherComments;
         this.setChartOptions();
         this.isLoading = false;
       },
