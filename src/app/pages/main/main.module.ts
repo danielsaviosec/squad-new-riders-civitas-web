@@ -50,7 +50,7 @@ import { AdiDetailsComponent } from './components/adi-details/adi-details.compon
     AdiComponent,
     StudentClassListComponent,
     FormRegistrationComponent,
-    AdiDetailsComponent
+    AdiDetailsComponent,
   ],
   imports: [
     MainRoutingModule,

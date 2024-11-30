@@ -3,3 +3,8 @@ export interface ISidebarIcons {
   image: string;
   route: string;
 }
+
+export interface ISidebarIconsMobile {
+  name: string;
+  route: string;
+}

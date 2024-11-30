@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ISidebarIcons } from 'src/app/interface';
+import { ISidebarIconsMobile } from 'src/app/interface';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 export class MenuHamburguerComponent {
   isMenuOpen = false;
 
-  @Input() menuIcons: ISidebarIcons[] = [];
+  @Input() menuIconsMobile: ISidebarIconsMobile[] = [];
 
   constructor(
     private authService: AuthService,

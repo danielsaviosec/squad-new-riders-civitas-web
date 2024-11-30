@@ -22,6 +22,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     SidebarComponent,
     MenuHamburguerComponent,
     ListTeacherComponent,
-    SidebarComponent,
-    AdminScreenComponent,
-    TeacherScreenComponent,
+    AdminScreenComponent, // Retirar posteriormente
+    TeacherScreenComponent, // Retirar posteriormente
+    HomeAdminComponent,
+    HomeTeacherComponent,
     BreadcrumbComponent,
     DialogComponent
   ],
@@ -64,8 +67,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     BreadcrumbComponent,
     MenuHamburguerComponent,
     RouterModule,
-    AdminScreenComponent,
-    TeacherScreenComponent
+    HomeAdminComponent, // Retirar posteriormente
+    HomeTeacherComponent, // Retirar posteriormente
   ],
   providers: [MatSnackBar]
 })
