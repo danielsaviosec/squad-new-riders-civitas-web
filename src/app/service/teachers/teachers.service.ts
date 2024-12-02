@@ -21,6 +21,12 @@ export class TeacherService {
     return this.http.post<CreateResponse>(`${environment.apiUrl}teachers/register`, data, { headers });
   }
 
+  getTeacherByToken(): Observable<ITeacherResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ITeacherResponse>(`${environment.apiUrl}teachers`, { headers });
+  }
+
   getTeacher(id: number): Observable<ITeacherResponse> {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 import { StudentService } from 'src/app/service/students/student.service';
 import { AdiService } from 'src/app/service/adi/adi.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { forkJoin } from 'rxjs';
+import { finalize, forkJoin, of, catchError } from 'rxjs';
 
 import { IAdisReponse } from 'src/app/interface/response/IAdisResponse.interface';
 import { IAdiResponse } from 'src/app/interface/response/IAdiResponse.interface';
@@ -14,10 +14,11 @@ import { IAdiResponse } from 'src/app/interface/response/IAdiResponse.interface'
   templateUrl: './adi.component.html',
   styleUrls: ['./adi.component.scss'],
 })
-export class AdiComponent implements OnInit {
+export class AdiComponent implements OnInit, AfterViewChecked {
   userRole: string | null = null;
   chartOptions: any;
   idEstudante!: number;
+  idCurrentAdi!: number;
   idTurma!: number;
   nomeDoEstudante!: string;
   apelidoTurma!: string;
@@ -60,34 +61,39 @@ export class AdiComponent implements OnInit {
         this.isLoading = true;
 
         forkJoin({
-          className: this.classesService.getClass(this.idTurma),
-          studentName: this.studentsService.getStudent(this.idEstudante),
-          adiData: this.adiService.getAdis(this.idEstudante),
-        }).subscribe({
-          next: ({ className, studentName, adiData }) => {
-            // Atualiza o nome da turma
-            this.apelidoTurma = className.name;
-            this.updateBreadcrumb();
-
-            // Atualiza o nome do estudante
-            this.nomeDoEstudante = studentName.fullName;
-            this.updateBreadcrumb();
-
-            // Atualiza os dados da ADI
-            this.adisData = adiData;
-            this.adiDate = adiData.latestEvaluation.date;
-            this.setChartOptions();
-
-            this.isLoading = false;
-          },
-          error: (err) => {
-            console.error('Erro ao carregar os dados:', err);
-            this.isLoading = false;
-          },
+          adiData: this.adiService.getAdis(this.idEstudante).pipe(
+            catchError((err) => {
+              console.error('Erro ao carregar os dados da ADI:', err);
+              return of(null);
+            })
+          )
+        }).pipe(
+          finalize(() => {
+            this.isLoading = false; // Desativa o loading após todas as requisições
+          })
+        ).subscribe({
+          next: ({ adiData }) => {
+            if (adiData) {
+              this.nomeDoEstudante = adiData.studentInfo.fullName;
+              this.apelidoTurma = adiData.studentInfo.className;
+              this.idCurrentAdi = adiData.latestEvaluation.id;
+              this.adisData = adiData;
+              this.adiDate = adiData.latestEvaluation.date;
+              this.updateBreadcrumb();
+              this.setChartOptions();
+            }
+          }
         });
       }
 
     });
+  }
+
+  ngAfterViewChecked(): void {
+    const section = document.querySelector('section.main');
+    if (this.userRole === 'guardian' && section) {
+      section.classList.add('guardian-layout');
+    }
   }
 
   // Método para requisição de novos dados do gráfico
@@ -96,6 +102,7 @@ export class AdiComponent implements OnInit {
       next: (response: IAdiResponse) => {
         const reviews = response.reviews;
         this.adiDate = response.date;
+        this.idCurrentAdi = response.id;
         this.updateChart(reviews);
       },
       error: (err) => {
@@ -198,7 +205,7 @@ export class AdiComponent implements OnInit {
 
   onVisualizarClick() {
     // Redirecionando para a página do estudante
-    this.router.navigate([`/main/adi-details/${this.adisData.latestEvaluation.id}`]);
+    this.router.navigate([`/main/adi-details/${this.idCurrentAdi}`]);
   }
 
   // Atualizar o breadcrumb com os dados obtidos

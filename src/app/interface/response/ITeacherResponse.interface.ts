@@ -6,6 +6,10 @@ export interface ITeacherResponse {
   registrationNumber: string
 }
 
-interface teacherClasses {
-  id: number
+export interface teacherClasses {
+  id: number,
+  name?: string,
+  schoolYear?: string,
+  schoolShift?: string,
+  educationType?: string,
 }

@@ -6,7 +6,7 @@
   </div>
 </button>
 
-<div class="menu-overlay" [class.is-open]="isMenuOpen" (click)="toggleMenu()"></div>
+<div class="menu-overlay" [class.is-open]="isMenuOpen" (click)="toggleMenu()" (keydown)="toggleMenu()" tabindex="0"></div>
 <div class="menu-items" [class.is-open]="isMenuOpen">
   <button (click)="toggleMenu()" class="close-menu">✖</button>
   <div class="menu" *ngFor="let option of menuIconsMobile">

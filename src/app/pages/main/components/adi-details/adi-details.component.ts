@@ -45,7 +45,7 @@ export class AdiDetailsComponent implements OnInit {
     this.userRole = this.authService.getRole();
 
     // Filtra os ícones com base no papel do usuário
-    if (this.userRole === "guardian") { this.icons = [] };
+    if (this.userRole === "guardian") { this.icons = [] }
 
     this.idAdi = +this.route.snapshot.paramMap.get('id')!;
     this.setChartOptions();
@@ -58,6 +58,8 @@ export class AdiDetailsComponent implements OnInit {
   }
 
   loadAdiData(id: number): void {
+    this.isLoading = true;
+
     this.adiService.getAdi(id).subscribe({
       next: (data: IAdiResponse) => {
         this.nomeDoEstudante = data.student.fullName;
@@ -65,6 +67,7 @@ export class AdiDetailsComponent implements OnInit {
         this.reviews = data.reviews;
         this.data = data.date;
         this.teacherComments = data.teacherComments;
+        this.idStudent = data.student.id;
         this.setChartOptions();
         this.isLoading = false;
       },
