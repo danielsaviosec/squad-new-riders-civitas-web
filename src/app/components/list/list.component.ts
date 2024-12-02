@@ -79,7 +79,7 @@ export class ListComponent {
           case 'professor':
             this.teacherService.deleteTeacher(this.id).subscribe({
               next: () => this.handleSuccess(),
-              error: (data) => this.onDeleteError(data.error.message, 'professor'),
+              error: (data) => this.onDeleteError(data, 'professor'),
             })
         }
       }
@@ -99,10 +99,10 @@ export class ListComponent {
   }
 
   // TODO: Corrigir any
-  onDeleteError(error: string, tipo: string) {
+  onDeleteError(data: { error: { message: string } }, tipo: string) {
     const hasError = true;
     const errorMessage =
-      error || `Erro ao excluir ${tipo}. Tente novamente.`;
+      data.error.message || `Erro ao excluir ${tipo}. Tente novamente.`;
     const title = 'Não foi possível excluir';
     this.dialogService.openDeleteDialog(title, errorMessage, hasError);
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -26,10 +26,15 @@ export class StudentService {
   }
 
   // Função para listar professores
-  getStudents(): Observable<IStudentResponse[]> {
+  getStudents(fullName?: string): Observable<IStudentResponse[]> {
+    let params = new HttpParams();
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<IStudentResponse[]>(`${environment.apiUrl}admin/me/students`, { headers });
+    if (fullName) {
+      params = params.set('fullName', fullName);
+    }
+
+    return this.http.get<IStudentResponse[]>(`${environment.apiUrl}admin/me/students`, { headers, params });
   }
 
   // Novo método para atualizar o estudante

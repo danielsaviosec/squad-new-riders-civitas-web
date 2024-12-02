@@ -3,6 +3,7 @@ import { ISidebarIcons } from 'src/app/interface';
 import { ISelectOption } from 'src/app/interface/IClassRegistration.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 import { ClassService } from 'src/app/service/classes/classes.service';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/service/auth/auth.service';
@@ -44,9 +45,10 @@ export class ClassListComponent implements OnInit {
     { value: 'ensinoFundamental', label: 'Ensino Fundamental 1', backName: 'Elementary school 1' },
   ];
 
-  turmaOptions: ClassesResponse[] = []; // Agora a variável turmaOptions tem o tipo Turma
+  turmaOptions: ClassesResponse[] = []; // Variável turmaOptions tem o tipo Turma
   isLoading: boolean = false;
   userRole: string | null = null;
+  searchTerm$ = new Subject<string>(); // Subject para controlar a busca
 
   constructor(
     private classService: ClassService,
@@ -69,23 +71,39 @@ export class ClassListComponent implements OnInit {
 
     // Chama o serviço para obter as turmas
     if(this.userRole === "admin") {
-      this.classService.getClasses().subscribe(
-        (data: ClassesResponse[]) => {
-          this.turmaOptions = data.map((turma: ClassesResponse) => {
-            return {
-              ...turma,
-              schoolYear: this.translateAnoLetivo(turma.schoolYear), // Traduz anoLetivo
-              schoolShift: this.translatePeriodoLetivo(turma.schoolShift), // Traduz periodoLetivo
-              educationType: this.translateEnsino(turma.educationType) // Traduz ensino
-            };
-          });
+      this.searchTerm$
+      .pipe(
+        debounceTime(300), // Aguarda 300ms após o último evento
+        distinctUntilChanged(), // Evita requisições repetidas
+        switchMap(term =>
+          this.classService.getClasses(term).pipe(
+            catchError(err => {
+              console.error('Erro ao buscar turmas:', err);
+              this.turmaOptions = []; // Limpa resultados anteriores
+              this.isLoading = false; // Atualiza o estado de carregamento
+              return of([]); // Continua emitindo um array vazio para que a busca prossiga
+            })
+          )
+        )
+      )
+      .subscribe({
+        next: (data: ClassesResponse[]) => {
+          this.turmaOptions = data.map((turma) => ({
+            ...turma,
+            schoolYear: this.translateAnoLetivo(turma.schoolYear),
+            schoolShift: this.translatePeriodoLetivo(turma.schoolShift),
+            educationType: this.translateEnsino(turma.educationType)
+          }));
           this.isLoading = false;
         },
-        (error) => {
-          console.error('Erro ao buscar turmas:', error);
+        error: () => {
+          this.turmaOptions = [];
           this.isLoading = false;
         }
-      );
+      });
+
+      // Disparar busca inicial
+      this.searchTerm$.next('');
     } else if(this.userRole === "teacher") {
       this.classService.getClassesTeacher().subscribe(
         (data: ClassesResponse[]) => {
@@ -97,7 +115,7 @@ export class ClassListComponent implements OnInit {
               educationType: this.translateEnsino(turma.educationType) // Traduz ensino
             };
           });
-          
+
           this.isLoading = false;
         },
         (error) => {
@@ -106,6 +124,11 @@ export class ClassListComponent implements OnInit {
         }
       );
     }
+  }
+
+  onSearch(term: string): void {
+    // TODO: Carregamento de pesquisa...
+    this.searchTerm$.next(term);
   }
 
   onNavigateToUpdateClass(id: number) {
