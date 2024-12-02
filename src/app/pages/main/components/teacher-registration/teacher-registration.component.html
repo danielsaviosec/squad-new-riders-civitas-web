@@ -20,7 +20,7 @@
       <div class="form-card">
         <mat-form-field appearance="outline" floatLabel="always">
           <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+          <input matInput formControlName="cpf" placeholder="xxx.xxx.xxx-xx" cpfMask maxlength="14">
           <mat-error *ngIf="form.get('cpf')?.hasError('pattern')">
             CPF inválido. Verifique as informações digitadas.
           </mat-error>
@@ -42,8 +42,15 @@
           </mat-select>
         </mat-form-field>
       </div>
+
       <div class="btn-wrapper">
-        <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Cadastrar</button>
+          <app-button
+            label="Cadastrar"
+            [customClass]="'primary'"
+            color="primary"
+            [disabled]="form.invalid"
+            [loading]="form.pending">
+          </app-button>
       </div>
     </form>
   </div>
