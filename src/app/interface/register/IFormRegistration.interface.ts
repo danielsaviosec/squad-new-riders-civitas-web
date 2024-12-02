@@ -1,6 +1,7 @@
 export interface IQuestionOption {
     value: string;
     text: string;
+    grade: number;
 }
 
 export interface IQuestion {

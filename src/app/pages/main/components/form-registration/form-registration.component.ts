@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
+import { AdiService } from 'src/app/service/adi/adi.service';
+import { finalize } from 'rxjs';
+
 import { IQuestion, IQuestionOption } from 'src/app/interface/register/IFormRegistration.interface';
+import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
+import { IAdiRegistrationData } from 'src/app/interface/register/IAdiRegistrationData.interface';
 
 @Component({
   selector: 'app-form-registration',
@@ -43,16 +49,29 @@ export class FormRegistrationComponent implements OnInit {
   ];
 
   options: IQuestionOption[] = [
-    { value: 'discordoTotalmente', text: 'Discordo totalmente' },
-    { value: 'discordo', text: 'Discordo' },
-    { value: 'neutro', text: 'Neutro' },
-    { value: 'concordo', text: 'Concordo' },
-    { value: 'concordoTotalmente', text: 'Concordo totalmente' }
+    { value: 'discordoTotalmente', text: 'Discordo totalmente', grade: 1 },
+    { value: 'discordo', text: 'Discordo', grade: 2 },
+    { value: 'neutro', text: 'Neutro', grade: 3 },
+    { value: 'concordo', text: 'Concordo', grade: 4 },
+    { value: 'concordoTotalmente', text: 'Concordo totalmente', grade: 5 }
   ];
 
-  constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar) { }
+  private studentId: number | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackbarErrorService: SnackbarErrorService,
+    private _snackBar: MatSnackBar,
+    private adiService: AdiService
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.studentId = +params['id'] || null;
+    });
+
     const formControls: { [key: string]: any } = {};
     this.questions.forEach(question => {
       formControls[question.id] = ['', Validators.required];
@@ -63,21 +82,60 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
-      this.handleSuccess();
+    if (this.form.valid && this.studentId !== null) {
+      this.form.markAsPending();
+      const requestData: IAdiRegistrationData = this.mapFormToRequest();
+
+      this.adiService.registerAdi(requestData)
+      .pipe(
+        finalize(() => {
+          this.form.updateValueAndValidity();
+        })
+      )
+      .subscribe({
+        next: (response) => this.handleSuccess(response?.data?.id),
+        error: (data) => this.handleError(data?.error)
+      })
     }
   }
 
-  private handleSuccess(): void {
-    this._snackBar.open('PDI registrado com sucesso!', '', {
+  private mapFormToRequest(): IAdiRegistrationData {
+    const formValues = this.form.value;
+
+    return {
+      studentId: this.studentId!,
+      selfAwareness: this.mapToGrade(formValues['autoconhecimento']),
+      empathy: this.mapToGrade(formValues['empatia']),
+      communication: this.mapToGrade(formValues['comunicacao']),
+      teamwork: this.mapToGrade(formValues['trabalhoEquipe']),
+      autonomy: this.mapToGrade(formValues['autonomia']),
+      teacherComments: formValues['textTeacher'],
+    };
+  }
+
+  private mapToGrade(value: string): number {
+    const option = this.options.find(opt => opt.value === value);
+    return option ? option.grade : 0;
+  }
+
+  private handleSuccess(id: number | undefined) {
+    this._snackBar.open('ADI registrado com sucesso!', '', {
       duration: 3000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });
 
     setTimeout(() => {
-      this.router.navigate(['/'])
+      this.router.navigate([`/main/adi-details/${id}}`])
     }, 3500);
+  }
+
+  handleError(error: CreateResponse):void {
+    const errorMessage: string = error?.message || "Erro ao atualizar turma. Tente novamente."
+    this.snackbarErrorService.showErrorMessage(
+      errorMessage,
+      'Verifique as informações digitadas ou cadastre novos dados'
+    );
   }
 
   goBack(): void {

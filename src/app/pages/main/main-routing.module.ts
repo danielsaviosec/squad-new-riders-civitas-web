@@ -108,7 +108,7 @@ const routes: Routes = [
     data: { allowedRoles: ['admin', 'teacher'] }
   },
   {
-    path: 'form-registration',
+    path: 'form-registration/:id',
     component: FormRegistrationComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['admin', 'teacher'] }
