@@ -8,20 +8,22 @@
   </section>
 
   <div class="title">
-    <h2>Alunos da Turma</h2>
+    <h2>Avaliação de Desenvolvimento Individual</h2>
   </div>
 
   <div class="search">
-    <app-back-button></app-back-button>
-  </div>
+    <div class="left-search">
+      <app-back-button></app-back-button>
 
-  <div class="sub-title" *ngIf="students.length !== 0">
-    <app-breadcrumb
-      [breadcrumbItems]="[
-        { label: 'Suas turmas', link: '/main/class-list' },
-        { label: turma.name || 'Nome da Turma', link: '' }
-      ]"
-    ></app-breadcrumb>
+      <div class="sub-title" *ngIf="students.length !== 0">
+        <app-breadcrumb
+          [breadcrumbItems]="[
+            { label: 'Suas turmas', link: '/main/class-list' },
+            { label: turma.name || 'Nome da Turma', link: '' }
+          ]"
+        ></app-breadcrumb>
+      </div>
+    </div>
   </div>
 
   <section class="main-section" >

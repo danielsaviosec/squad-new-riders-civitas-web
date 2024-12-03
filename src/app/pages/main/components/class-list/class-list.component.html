@@ -13,11 +13,18 @@
   </div>
 
   <div class="title" *ngIf="userRole === 'teacher'">
-    <h2>Plano de Desenvolvimento Individual</h2>
+    <h2>Avaliação de Desenvolvimento Individual</h2>
   </div>
 
   <div class="search">
-    <app-back-button></app-back-button>
+    <div class="left-search">
+      <app-back-button></app-back-button>
+
+      <div class="sub-title" *ngIf="userRole === 'teacher'">
+        <h4>Suas Turmas</h4>
+      </div>
+    </div>
+
     <div class="input-wrapper" *ngIf="userRole === 'admin'">
       <input
         #searchInput
@@ -30,10 +37,6 @@
         </svg>
       </span>
     </div>
-  </div>
-
-  <div class="sub-title" *ngIf="userRole === 'teacher'">
-    <h4>Suas Turmas</h4>
   </div>
 
   <section class="main-section">
