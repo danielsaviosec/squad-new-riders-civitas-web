@@ -65,4 +65,10 @@ export class StudentListComponent implements OnInit {
   onNavigateToUpdateStudent(id: number) {
     this.router.navigate([`/main/update-student/${id}`]);
   }
+
+  onNavigateViewAdi(event: { id: number, classId: number }) {
+    const { id, classId } = event;
+    console.log(`/main/class/${classId}/student-adi/${id}`)
+    this.router.navigate([`/main/class/${classId}/student-adi/${id}`]);
+  }
 }

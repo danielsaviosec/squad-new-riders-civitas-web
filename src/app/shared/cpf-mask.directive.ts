@@ -1,7 +1,7 @@
 import { Directive, HostListener, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[cpfMask]'
+  selector: '[appCpfMask]'
 })
 export class CpfMaskDirective {
   private previousValue: string = '';

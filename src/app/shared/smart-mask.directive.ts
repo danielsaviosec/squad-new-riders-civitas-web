@@ -9,7 +9,7 @@ export class SmartMaskDirective {
   constructor(private el: ElementRef<HTMLInputElement>) {}
 
   @HostListener('input', ['$event'])
-  onInput(event: Event): void {
+  onInput(): void {
     const input = this.el.nativeElement;
     let value = input.value.replace(/\D/g, '');
 
@@ -17,12 +17,6 @@ export class SmartMaskDirective {
       // Máscara de CPF (###.###.###-##)
       value = value
         .replace(/^(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    } else {
-      // Máscara de RG (##.###.###-X ou sem pontuação)
-      value = value
-        .replace(/^(\d{1,2})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     }

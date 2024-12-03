@@ -38,7 +38,9 @@
         [rgCpfDoEstudante]="student.document"
         [cpfResponsavel]="student.cpfGuardian"
         [id]="student.id"
-        (selecionado)="onNavigateToUpdateStudent($event)">
+        [idTurma]="student.studentClass.id"
+        (selecionado)="onNavigateToUpdateStudent($event)"
+        (viewAdi)="onNavigateViewAdi($event)">
         ></app-list>
       </div>
   </section>

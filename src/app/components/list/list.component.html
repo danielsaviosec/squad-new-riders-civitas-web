@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="section-text">
+  <div class="section-text"  (click)="onViewAdiClick()" (keydown)="onViewAdiClick()" tabindex="0">
     <ng-container *ngIf="tipo === 'professor'; else tipoTemplate">
       <!-- Exibir dados do professor -->
       <h3>{{ nomeCompleto }}, {{ matricula }}</h3>
@@ -26,11 +26,11 @@
   </div>
 
   <div class="section-controlers">
-    <button mat-icon-button aria-label="Editar" title="Editar" (click)="onUpdateClick()">
+    <button mat-icon-button aria-label="Editar" title="Editar" (click)="onUpdateClick($event)">
       <mat-icon style="font-size: 18px">edit</mat-icon>
     </button>
 
-    <button mat-icon-button aria-label="Excluir" title="Excluir" (click)="onDeleteClick()">
+    <button mat-icon-button aria-label="Excluir" title="Excluir" (click)="onDeleteClick($event)">
       <mat-icon style="font-size: 18px">delete</mat-icon>
     </button>
   </div>

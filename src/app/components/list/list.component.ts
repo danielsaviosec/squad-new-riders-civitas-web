@@ -35,6 +35,7 @@ export class ListComponent {
 
   // Update
   @Output() selecionado = new EventEmitter<number>();
+  @Output() viewAdi = new EventEmitter<{ id: number; classId: number }>();
   @Input() id!: number;
 
   constructor(
@@ -46,11 +47,19 @@ export class ListComponent {
     private router: Router,
   ) {}
 
-  onUpdateClick() {
+  onViewAdiClick() {
+    this.viewAdi.emit({ id: this.id, classId: this.idTurma });
+  }
+
+  onUpdateClick(event: MouseEvent) {
+    event.stopPropagation();
+
     this.selecionado.emit(this.id);
   }
 
-  onDeleteClick() {
+  onDeleteClick(event: MouseEvent) {
+    event.stopPropagation();
+
     const title = `Tem certeza que deseja realizar a exclusão de ${this.tipo}?`
     const content =
       this.tipo === 'turma'
