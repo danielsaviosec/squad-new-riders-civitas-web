@@ -111,7 +111,7 @@ export class UpdateTeacherComponent implements OnInit {
   }
 
   private handleSuccess() {
-    this._snackBar.open('Dados do professor atualizado atualizada com sucesso!', '', {
+    this._snackBar.open('Dados do psicólogo atualizado com sucesso!', '', {
       duration: 3000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
@@ -123,7 +123,7 @@ export class UpdateTeacherComponent implements OnInit {
   }
 
   handleError(error: CreateResponse):void {
-    const errorMessage: string = error?.message || "Erro ao atualizar dados do professor. Tente novamente."
+    const errorMessage: string = error?.message || "Erro ao atualizar dados do psicólogo. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
       'Verifique as informações digitadas ou cadastre novos dados'
