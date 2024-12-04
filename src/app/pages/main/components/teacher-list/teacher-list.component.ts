@@ -21,11 +21,11 @@ export class TeacherListComponent implements OnInit {
 
   teachers: Teacher[] = [];
   teacherClassesNames: { [key: string]: string[] } = {};
-  isLoading = true;
+  isLoading: boolean = true;
 
   constructor(private teacherService: TeacherService, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.teacherService.getTeachers().subscribe(
       (data) => {
         this.teachers = data;
@@ -42,7 +42,7 @@ export class TeacherListComponent implements OnInit {
     );
   }
 
-  onNavigateToUpdateTeacher(id: number) {
+  onNavigateToUpdateTeacher(id: number): void {
     this.router.navigate([`/main/update-teacher/${id}`]);
   }
 }

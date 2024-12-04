@@ -198,12 +198,12 @@ export class AdiComponent implements OnInit, AfterViewChecked {
 
   }
 
-  onRegisterNewAdi() {
+  onRegisterNewAdi(): void {
     // Redirecionando para o cadastro de nova ADI
     this.router.navigate([`/main/form-registration/${this.idEstudante}`]);
   }
 
-  onVisualizarClick() {
+  onVisualizarClick(): void {
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/adi-details/${this.idCurrentAdi}`]);
   }

@@ -19,7 +19,7 @@ import { CreateResponse } from 'src/app/interface/response/CreateResponse.interf
 export class TeacherRegistrationComponent implements OnInit {
   form!: FormGroup;
   turmaOptions: ClassesResponse[] = []; // Variável para armazenar as turmas
-  isLoading = true; // Variável para controlar o carregamento
+  isLoading: boolean = true; // Variável para controlar o carregamento
 
   anoLetivo = [
     { value: '1-ano', label: '1º ano', backName: '1st year' },
@@ -51,7 +51,7 @@ export class TeacherRegistrationComponent implements OnInit {
     private teacherService: TeacherService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(50)]],
       matricula: ['', [Validators.required, Validators.maxLength(20)]],
@@ -114,19 +114,19 @@ export class TeacherRegistrationComponent implements OnInit {
       };
 
       this.teacherService.registerTeacher(teacherData)
-      .pipe(
-        finalize(() => {
-          this.form.updateValueAndValidity();
-        })
-      ).subscribe(
-        () => {
-          this.showSuccessMessage();
-        },
-        (data) => {
-          console.error('Erro ao cadastrar psicólogo:', data?.error);
-          this.handleError(data?.error);
-        }
-      );
+        .pipe(
+          finalize(() => {
+            this.form.updateValueAndValidity();
+          })
+        ).subscribe(
+          () => {
+            this.showSuccessMessage();
+          },
+          (data) => {
+            console.error('Erro ao cadastrar psicólogo:', data?.error);
+            this.handleError(data?.error);
+          }
+        );
     } else {
       this.handleError({ message: "Erro ao cadastrar psicólogo. Tente novamente." });
     }
@@ -144,7 +144,7 @@ export class TeacherRegistrationComponent implements OnInit {
     }, 3500);
   }
 
-  handleError(error: CreateResponse):void {
+  handleError(error: CreateResponse): void {
     const errorMessage: string = error.message || "Erro ao cadastrar psicólogo. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,

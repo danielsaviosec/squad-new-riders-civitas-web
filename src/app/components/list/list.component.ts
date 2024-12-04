@@ -46,11 +46,11 @@ export class ListComponent {
     private router: Router,
   ) {}
 
-  onUpdateClick() {
+  onUpdateClick(): void {
     this.selecionado.emit(this.id);
   }
 
-  onDeleteClick() {
+  onDeleteClick(): void {
     const title = `Tem certeza que deseja realizar a exclusão de ${this.tipo}?`
     const content =
       this.tipo === 'turma'
@@ -86,7 +86,7 @@ export class ListComponent {
     })
   }
 
-  private handleSuccess() {
+  private handleSuccess(): void {
     this._snackBar.open(`${this.tipo} excluido com sucesso.`, '', {
       duration: 3000,
       horizontalPosition: 'right',
@@ -99,7 +99,7 @@ export class ListComponent {
   }
 
   // TODO: Corrigir any
-  onDeleteError(error: string, tipo: string) {
+  onDeleteError(error: string, tipo: string): void {
     const hasError = true;
     const errorMessage =
       error || `Erro ao excluir ${tipo}. Tente novamente.`;

@@ -27,7 +27,7 @@ export class LoginGuardianComponent {
     private _snackBar: MatSnackBar
   ) {}
 
-  onSubmit($event: SubmitEvent) {
+  onSubmit($event: SubmitEvent): void {
     $event.preventDefault();
     this.authForm.markAsPending();
 
@@ -39,13 +39,13 @@ export class LoginGuardianComponent {
     });
   }
 
-  private handleLoginSuccess(response: LoginResponse) {
+  private handleLoginSuccess(response: LoginResponse): void {
     if (response.token) {
       this.router.navigate(['/main']);
     }
   }
 
-  private handleLoginError(error: HttpErrorResponse) {
+  private handleLoginError(error: HttpErrorResponse): void {
     this.authForm.reset();
 
     console.log(error.status);
@@ -72,7 +72,7 @@ export class LoginGuardianComponent {
     }
   }
 
-  resetError() {
+  resetError(): void {
     this.isInvalid = false;
   }
 }

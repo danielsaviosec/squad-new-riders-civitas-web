@@ -12,7 +12,7 @@ export class ButtonComponent {
   @Input() loading = false;
   @Output() clickEvent = new EventEmitter<void>(); // Evento de clique
 
-  onClick() {
+  onClick(): void {
     if(!this.disabled) {
       this.clickEvent.emit();
     }

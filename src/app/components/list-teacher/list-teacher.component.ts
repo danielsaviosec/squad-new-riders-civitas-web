@@ -26,14 +26,14 @@ export class ListTeacherComponent {
   constructor(private router: Router, private sharedDataService: SharedDataService) {}
 
   // Funções
-  onTurmaClick() {
+  onTurmaClick(): void {
     this.turmaSelecionada.emit({
       idTurma: this.idTurma,
       apelidoTurma: this.apelidoTurma
     })
   }
 
-  onVisualizarClick() {
+  onVisualizarClick(): void {
     // Setando apelidoTurma e nomeDoEstudante no SharedDataService
     this.sharedDataService.setData({
       apelidoTurma: this.apelidoTurma,
@@ -44,7 +44,7 @@ export class ListTeacherComponent {
     this.router.navigate([`/main/class/${this.idTurma}/student-adi/${this.idEstudante}`]);
   }
 
-  onRegisterClick() {
+  onRegisterClick(): void {
     this.router.navigate([`main/form-registration/${this.idEstudante}`]);
   }
 }

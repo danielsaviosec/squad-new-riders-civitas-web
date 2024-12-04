@@ -21,7 +21,7 @@ export class UpdateTeacherComponent implements OnInit {
   turmaOptions: teacherClasses[] = [];
   teacher!: ITeacherResponse;
   teacherClassesNames: { [key: string]: string[] } = {};
-  isLoading = true;
+  isLoading: boolean = true;
   teacherId!: number | null;
 
   constructor(

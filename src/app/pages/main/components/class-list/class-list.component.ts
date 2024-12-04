@@ -108,11 +108,11 @@ export class ClassListComponent implements OnInit {
     }
   }
 
-  onNavigateToUpdateClass(id: number) {
+  onNavigateToUpdateClass(id: number): void {
     this.router.navigate([`/main/update-class/${id}`]);
   }
 
-  onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }) {
+  onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }): void {
     // Armazena o apelido da turma no serviço compartilhado
     this.sharedDataService.setData({ apelidoTurma: turma.apelidoTurma });
 
