@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment.development';
 import { ClassRegistrationData } from 'src/app/interface/register/ClassRegistrationData.interface';
 import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
+import { IClassResponse } from 'src/app/interface/response/IClassResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,12 @@ export class ClassService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.post<CreateResponse>(`${environment.apiUrl}classes/create`, data, { headers });
+  }
+
+  getClass(id: number): Observable<IClassResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<IClassResponse>(`${environment.apiUrl}classes/${id}`, { headers });
   }
 
   // Novo método para obter a lista de classes

@@ -19,6 +19,12 @@ export class StudentService {
     return this.http.post<CreateResponse>(`${environment.apiUrl}students/register`, data, { headers });
   }
 
+  getStudent(id: number): Observable<IStudentResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<IStudentResponse>(`${environment.apiUrl}students/${id}`, { headers });
+  }
+
   // Função para listar professores
   getStudents(): Observable<IStudentResponse[]> {
     const token = localStorage.getItem('@civitas:token');
@@ -34,7 +40,7 @@ export class StudentService {
     return this.http.put<CreateResponse>(`${environment.apiUrl}admin/students/${id}`, data, { headers });
   }
 
-  getStudentsByClassId(classId: string): Observable<IStudentResponse[]> {
+  getStudentsByClassId(classId: number): Observable<IStudentResponse[]> {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<IStudentResponse[]>(`${environment.apiUrl}teachers/me/classes/${classId}/students`, { headers });

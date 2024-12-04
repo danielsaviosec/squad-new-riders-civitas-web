@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment.development';
 import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
 import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
 import { TeachersResponse } from 'src/app/interface/response/TeachersResponse.interface';
+import { ITeacherResponse } from 'src/app/interface/response/ITeacherResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,18 @@ export class TeacherService {
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<CreateResponse>(`${environment.apiUrl}teachers/register`, data, { headers });
+  }
+
+  getTeacherByToken(): Observable<ITeacherResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ITeacherResponse>(`${environment.apiUrl}teachers`, { headers });
+  }
+
+  getTeacher(id: number): Observable<ITeacherResponse> {
+    const token = localStorage.getItem('@civitas:token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ITeacherResponse>(`${environment.apiUrl}teachers/${id}`, { headers });
   }
 
   // Função para listar professores

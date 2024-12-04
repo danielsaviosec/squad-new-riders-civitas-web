@@ -8,10 +8,8 @@ import { TeacherService } from 'src/app/service/teachers/teachers.service';
 import { forkJoin, finalize } from 'rxjs';
 
 import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
-import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
-import { TeachersResponse } from 'src/app/interface/response/TeachersResponse.interface';
-import { Class } from 'src/app/interface/register/Class.interface';
 import { CreateResponse } from 'src/app/interface/response/CreateResponse.interface';
+import { ITeacherResponse, teacherClasses } from 'src/app/interface/response/ITeacherResponse.interface';
 
 @Component({
   selector: 'app-update-teacher',
@@ -20,10 +18,11 @@ import { CreateResponse } from 'src/app/interface/response/CreateResponse.interf
 })
 export class UpdateTeacherComponent implements OnInit {
   form!: FormGroup;
-  turmaOptions: ClassesResponse[] = [];
-  teachers: TeachersResponse[] = [];
+  turmaOptions: teacherClasses[] = [];
+  teacher!: ITeacherResponse;
   teacherClassesNames: { [key: string]: string[] } = {};
   isLoading = true;
+  teacherId!: number | null;
 
   constructor(
     private fb: FormBuilder,
@@ -31,12 +30,13 @@ export class UpdateTeacherComponent implements OnInit {
     private snackbarErrorService: SnackbarErrorService,
     private route: ActivatedRoute,
     private router: Router,
-    private classService: ClassService, // Injeta o serviço
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private classService: ClassService
   ) { }
 
   ngOnInit():void {
     this.isLoading = true;
+    this.teacherId =  Number(this.route.snapshot.paramMap.get('id'));
 
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(50)]],
@@ -51,25 +51,21 @@ export class UpdateTeacherComponent implements OnInit {
 
     forkJoin({
       classes: this.classService.getClasses(),
-      teachers: this.teacherService.getTeachers()
+      teacher: this.teacherService.getTeacher(this.teacherId)
     }).subscribe({
-      next: ({ classes, teachers }) => {
+      next: ({ classes, teacher }) => {
         this.turmaOptions = classes;
 
-        this.teachers = teachers;
-        teachers.forEach(teacher => {
-          this.teacherClassesNames[teacher.registrationNumber] = teacher.classes.map((classItem: Class) => classItem.name);
-        });
+        console.log(this.turmaOptions);
 
-        const teacherId: number | null = Number(this.route.snapshot.paramMap.get('id'));
-        const filterTeacher: TeachersResponse | undefined = this.teachers.find(teacher => teacher.id === teacherId);
+        this.teacher = teacher;
 
-        if (filterTeacher) {
+        if (this.teacher) {
           this.form.patchValue({
-            nome: filterTeacher.fullName,
-            matricula: filterTeacher.registrationNumber,
-            cpf: filterTeacher.cpf,
-            turma: filterTeacher.classes.map((classItem: Class) => classItem.id)
+            nome: this.teacher.fullName,
+            matricula: this.teacher.registrationNumber,
+            cpf: this.teacher.cpf,
+            turma: this.turmaOptions.map((classItem: teacherClasses) => classItem.id)
           });
         }
       },

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../service/auth/auth.service';
 
 import { LoginResponse } from 'src/app/interface/response/LoginResponse.interface';
-import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCredentials.interface';
+import { ILoginRegistrationNumberCredentials } from 'src/app/interface/auth/ILoginRegistrationNumberCredentials.interface';
 
 @Component({
   selector: 'app-login-teacher',
@@ -16,7 +16,6 @@ import { LoginTeacherCredentials } from 'src/app/interface/auth/LoginTeacherCred
 export class LoginTeacherComponent {
   isInvalid = false;
   inputValue = '';
-
 
   authForm = new FormGroup({
     registrationNumber: new FormControl('', [Validators.required]),
@@ -32,17 +31,12 @@ export class LoginTeacherComponent {
     $event.preventDefault();
     this.authForm.markAsPending();
 
-    const credentials = this.authForm.value as LoginTeacherCredentials;
+    const credentials = this.authForm.value as ILoginRegistrationNumberCredentials;
 
     this.authService.loginTeacher(credentials).subscribe({
       next: (response) => this.handleLoginSuccess(response),
       error: (error: HttpErrorResponse) => this.handleLoginError(error),
     });
-  }
-
-  isInvalidRequired(): boolean {
-    const control = this.authForm.get('registrationNumber');
-    return control?.hasError('required') && control.touched ? true : false;
   }
 
   private handleLoginSuccess(response: LoginResponse) {
@@ -54,9 +48,11 @@ export class LoginTeacherComponent {
   private handleLoginError(error: HttpErrorResponse) {
     this.authForm.reset();
 
+    console.log(error.status);
+
     switch (error.status) {
       case 401:
-        this.authForm.setErrors({ unauthorized: true });
+        this.isInvalid = true;
         break;
 
       case 0:
@@ -74,5 +70,9 @@ export class LoginTeacherComponent {
           panelClass: 'snackbar-error',
         });
     }
+  }
+
+  resetError() {
+    this.isInvalid = false;
   }
 }

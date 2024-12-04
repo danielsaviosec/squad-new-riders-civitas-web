@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
+import { finalize } from 'rxjs';
 
 import { IClassRegistrationData } from 'src/app/interface/register/IClassRegistrationData.interface';
 import { ICreateResponse } from 'src/app/interface/response/ICreateResponse.interface';
@@ -68,6 +69,7 @@ export class ClassRegistrationComponent implements OnInit {
   //Lógicas do cadastro enviado ou repetição de nomes
   onSubmit():void {
     if (this.form.invalid) return;
+    this.form.markAsPending();
 
     const formValues = this.form.value;
 
@@ -82,7 +84,12 @@ export class ClassRegistrationComponent implements OnInit {
       educationType: selectedEnsino
     };
 
-    this.classService.registerClass(classData).subscribe({
+    this.classService.registerClass(classData)
+    .pipe(
+      finalize(() => {
+        this.form.updateValueAndValidity();
+      })
+    ).subscribe({
       next: () => this.handleSuccess(),
       error: (data) => this.handleError(data?.error)
     });

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ILogo } from 'src/app/interface';
-import { ISidebarIcons } from 'src/app/interface/ISidebarIcons.interface';
+import { ISidebarIcons, ISidebarIconsMobile } from 'src/app/interface/ISidebarIcons.interface';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class SidebarComponent {
   ]
 
   @Input() menuIcons: ISidebarIcons[] = [];
+  @Input() menuIconsMobile: ISidebarIconsMobile[] = [];
 
   constructor(private authService: AuthService, private router: Router) {}
 

@@ -1,14 +1,17 @@
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-<main>
+<section class="main" *ngIf="!isLoading">
   <section class="sidebar-section">
-    <app-sidebar [homeLink]="{ route: 'main/teacher-screen' }" [menuIcons]="icons"></app-sidebar>
+    <app-sidebar [homeLink]="{ route: '/main' }" [menuIcons]="icons"></app-sidebar>
   </section>
 
   <div class="title">
-    <h2>Plano de Desenvolvimento Individual</h2>
+    <h2>Avaliação de Desenvolvimento Individual</h2>
   </div>
 
-  <div class="navigate">
+  <div class="navigate" *ngIf="userRole !== 'guardian'">
     <div class="content-left">
       <app-back-button></app-back-button>
 
@@ -17,60 +20,47 @@
       </div>
     </div>
 
-    <div class="new-adi-btn" (click)="onVisualizarClick()" (keydown)="onVisualizarClick()" tabindex="0">
+    <div class="new-adi-btn" (click)="onRegisterNewAdi()" (keydown)="onRegisterNewAdi()" tabindex="0">
       Registrar novo PDI
       <mat-icon>add_circle_outline</mat-icon>
     </div>
   </div>
 
   <div class="student-informations">
-    <h4>[Nome completo do aluno]</h4>
-    <span>[Apelido da turma a qual pertence]</span>
+    <h4>{{ nomeDoEstudante }}</h4>
+    <span>{{ apelidoTurma }}</span>
   </div>
 
   <div class="history-ADIs">
     <h4>Histórico de ADIs</h4>
 
-    <div class="ADIs-list">
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
-      <div class="ADI-item">
-        ADI 3 [data]
-        <mat-icon>search</mat-icon>
-      </div>
+    <div class="ADIs-list" *ngIf="adisData?.latestEvaluation; else noHistoryData">
+      <ng-container *ngFor="let adi of adisData?.evaluations">
+        <div class="ADI-item" (click)="onAdiClick(adi.id)" (keydown)="onAdiClick(adi.id)" tabindex="0">
+          {{ adi.label }}
+          <mat-icon>search</mat-icon>
+        </div>
+      </ng-container>
     </div>
+
+    <ng-template #noHistoryData>
+      <div class="no-history-data">Não há registros</div>
+    </ng-template>
+
   </div>
 
   <div class="last-ADI">
     <h4>Última avaliação</h4>
-    <span>[Data da última avaliação]</span>
+    <span>{{ adiDate ? adiDate : '--/--/--' }}</span>
 
-    <div class="chart-container">
+    <div class="chart-container" *ngIf="adisData?.latestEvaluation; else noChartData">
       <echarts [options]="chartOptions" class="echart"></echarts>
     </div>
 
-    <button>Visualizar</button>
+    <ng-template #noChartData>
+      <div class="no-chart-data">Não há registros</div>
+    </ng-template>
+
+    <button (click)="onVisualizarClick()" (keydown)="onVisualizarClick()" >Visualizar</button>
   </div>
-</main>
+</section>

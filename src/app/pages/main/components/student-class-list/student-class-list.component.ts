@@ -12,6 +12,7 @@ import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 })
 export class StudentClassListComponent implements OnInit {
   students: IStudentResponse[] = [];
+  classId: number = 0;
   isLoading = true;
   icons = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
@@ -26,17 +27,17 @@ export class StudentClassListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const classId = this.route.snapshot.paramMap.get('id');
+    this.classId = Number(this.route.snapshot.paramMap.get('id'));
 
     // Recupera o apelido da turma do serviço compartilhado
     this.turma.name = this.sharedDataService.getData()?.apelidoTurma;
 
-    if (classId) {
-      this.fetchStudentsByClassId(classId);
+    if (this.classId) {
+      this.fetchStudentsByClassId(this.classId);
     }
   }
 
-  fetchStudentsByClassId(classId: string): void {
+  fetchStudentsByClassId(classId: number): void {
     this.isLoading = true;
     this.studentService.getStudentsByClassId(classId).subscribe({
       next: (data) => {

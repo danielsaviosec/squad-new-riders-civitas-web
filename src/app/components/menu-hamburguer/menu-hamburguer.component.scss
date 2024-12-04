@@ -16,6 +16,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 10px;
 }
 
 .hamburger-icon .bar {
@@ -51,7 +52,7 @@
   right: 0;
   width: 80vw;
   height: 100vh;
-  background:$button-register-color;
+  background: $button-register-color;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
@@ -69,12 +70,12 @@
 
   .close-menu {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 5px;
+    right: 8px;
     background: none;
     border: none;
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
   }
 
@@ -83,7 +84,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 5px;
-    width: 100%;
+    width: 100px;
     color: #fff;
     background: transparent;
     padding: 0.5rem 1rem;
@@ -92,11 +93,11 @@
     font-weight: 500;
     border: none;
     transition: all 0.3s ease;
+    text-transform: uppercase;
     cursor: pointer;
 
     &:hover {
-      background: #E8DEF8;
-      color: #000;
+      color: #292929;
     }
   }
 
@@ -112,12 +113,13 @@
       width: 100%;
       color: #fff;
       background: transparent;
-      padding: 0.5rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 25px;
       font-size: 0.8rem;
       font-weight: 500;
       border: none;
       transition: all 0.3s ease;
+      text-transform: uppercase;
       cursor: pointer;
 
       &:hover {
@@ -129,9 +131,6 @@
       color: #fff;
       font-size: 0.8rem;
       font-weight: 500;
-    }
-
-    .version {
       display: block;
       opacity: 0.4;
     }

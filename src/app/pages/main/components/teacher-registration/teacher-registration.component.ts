@@ -5,6 +5,7 @@ import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar
 import { Router } from '@angular/router';
 import { ClassService } from 'src/app/service/classes/classes.service';
 import { TeacherService } from 'src/app/service/teachers/teachers.service';
+import { finalize } from 'rxjs';
 
 import { TeacherRegistrationData } from 'src/app/interface/register/TeacherRegistrationData.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
@@ -103,6 +104,8 @@ export class TeacherRegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
+      this.form.markAsPending();
+
       const teacherData: TeacherRegistrationData = {
         fullName: this.form.value.nome,
         cpf: this.form.value.cpf,
@@ -110,7 +113,12 @@ export class TeacherRegistrationComponent implements OnInit {
         classes: this.form.value.turma
       };
 
-      this.teacherService.registerTeacher(teacherData).subscribe(
+      this.teacherService.registerTeacher(teacherData)
+      .pipe(
+        finalize(() => {
+          this.form.updateValueAndValidity();
+        })
+      ).subscribe(
         () => {
           this.showSuccessMessage();
         },

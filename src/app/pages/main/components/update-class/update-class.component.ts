@@ -102,7 +102,7 @@ export class UpdateClassComponent implements OnInit {
   //=================================
   //Botão voltar
   goBack(): void {
-    this.router.navigate(['/admin-screen'])
+    this.router.navigate(['/main'])
   }
 
   onSubmit(): void {

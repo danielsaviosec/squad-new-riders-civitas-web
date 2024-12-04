@@ -1,19 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ISidebarIcons } from 'src/app/interface';
+import { ITeacherResponse } from 'src/app/interface/response/ITeacherResponse.interface';
+import { TeacherService } from 'src/app/service/teachers/teachers.service';
 
 @Component({
-  selector: 'app-teacher-screen',
-  templateUrl: './teacher-screen.component.html',
-  styleUrls: ['./teacher-screen.component.scss']
+  selector: 'app-home-teacher',
+  templateUrl: './home-teacher.component.html',
+  styleUrls: ['./home-teacher.component.scss']
 })
-export class TeacherScreenComponent {
+export class HomeTeacherComponent implements OnInit {
+  teacher!: ITeacherResponse;
+  isLoading: boolean = false;
+
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main/teacher-screen' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private teacherService: TeacherService) { }
 
   /**greeting
    *
@@ -37,6 +42,21 @@ export class TeacherScreenComponent {
     } else {
       return "Boa noite"
     }
+  }
+
+  ngOnInit(): void {
+    this.isLoading = true;
+
+    this.teacherService.getTeacherByToken().subscribe(
+      (data) => {
+        this.teacher = data;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error("Erro ao carregar professor:", error);
+        this.isLoading = false;
+      }
+    );
   }
 
   //Direcionamento do botão de "Buscar Turmas" para a página de turmas.
