@@ -123,17 +123,17 @@ export class TeacherRegistrationComponent implements OnInit {
           this.showSuccessMessage();
         },
         (data) => {
-          console.error('Erro ao cadastrar professor:', data?.error);
+          console.error('Erro ao cadastrar psicólogo:', data?.error);
           this.handleError(data?.error);
         }
       );
     } else {
-      this.handleError({ message: "Erro ao cadastrar professor. Tente novamente." });
+      this.handleError({ message: "Erro ao cadastrar psicólogo. Tente novamente." });
     }
   }
 
   showSuccessMessage(): void {
-    this.snackBar.open('Professor(a) cadastrado com sucesso!', '', {
+    this.snackBar.open('Psicólogo(a) cadastrado com sucesso!', '', {
       duration: 3000,
       panelClass: ['sucess-snackbar'],
       horizontalPosition: 'right',
@@ -145,7 +145,7 @@ export class TeacherRegistrationComponent implements OnInit {
   }
 
   handleError(error: CreateResponse):void {
-    const errorMessage: string = error.message || "Erro ao cadastrar professor. Tente novamente."
+    const errorMessage: string = error.message || "Erro ao cadastrar psicólogo. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
       'Verifique as informações digitadas ou cadastre novos dados'
