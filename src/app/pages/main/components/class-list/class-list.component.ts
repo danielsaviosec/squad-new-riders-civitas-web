@@ -19,7 +19,7 @@ export class ClassListComponent implements OnInit {
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
-    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Psicólogos", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
@@ -108,11 +108,11 @@ export class ClassListComponent implements OnInit {
     }
   }
 
-  onNavigateToUpdateClass(id: number) {
+  onNavigateToUpdateClass(id: number): void {
     this.router.navigate([`/main/update-class/${id}`]);
   }
 
-  onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }) {
+  onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }): void {
     // Armazena o apelido da turma no serviço compartilhado
     this.sharedDataService.setData({ apelidoTurma: turma.apelidoTurma });
 

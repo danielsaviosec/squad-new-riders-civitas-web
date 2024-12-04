@@ -9,7 +9,7 @@
   </section>
 
   <div class="title">
-    <h2>Professores cadastrados</h2>
+    <h2>Psicólogos cadastrados</h2>
   </div>
 
   <div class="search">
@@ -29,7 +29,7 @@
       <app-list *ngFor="let teacher of teachers"
         tipo="professor"
         [nomeCompleto]="teacher.fullName"
-        [matricula]="'Matrícula: ' + teacher.registrationNumber"
+        [matricula]="'CRP: ' + teacher.registrationNumber"
         [apelidosTurmas]="teacherClassesNames[teacher.registrationNumber]"
         [id]="teacher.id"
         (selecionado)="onNavigateToUpdateTeacher($event)">

@@ -6,14 +6,14 @@
   <app-back-button (click)="goBack()" class="back-button"></app-back-button>
   <div class="card">
     <div class="text-card">
-      <p><strong>Atualização de professor</strong></p>
-      <p>Confira e atualize as informações do professor</p>
+      <p><strong>Atualização de psicólogo</strong></p>
+      <p>Confira e atualize as informações do psicólogo</p>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-card">
         <mat-form-field appearance="outline" floatLabel="always">
           <mat-label>Nome completo</mat-label>
-          <input matInput formControlName="nome" placeholder="Nome do professor" maxlength="50" />
+          <input matInput formControlName="nome" placeholder="Nome do psicólogo" maxlength="50" />
           <mat-error *ngIf="form.get('nome')?.hasError('required')">
             Nome é obrigatório.
         </mat-error>
@@ -33,10 +33,10 @@
       </div>
       <div class="form-card">
         <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>Número de matrícula</mat-label>
-          <input matInput formControlName="matricula" placeholder="Registro do professor na escola" maxlength="20">
+          <mat-label>CRP</mat-label>
+          <input matInput formControlName="matricula" placeholder="CRP 01/XXXXX" maxlength="20">
           <mat-error *ngIf="form.get('matricula')?.hasError('required')">
-            Número de matrícula é obrigatório.
+            CRP é obrigatório.
         </mat-error>
         </mat-form-field>
       </div>

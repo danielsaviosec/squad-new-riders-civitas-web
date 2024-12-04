@@ -14,8 +14,8 @@ import { ILoginRegistrationNumberCredentials } from 'src/app/interface/auth/ILog
   styleUrls: ['./login-teacher.component.scss'],
 })
 export class LoginTeacherComponent {
-  isInvalid = false;
-  inputValue = '';
+  isInvalid: boolean = false;
+  inputValue: string= '';
 
   authForm = new FormGroup({
     registrationNumber: new FormControl('', [Validators.required]),
@@ -27,7 +27,7 @@ export class LoginTeacherComponent {
     private _snackBar: MatSnackBar
   ) {}
 
-  onSubmit($event: SubmitEvent) {
+  onSubmit($event: SubmitEvent): void {
     $event.preventDefault();
     this.authForm.markAsPending();
 
@@ -39,16 +39,14 @@ export class LoginTeacherComponent {
     });
   }
 
-  private handleLoginSuccess(response: LoginResponse) {
+  private handleLoginSuccess(response: LoginResponse): void {
     if (response.token) {
       this.router.navigate(['/main']);
     }
   }
 
-  private handleLoginError(error: HttpErrorResponse) {
+  private handleLoginError(error: HttpErrorResponse): void {
     this.authForm.reset();
-
-    console.log(error.status);
 
     switch (error.status) {
       case 401:
@@ -72,7 +70,7 @@ export class LoginTeacherComponent {
     }
   }
 
-  resetError() {
+  resetError(): void {
     this.isInvalid = false;
   }
 }

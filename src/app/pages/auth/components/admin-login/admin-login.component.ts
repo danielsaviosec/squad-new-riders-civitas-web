@@ -25,7 +25,7 @@ export class AdminLoginComponent {
     private _snackBar: MatSnackBar
   ) {}
 
-  onSubmit($event: SubmitEvent) {
+  onSubmit($event: SubmitEvent): void {
     $event.preventDefault();
     this.authForm.markAsPending();
 
@@ -56,13 +56,13 @@ export class AdminLoginComponent {
     return this.authForm.errors?.['unauthorized'] && this.authForm.pristine;
   }
 
-  private handleLoginSuccess(response: LoginResponse) {
+  private handleLoginSuccess(response: LoginResponse): void {
     if (response.token) {
       this.router.navigate(['/main']);
     }
   }
 
-  private handleLoginError(error: HttpErrorResponse) {
+  private handleLoginError(error: HttpErrorResponse): void {
     this.authForm.reset();
 
     switch (error.status) {
