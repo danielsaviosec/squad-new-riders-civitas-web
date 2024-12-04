@@ -15,7 +15,7 @@ import { ILoginRegistrationNumberCredentials } from 'src/app/interface/auth/ILog
 })
 export class LoginTeacherComponent {
   isInvalid: boolean = false;
-  inputValue = '';
+  inputValue: string= '';
 
   authForm = new FormGroup({
     registrationNumber: new FormControl('', [Validators.required]),
@@ -47,8 +47,6 @@ export class LoginTeacherComponent {
 
   private handleLoginError(error: HttpErrorResponse): void {
     this.authForm.reset();
-
-    console.log(error.status);
 
     switch (error.status) {
       case 401:
