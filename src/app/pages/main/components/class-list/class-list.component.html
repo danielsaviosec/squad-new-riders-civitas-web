@@ -40,9 +40,20 @@
   </div>
 
   <section class="main-section">
-    <div class="content-wrapper">
+
+    <div *ngIf="isLoadingSearch" class="loading-spinner-search">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="turmaOptions.length === 0 && !isLoadingSearch" class="empty-state">
+      <h3>Nenhuma turma encontrada como resultado dessa pesquisa</h3>
+      <p>Tente novamente ou registre novas turmas para começar a acompanhar.</p>
+    </div>
+
+    <div class="content-wrapper" *ngIf="!isLoadingSearch">
       <!-- Itera sobre as turmas recebidas da API -->
       <div *ngIf="userRole === 'admin'">
+
         <ng-container *ngFor="let turma of turmaOptions">
           <app-list
             tipo="turma"
@@ -54,6 +65,7 @@
             (selecionado)="onNavigateToUpdateClass($event)">
           </app-list>
         </ng-container>
+
       </div>
 
       <div *ngIf="userRole === 'teacher'">

@@ -29,19 +29,29 @@
   </div>
 
   <section class="main-section">
-      <div class="content-wrapper">
-        <app-list  *ngFor="let student of students"
-        tipo="estudante"
-        [nomeDoEstudante]="student.fullName"
-        [matriculaDoEstudante]="student.registrationNumber"
-        [apelidoTurmaEstudante]="student.studentClass.name"
-        [rgCpfDoEstudante]="student.document"
-        [cpfResponsavel]="student.cpfGuardian"
-        [id]="student.id"
-        [idTurma]="student.studentClass.id"
-        (selecionado)="onNavigateToUpdateStudent($event)"
-        (viewAdi)="onNavigateViewAdi($event)">
-        ></app-list>
-      </div>
+
+    <div *ngIf="isLoadingSearch" class="loading-spinner-search">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="students.length === 0 && !isLoadingSearch" class="empty-state">
+      <h3>Nenhum estudante encontrado como resultado dessa pesquisa</h3>
+      <p>Tente novamente ou registre novos estudantes para começar a acompanhar.</p>
+    </div>
+
+    <div class="content-wrapper" *ngIf="!isLoadingSearch">
+      <app-list  *ngFor="let student of students"
+      tipo="estudante"
+      [nomeDoEstudante]="student.fullName"
+      [matriculaDoEstudante]="student.registrationNumber"
+      [apelidoTurmaEstudante]="student.studentClass.name"
+      [rgCpfDoEstudante]="student.document"
+      [cpfResponsavel]="student.cpfGuardian"
+      [id]="student.id"
+      [idTurma]="student.studentClass.id"
+      (selecionado)="onNavigateToUpdateStudent($event)"
+      (viewAdi)="onNavigateViewAdi($event)">
+      ></app-list>
+    </div>
   </section>
 </main>

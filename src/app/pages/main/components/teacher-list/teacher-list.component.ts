@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
 import { TeacherService } from '../../../../service/teachers/teachers.service';
-import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap, finalize } from 'rxjs';
 
 import { Teacher } from 'src/app/interface/register/Teacher.interface';
 import { Class } from 'src/app/interface/register/Class.interface';
@@ -23,6 +23,7 @@ export class TeacherListComponent implements OnInit {
   teachers: Teacher[] = [];
   teacherClassesNames: { [key: string]: string[] } = {};
   isLoading = true;
+  isLoadingSearch: boolean = false;
   searchTerm$ = new Subject<string>(); // Subject para controlar a busca
 
   constructor(private teacherService: TeacherService, private router: Router) {}
@@ -32,16 +33,19 @@ export class TeacherListComponent implements OnInit {
       .pipe(
         debounceTime(300), // Aguarda 300ms após o último evento
         distinctUntilChanged(), // Evita requisições repetidas
-        switchMap(term =>
-          this.teacherService.getTeachers(term).pipe(
+        switchMap(term => {
+          this.isLoadingSearch = true;
+          return this.teacherService.getTeachers(term).pipe(
             catchError(err => {
               console.error('Erro ao buscar professores:', err);
-              this.teachers = []; // Limpa resultados anteriores
-              this.isLoading = false; // Atualiza o estado de carregamento
-              return of([]); // Continua emitindo um array vazio para que a busca prossiga
+              this.isLoadingSearch = false;
+              return of([]);
+            }),
+            finalize(() => {
+              this.isLoadingSearch = false; // Desativar spinner de busca
             })
-          )
-        )
+          );
+        })
       )
       .subscribe({
         next: (data) => {

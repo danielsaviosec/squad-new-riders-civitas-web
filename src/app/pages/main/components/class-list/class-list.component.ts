@@ -3,7 +3,7 @@ import { ISidebarIcons } from 'src/app/interface';
 import { ISelectOption } from 'src/app/interface/IClassRegistration.interface';
 import { ClassesResponse } from 'src/app/interface/response/ClassesResponse.interface';
 import { ClassService } from 'src/app/service/classes/classes.service';
-import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, finalize, of, Subject, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/service/auth/auth.service';
@@ -47,6 +47,7 @@ export class ClassListComponent implements OnInit {
 
   turmaOptions: ClassesResponse[] = []; // Variável turmaOptions tem o tipo Turma
   isLoading: boolean = false;
+  isLoadingSearch: boolean = false;
   userRole: string | null = null;
   searchTerm$ = new Subject<string>(); // Subject para controlar a busca
 
@@ -75,16 +76,19 @@ export class ClassListComponent implements OnInit {
       .pipe(
         debounceTime(300), // Aguarda 300ms após o último evento
         distinctUntilChanged(), // Evita requisições repetidas
-        switchMap(term =>
-          this.classService.getClasses(term).pipe(
+        switchMap(term => {
+          this.isLoadingSearch = true;
+          return this.classService.getClasses(term).pipe(
             catchError(err => {
               console.error('Erro ao buscar turmas:', err);
-              this.turmaOptions = []; // Limpa resultados anteriores
-              this.isLoading = false; // Atualiza o estado de carregamento
-              return of([]); // Continua emitindo um array vazio para que a busca prossiga
+              this.isLoadingSearch = false;
+              return of([]);
+            }),
+            finalize(() => {
+              this.isLoadingSearch = false; // Desativar spinner de busca
             })
-          )
-        )
+          );
+        })
       )
       .subscribe({
         next: (data: ClassesResponse[]) => {
@@ -127,7 +131,6 @@ export class ClassListComponent implements OnInit {
   }
 
   onSearch(term: string): void {
-    // TODO: Carregamento de pesquisa...
     this.searchTerm$.next(term);
   }
 

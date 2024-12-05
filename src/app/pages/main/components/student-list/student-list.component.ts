@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ISidebarIcons } from 'src/app/interface';
 import { IStudentResponse } from 'src/app/interface/response/IStudentsResponse.interface';
 import { StudentService } from 'src/app/service/students/student.service';
-import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-student-list',
@@ -22,6 +22,7 @@ export class StudentListComponent implements OnInit {
 
   students: IStudentResponse[] = [];
   isLoading = true;
+  isLoadingSearch: boolean = false;
   searchTerm$ = new Subject<string>(); // Subject para controlar a busca
 
   constructor(private studentService: StudentService, private router: Router) {}
@@ -31,16 +32,19 @@ export class StudentListComponent implements OnInit {
     .pipe(
       debounceTime(300), // Aguarda 300ms após o último evento
       distinctUntilChanged(), // Evita requisições repetidas
-      switchMap(term =>
-        this.studentService.getStudents(term).pipe(
+      switchMap(term => {
+        this.isLoadingSearch = true;
+        return this.studentService.getStudents(term).pipe(
           catchError(err => {
             console.error('Erro ao buscar estudantes:', err);
-            this.students = []; // Limpa resultados anteriores
-            this.isLoading = false; // Atualiza o estado de carregamento
-            return of([]); // Continua emitindo um array vazio para que a busca prossiga
+            this.isLoadingSearch = false;
+            return of([]);
+          }),
+          finalize(() => {
+            this.isLoadingSearch = false; // Desativar spinner de busca
           })
-        )
-      )
+        );
+      })
     )
     .subscribe({
       next: (data) => {
