@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class SelectProfileComponent {
   constructor(private router: Router) {}
 
-  navigateTo(profile: string) {
+  navigateTo(profile: string): void {
     this.router.navigate([`/auth/${profile}`]);
   }
 }

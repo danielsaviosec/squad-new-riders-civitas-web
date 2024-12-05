@@ -5,16 +5,16 @@
     <div class="logo-civitas"></div>
     <h1>Seja bem-vindo!</h1>
     <p>
-      Olá, professor(a)!<br />
+      Olá, psicólogo(a)!<br />
       Aproveite a nossa ferramenta para aprimorar o desenvolvimento pessoal dos seus estudantes!
     </p>
     <form [formGroup]="authForm" (ngSubmit)="onSubmit($event)" class="button-group">
       <app-input
         type="text"
-        label="Número de matrícula do professor"
-        placeholder="Digite o número de matrícula"
+        label="CRP do psicólogo"
+        placeholder="CRP do psicólogo"
         [hasError]="isInvalid"
-        errorMessage="O número de matrícula está incorreta"
+        errorMessage="CRP está incorreto"
         (inputValueChange)="authForm.get('registrationNumber')?.setValue($event); resetError()"
       >
       </app-input>

@@ -19,7 +19,7 @@ import { finalize } from 'rxjs';
 export class StudentRegistrationComponent implements OnInit {
   form!: FormGroup;
   turmaOptions: ClassesResponse[] = [];
-  isLoading = true;
+  isLoading: boolean = true;
 
   anoLetivo = [
     { value: '1-ano', label: '1º ano', backName: '1st year' },

@@ -14,21 +14,21 @@ export class HomeAdminComponent implements OnInit {
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
-    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Psicólogos", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
   menuIconsMobile: ISidebarIconsMobile[] = [
     { name: "Início", route: 'main' },
     { name: "Turmas", route: 'main/class-list' },
-    { name: "Professores", route: 'main/teacher-list' },
+    { name: "Psicólogos", route: 'main/teacher-list' },
     { name: "Estudantes", route: 'main/student-list' }
   ]
 
   cardsAdmin: IAdminScreenCard[] = [
     { title: 'Cadastrar Turmas', image: 'assets/admin-screen-cards/cadastro-turmas.png', route: 'main/class-registration' },
     { title: 'Cadastrar Estudantes', image: 'assets/admin-screen-cards/cadastro-estudantes.png', route: 'main/student-registration' },
-    { title: 'Cadastrar Professores', image: 'assets/admin-screen-cards/cadastro-professores.png', route: 'main/teacher-registration' },
+    { title: 'Cadastrar Psicólogos', image: 'assets/admin-screen-cards/cadastro-professores.png', route: 'main/teacher-registration' },
   ];
 
   constructor(private router: Router) { }

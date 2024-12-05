@@ -7,14 +7,14 @@
   <app-back-button (click)="goBack()" class="back-button"></app-back-button>
   <div class="card">
     <div class="text-card">
-      <p><strong>Cadastro de professor</strong></p>
-      <p>Preencha as informações do professor</p>
+      <p><strong>Cadastro de psicólogo</strong></p>
+      <p>Preencha as informações do psicólogo</p>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-card">
         <mat-form-field appearance="outline" floatLabel="always">
           <mat-label>Nome completo</mat-label>
-          <input matInput formControlName="nome" placeholder="Nome do professor" maxlength="50" />
+          <input matInput formControlName="nome" placeholder="Nome do psicólogo" maxlength="50" />
         </mat-form-field>
       </div>
       <div class="form-card">
@@ -28,8 +28,8 @@
       </div>
       <div class="form-card">
         <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>Número de matrícula</mat-label>
-          <input matInput formControlName="matricula" placeholder="Registro do professor na escola" maxlength="20">
+          <mat-label>CRP</mat-label>
+          <input matInput formControlName="matricula" placeholder="CRP do psicólogo" maxlength="20">
         </mat-form-field>
       </div>
       <div class="form-card">

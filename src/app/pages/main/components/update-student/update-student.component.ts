@@ -119,9 +119,6 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   // Submissão do formulário
-
-
-  // Submissão do formulário
   onSubmit(): void {
     if (this.form.valid) {
       this.form.markAsPending();

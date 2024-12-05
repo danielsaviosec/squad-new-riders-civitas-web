@@ -95,7 +95,7 @@ export class ListComponent {
     })
   }
 
-  private handleSuccess() {
+  private handleSuccess(): void {
     this._snackBar.open(`${this.tipo} excluido com sucesso.`, '', {
       duration: 3000,
       horizontalPosition: 'right',
@@ -107,7 +107,6 @@ export class ListComponent {
     }, 1500);
   }
 
-  // TODO: Corrigir any
   onDeleteError(data: { error: { message: string } }, tipo: string) {
     const hasError = true;
     const errorMessage =

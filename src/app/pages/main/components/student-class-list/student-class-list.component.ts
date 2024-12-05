@@ -13,7 +13,7 @@ import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 export class StudentClassListComponent implements OnInit {
   students: IStudentResponse[] = [];
   classId: number = 0;
-  isLoading = true;
+  isLoading: boolean = true;
   icons = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
