@@ -149,7 +149,7 @@ export class AdiComponent implements OnInit, AfterViewChecked {
         left: '5%',
       },
       legend: {
-        data: ['Ideal', 'Real'],
+        data: ['Mínimo', 'Real'],
         bottom: '5%',
         textStyle: {
           fontSize: fontSize,
@@ -194,7 +194,7 @@ export class AdiComponent implements OnInit, AfterViewChecked {
             },
             {
               value: [3, 3, 3, 3, 3], // Valores ideais
-              name: 'Ideal',
+              name: 'Mínimo',
               lineStyle: { color: 'rgb(240,194,50)', type: 'dashed' },
               itemStyle: { color: 'rgb(240,194,50)' }
             },

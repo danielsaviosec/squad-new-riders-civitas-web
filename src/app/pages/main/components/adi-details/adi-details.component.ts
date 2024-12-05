@@ -89,7 +89,7 @@ export class AdiDetailsComponent implements OnInit {
       },
       tooltip: {},
       legend: {
-        data: ['Ideal', 'Real'],
+        data: ['Mínimo', 'Real'],
         bottom: '5%',
         textStyle: {
           fontSize: fontSize,
@@ -152,7 +152,7 @@ export class AdiDetailsComponent implements OnInit {
             },
             {
               value: [3, 3, 3, 3, 3],
-              name: 'Ideal',
+              name: 'Mínimo',
               lineStyle: {
                 color: 'rgb(240,194,50)',
                 type: 'dashed',

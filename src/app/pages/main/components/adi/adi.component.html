@@ -21,7 +21,7 @@
     </div>
 
     <div class="new-adi-btn" (click)="onRegisterNewAdi()" (keydown)="onRegisterNewAdi()" tabindex="0">
-      Registrar novo PDI
+      Registrar novo ADI
       <mat-icon>add_circle_outline</mat-icon>
     </div>
   </div>
@@ -50,7 +50,7 @@
   </div>
 
   <div class="last-ADI">
-    <h4>Última avaliação</h4>
+    <h4>Pré-visualização do ADI</h4>
     <span>{{ adiDate ? adiDate : '--/--/--' }}</span>
 
     <div class="chart-container" *ngIf="adisData?.latestEvaluation; else noChartData">
