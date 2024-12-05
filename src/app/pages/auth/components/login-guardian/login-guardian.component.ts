@@ -49,7 +49,7 @@ export class LoginGuardianComponent {
     this.authForm.reset();
 
     switch (error.status) {
-      case 401:
+      case 404:
         this.isInvalid = true;
         break;
 
