@@ -56,7 +56,6 @@ export class UpdateTeacherComponent implements OnInit {
       next: ({ classes, teacher }) => {
         this.turmaOptions = classes;
 
-        console.log(this.turmaOptions);
 
         this.teacher = teacher;
 

@@ -68,7 +68,6 @@ export class StudentListComponent implements OnInit {
 
   onNavigateViewAdi(event: { id: number, classId: number }) {
     const { id, classId } = event;
-    console.log(`/main/class/${classId}/student-adi/${id}`)
     this.router.navigate([`/main/class/${classId}/student-adi/${id}`]);
   }
 }

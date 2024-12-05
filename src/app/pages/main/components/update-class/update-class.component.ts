@@ -128,7 +128,6 @@ export class UpdateClassComponent implements OnInit {
     .pipe(
       finalize(() => {
         this.form.updateValueAndValidity();
-        console.log(this.form.pending);
       })
     )
     .subscribe({
