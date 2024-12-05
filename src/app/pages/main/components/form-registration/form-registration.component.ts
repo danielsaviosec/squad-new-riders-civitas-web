@@ -134,7 +134,7 @@ export class FormRegistrationComponent implements OnInit {
 
   private handleSuccess(response: CreateResponse) {
     this._snackBar.open('ADI registrado com sucesso!', '', {
-      duration: 3000,
+      duration: 5000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });

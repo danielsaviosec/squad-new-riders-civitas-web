@@ -132,7 +132,7 @@ export class StudentRegistrationComponent implements OnInit {
 
   showSuccessMessage(): void {
     this.snackBar.open('Estudante cadastrado com sucesso!', '', {
-      duration: 3000,
+      duration: 5000,
       panelClass: ['sucess-snackbar'],
       horizontalPosition: 'right',
     });

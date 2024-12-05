@@ -112,7 +112,7 @@ export class UpdateTeacherComponent implements OnInit {
 
   private handleSuccess() {
     this._snackBar.open('Dados do professor atualizado atualizada com sucesso!', '', {
-      duration: 3000,
+      duration: 5000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });

@@ -97,7 +97,7 @@ export class ListComponent {
 
   private handleSuccess() {
     this._snackBar.open(`${this.tipo} excluido com sucesso.`, '', {
-      duration: 3000,
+      duration: 5000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });
