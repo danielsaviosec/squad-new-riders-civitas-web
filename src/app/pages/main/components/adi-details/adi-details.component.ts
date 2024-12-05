@@ -18,6 +18,7 @@ export class AdiDetailsComponent implements OnInit {
   idStudent!: number;
   nomeDoEstudante!: string;
   data!: string;
+  formattedLabel!: string;
   apelidoTurma!: string;
   teacherComments!: string;
   reviews: Reviews = { teamwork: 0, empathy: 0, selfAwareness: 0, communication: 0, autonomy: 0 };
@@ -65,7 +66,7 @@ export class AdiDetailsComponent implements OnInit {
         this.nomeDoEstudante = data.student.fullName;
         this.apelidoTurma = data.student.studentClass;
         this.reviews = data.reviews;
-        this.data = data.date;
+        this.formattedLabel = this.formatAdiLabel(data.label)
         this.teacherComments = data.teacherComments;
         this.idStudent = data.student.id;
         this.setChartOptions();
@@ -76,6 +77,18 @@ export class AdiDetailsComponent implements OnInit {
         this.isLoading = false; // Finaliza o carregamento em caso de erro
       },
     });
+  }
+
+  formatAdiLabel(label: string): string {
+    const regex = /PDI(\d{2})_(\d{2})_(\d{4})_(\d{2}h\d{2})/;
+    const match = label.match(regex);
+
+    if (match) {
+      const [, day, month, year, time] = match;
+      return `${day}/${month}/${year} às ${time.replace('h', ':')}`;
+    }
+
+    return label;
   }
 
   setChartOptions(): void {

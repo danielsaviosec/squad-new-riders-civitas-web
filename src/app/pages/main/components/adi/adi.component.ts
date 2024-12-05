@@ -85,8 +85,15 @@ export class AdiComponent implements OnInit, AfterViewChecked {
               this.nomeDoEstudante = adiData.studentInfo.fullName;
               this.apelidoTurma = adiData.studentInfo.className;
               this.idCurrentAdi = adiData.latestEvaluation.id;
-              this.adisData = adiData;
               this.adiDate = adiData.latestEvaluation.date;
+              this.adisData = {
+                ...adiData,
+                evaluations: adiData.evaluations.map((adi: any) => ({
+                  ...adi,
+                  formattedLabel: this.formatAdiLabel(adi.label)
+                }))
+              };
+
               this.updateBreadcrumb();
               this.setChartOptions();
             }
@@ -95,6 +102,18 @@ export class AdiComponent implements OnInit, AfterViewChecked {
       }
 
     });
+  }
+
+  formatAdiLabel(label: string): string {
+    const regex = /PDI(\d{2})_(\d{2})_(\d{4})_(\d{2}h\d{2})/;
+    const match = label.match(regex);
+
+    if (match) {
+      const [, day, month, year, time] = match;
+      return `PDI ${day}/${month}/${year} às ${time.replace('h', ':')}`;
+    }
+
+    return label;
   }
 
   ngAfterViewChecked(): void {
