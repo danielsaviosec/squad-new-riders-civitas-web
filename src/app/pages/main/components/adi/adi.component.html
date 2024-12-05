@@ -65,6 +65,12 @@
       <div class="no-chart-data">Não há registros</div>
     </ng-template>
 
-    <button (click)="onVisualizarClick()" (keydown)="onVisualizarClick()" >Visualizar</button>
+    <button
+      (click)="onVisualizarClick()"
+      [disabled]="!adisData"
+      (keydown)="onVisualizarClick()">
+      Visualizar
+    </button>
+
   </div>
 </section>
