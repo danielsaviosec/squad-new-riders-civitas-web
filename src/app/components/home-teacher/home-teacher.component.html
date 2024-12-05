@@ -1,4 +1,8 @@
-<main>
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<main *ngIf="!isLoading">
     <section class="sidebar-section">
         <app-sidebar [homeLink]="{ route: '/' }" [menuIcons]="icons"></app-sidebar>
     </section>
@@ -24,8 +28,10 @@
                     <button (click)="intoToListingClasses()" class="btn-content">Acessar minhas turmas</button>
                 </div>
                 <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/k85mRPqvMbE?si=H6be5XbmeJNzgsw-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                  </div>
+                    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/k85mRPqvMbE?si=H6be5XbmeJNzgsw-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+
+                    <div class="main-video"></div>
+                </div>
             </div>
         </div>
 </main>
