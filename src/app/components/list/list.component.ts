@@ -109,7 +109,6 @@ export class ListComponent {
     }, 1500);
   }
 
-  // TODO: Corrigir any
   onDeleteError(data: { error: { message: string } }, tipo: string) {
     const hasError = true;
     const errorMessage =

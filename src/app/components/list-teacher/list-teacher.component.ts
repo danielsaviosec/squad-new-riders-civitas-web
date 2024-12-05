@@ -25,19 +25,19 @@ export class ListTeacherComponent {
   constructor(private router: Router) {}
 
   // Funções
-  onTurmaClick() {
+  onTurmaClick(): void {
     this.turmaSelecionada.emit({
       idTurma: this.idTurma,
       apelidoTurma: this.apelidoTurma
     })
   }
 
-  onVisualizarClick() {
+  onVisualizarClick(): void {
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/class/${this.idTurma}/student-adi/${this.idEstudante}`]);
   }
 
-  onRegisterClick() {
+  onRegisterClick(): void {
     this.router.navigate([`main/form-registration/${this.idEstudante}`]);
   }
 }

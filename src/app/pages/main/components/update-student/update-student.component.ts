@@ -119,9 +119,6 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   // Submissão do formulário
-
-
-  // Submissão do formulário
   onSubmit(): void {
     if (this.form.valid) {
       this.form.markAsPending();
@@ -158,7 +155,7 @@ export class UpdateStudentComponent implements OnInit {
 
   showSuccessMessage(): void {
     this.snackBar.open('Dados do estudante atualizado com sucesso!', '', {
-      duration: 5000,
+      duration: 3500,
       panelClass: ['sucess-snackbar'],
       horizontalPosition: 'right',
     });

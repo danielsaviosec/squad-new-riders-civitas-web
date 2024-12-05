@@ -19,7 +19,7 @@ import { finalize } from 'rxjs';
 export class StudentRegistrationComponent implements OnInit {
   form!: FormGroup;
   turmaOptions: ClassesResponse[] = [];
-  isLoading = true;
+  isLoading: boolean = true;
 
   anoLetivo = [
     { value: '1-ano', label: '1º ano', backName: '1st year' },
@@ -132,7 +132,7 @@ export class StudentRegistrationComponent implements OnInit {
 
   showSuccessMessage(): void {
     this.snackBar.open('Estudante cadastrado com sucesso!', '', {
-      duration: 5000,
+      duration: 3500,
       panelClass: ['sucess-snackbar'],
       horizontalPosition: 'right',
     });

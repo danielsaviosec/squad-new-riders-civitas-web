@@ -193,7 +193,7 @@ export class AdiDetailsComponent implements OnInit {
     });
   }
 
-  onVisualizarClick() {
+  onVisualizarClick(): void {
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/form-registration/${this.idStudent}`]);
   }
