@@ -19,6 +19,7 @@ import { IAdiRegistrationData } from 'src/app/interface/register/IAdiRegistratio
 export class FormRegistrationComponent implements OnInit {
   form!: FormGroup;
   textTeacher: string = '';
+  hasError: boolean = false;
 
   questions: IQuestion[] = [
     {
@@ -82,6 +83,19 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
+
+    // Validação de campos preenchidos
+    if (this.form.invalid) {
+        this.hasError = true;
+
+        // Ocultar a mensagem após 5 segundos
+        setTimeout(() => {
+          this.hasError = false;
+        }, 5000);
+
+        return;
+    }
+
     if (this.form.valid && this.studentId !== null) {
       this.form.markAsPending();
       const requestData: IAdiRegistrationData = this.mapFormToRequest();

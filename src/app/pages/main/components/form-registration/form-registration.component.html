@@ -38,11 +38,12 @@
     </div>
 
     <div class="btn-wrapper">
+      <mat-hint class="error-message" *ngIf="hasError">É obrigatório preencher todos os campos</mat-hint>
+
       <app-button
         label="Salvar"
         [customClass]="'primary'"
         color="primary"
-        [disabled]="form.invalid"
         [loading]="form.pending">
       </app-button>
     </div>
