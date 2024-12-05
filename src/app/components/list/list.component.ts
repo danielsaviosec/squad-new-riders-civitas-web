@@ -99,7 +99,7 @@ export class ListComponent {
     const artigo = this.tipo === 'turma' ? 'excluída' : 'excluído';
 
     this._snackBar.open(`${this.tipo} ${artigo} com sucesso.`, '', {
-      duration: 5000,
+      duration: 3000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });
