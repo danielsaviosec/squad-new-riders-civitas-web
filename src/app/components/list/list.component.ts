@@ -96,7 +96,9 @@ export class ListComponent {
   }
 
   private handleSuccess() {
-    this._snackBar.open(`${this.tipo} excluido com sucesso.`, '', {
+    const artigo = this.tipo === 'turma' ? 'excluída' : 'excluído';
+
+    this._snackBar.open(`${this.tipo} ${artigo} com sucesso.`, '', {
       duration: 5000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
