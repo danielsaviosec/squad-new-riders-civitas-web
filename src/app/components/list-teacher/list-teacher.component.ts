@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 
 @Component({
   selector: 'app-list-teacher',
@@ -23,7 +22,7 @@ export class ListTeacherComponent {
   @Input() matriculaDoEstudante?: string;
   @Input() idEstudante!: number;
 
-  constructor(private router: Router, private sharedDataService: SharedDataService) {}
+  constructor(private router: Router) {}
 
   // Funções
   onTurmaClick() {
@@ -34,12 +33,6 @@ export class ListTeacherComponent {
   }
 
   onVisualizarClick() {
-    // Setando apelidoTurma e nomeDoEstudante no SharedDataService
-    this.sharedDataService.setData({
-      apelidoTurma: this.apelidoTurma,
-      nomeDoEstudante: this.nomeDoEstudante
-    });
-
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/class/${this.idTurma}/student-adi/${this.idEstudante}`]);
   }

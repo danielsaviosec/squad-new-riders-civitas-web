@@ -7,7 +7,6 @@ import { catchError, debounceTime, distinctUntilChanged, finalize, of, Subject, 
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 
 @Component({
   selector: 'app-class-list',
@@ -54,8 +53,7 @@ export class ClassListComponent implements OnInit {
   constructor(
     private classService: ClassService,
     private authService: AuthService,
-    private router: Router,
-    private sharedDataService: SharedDataService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -139,9 +137,6 @@ export class ClassListComponent implements OnInit {
   }
 
   onNavigateToStudentClassList(turma: { idTurma: number; apelidoTurma?: string }) {
-    // Armazena o apelido da turma no serviço compartilhado
-    this.sharedDataService.setData({ apelidoTurma: turma.apelidoTurma });
-
     // Navega para a página de estudantes
     this.router.navigate([`/main/student-class-list/${turma.idTurma}`]);
   }
