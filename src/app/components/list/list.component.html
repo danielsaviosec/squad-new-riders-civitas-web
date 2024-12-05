@@ -1,7 +1,7 @@
 <div class="card" (click)="onViewAdiClick()" (keydown)="onViewAdiClick()" tabindex="0">
   <div class="section-text">
-    <ng-container *ngIf="tipo === 'professor'; else tipoTemplate">
-      <!-- Exibir dados do professor -->
+    <ng-container *ngIf="tipo === 'psicologo'; else tipoTemplate">
+      <!-- Exibir dados do psicologo -->
       <h3>{{ nomeCompleto }}, {{ matricula }}</h3>
       <span>{{ apelidosTurmas.join(', ') }}</span>
     </ng-container>

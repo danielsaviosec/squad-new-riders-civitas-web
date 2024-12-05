@@ -41,7 +41,7 @@
 
     <div class="content-wrapper" *ngIf="!isLoadingSearch">
       <app-list *ngFor="let teacher of teachers"
-        tipo="professor"
+        tipo="psicologo"
         [nomeCompleto]="teacher.fullName"
         [matricula]="'Matrícula: ' + teacher.registrationNumber"
         [apelidosTurmas]="teacherClassesNames[teacher.registrationNumber]"
