@@ -38,7 +38,7 @@
       <ng-container *ngFor="let adi of adisData?.evaluations">
         <div class="ADI-item" (click)="onAdiClick(adi.id)" (keydown)="onAdiClick(adi.id)" tabindex="0">
           {{ adi.label }}
-          <mat-icon>search</mat-icon>
+          <mat-icon (click)="onAdiDetailsClick(adi.id)" (keydown)="onAdiDetailsClick(adi.id)" tabindex="0">search</mat-icon>
         </div>
       </ng-container>
     </div>
@@ -54,7 +54,11 @@
     <span>{{ adiDate ? adiDate : '--/--/--' }}</span>
 
     <div class="chart-container" *ngIf="adisData?.latestEvaluation; else noChartData">
-      <echarts [options]="chartOptions" class="echart"></echarts>
+      <echarts *ngIf="!isLoadingChart" [options]="chartOptions" class="echart"></echarts>
+
+      <div *ngIf="isLoadingChart">
+        <mat-spinner></mat-spinner>
+      </div>
     </div>
 
     <ng-template #noChartData>

@@ -25,6 +25,7 @@ export class AdiComponent implements OnInit, AfterViewChecked {
   adiDate!: string;
   adisData!: IAdisReponse;
   isLoading: boolean = false;
+  isLoadingChart: boolean = false;
 
   breadcrumbItems = [
     { label: 'Suas Turmas', link: '/main/class-list' },
@@ -105,7 +106,14 @@ export class AdiComponent implements OnInit, AfterViewChecked {
 
   // Método para requisição de novos dados do gráfico
   onAdiClick(adiId: number): void {
-    this.adiService.getAdi(adiId).subscribe({
+   this.isLoadingChart = true;
+
+    this.adiService.getAdi(adiId)
+    .pipe(
+      finalize(() => {
+        this.isLoadingChart = false;
+    }))
+    .subscribe({
       next: (response: IAdiResponse) => {
         const reviews = response.reviews;
         this.adiDate = response.date;
@@ -208,6 +216,10 @@ export class AdiComponent implements OnInit, AfterViewChecked {
   onRegisterNewAdi() {
     // Redirecionando para o cadastro de nova ADI
     this.router.navigate([`/main/form-registration/${this.idEstudante}`]);
+  }
+
+  onAdiDetailsClick(adiId: number) {
+    this.router.navigate([`/main/adi-details/${adiId}`]);
   }
 
   onVisualizarClick() {
