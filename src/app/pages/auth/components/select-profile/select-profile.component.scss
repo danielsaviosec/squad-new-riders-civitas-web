@@ -24,6 +24,16 @@
     max-width: 35rem;
     padding: 0 2%;
 
+    .logo-civitas {
+      width: 200px;
+      height: 70px;
+      background-image: url('../../../../../assets/civitas-logos/logo_horizontal_civitas_colorido.png');
+      margin: 10px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
     h1 {
       font-size: 2.8rem;
       font-weight: 500;
