@@ -151,8 +151,4 @@ export class FormRegistrationComponent implements OnInit {
       'Verifique as informações digitadas ou cadastre novos dados'
     );
   }
-
-  goBack(): void {
-    this.router.navigate(['/'])
-  }
 }
