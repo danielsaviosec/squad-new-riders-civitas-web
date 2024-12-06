@@ -12,7 +12,13 @@
   </div>
 
   <div class="navigate">
-    <app-back-button></app-back-button>
+    <mat-icon
+      class="back-button"
+      matSuffix (click)="goBack()"
+      style="cursor: pointer;"
+    >
+      arrow_back_icon
+    </mat-icon>
 
     <div
       class="new-adi-btn"

@@ -38,8 +38,10 @@ export class AdiDetailsComponent implements OnInit {
   ) {}
 
   icons: ISidebarIcons[] = [
-    { name: 'Início', image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
-    { name: 'Turmas', image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
+    { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
+    { name: "Psicólogos", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
   ngOnInit(): void {
@@ -47,6 +49,11 @@ export class AdiDetailsComponent implements OnInit {
 
     // Filtra os ícones com base no papel do usuário
     if (this.userRole === "guardian") { this.icons = [] }
+    if (this.userRole === "teacher") {
+        this.icons = this.icons.filter(icon =>
+            icon.name === "Início" || icon.name === "Turmas"
+        );
+    }
 
     this.idAdi = +this.route.snapshot.paramMap.get('id')!;
     this.setChartOptions();
@@ -196,5 +203,9 @@ export class AdiDetailsComponent implements OnInit {
   onVisualizarClick(): void {
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/form-registration/${this.idStudent}`]);
+  }
+
+  goBack(): void {
+    this.router.navigate([`/main/class-list`]);
   }
 }

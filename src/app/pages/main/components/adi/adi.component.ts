@@ -37,15 +37,13 @@ export class AdiComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private classesService: ClassService,
-    private studentsService: StudentService,
     private adiService: AdiService
   ) {}
 
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
-    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Psicólogos", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
@@ -200,11 +198,11 @@ export class AdiComponent implements OnInit, AfterViewChecked {
           data: [
             {
               value: [
-                this.adisData.latestEvaluation.reviews.teamwork,
-                this.adisData.latestEvaluation.reviews.empathy,
-                this.adisData.latestEvaluation.reviews.selfAwareness,
-                this.adisData.latestEvaluation.reviews.communication,
-                this.adisData.latestEvaluation.reviews.autonomy,
+                this.adisData.latestEvaluation.reviews?.teamwork,
+                this.adisData.latestEvaluation.reviews?.empathy,
+                this.adisData.latestEvaluation.reviews?.selfAwareness,
+                this.adisData.latestEvaluation.reviews?.communication,
+                this.adisData.latestEvaluation.reviews?.autonomy,
               ],
               name: 'Real',
               lineStyle: { color: '#9368e9' },

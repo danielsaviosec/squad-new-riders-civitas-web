@@ -133,7 +133,7 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   private handleSuccess(response: CreateResponse) {
-    this._snackBar.open('ADI registrado com sucesso!', '', {
+    this._snackBar.open('ADI registrada com sucesso!', '', {
       duration: 5000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
@@ -145,10 +145,10 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   handleError(error: CreateResponse):void {
-    const errorMessage: string = error?.message || "Erro ao atualizar turma. Tente novamente."
+    const errorMessage: string = error?.message || "Erro ao registrar ADI. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
-      'Verifique as informações digitadas ou cadastre novos dados'
+      'Verifique as informações inseridas ou tente cadastrar novos dados'
     );
   }
 }
