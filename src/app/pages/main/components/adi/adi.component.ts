@@ -161,7 +161,6 @@ export class AdiComponent implements OnInit, AfterViewChecked {
 
     this.chartOptions = {
       title: {
-        text: 'Mínimo e real',
         top: '5%',
         left: '5%',
       },
