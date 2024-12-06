@@ -8,11 +8,18 @@
   </div>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-card" *ngFor="let question of questions">
+    <div
+      class="form-card"
+      *ngFor="let question of questions"
+      [ngClass]="{'error-border': hasError && form.controls[question.id].invalid}"
+    >
       <h3>{{ question.title }}</h3>
       <p class="description">{{ question.description }}</p>
 
-      <div class="options-wrapper">
+      <div
+        class="options-wrapper"
+        [ngClass]="{'error-border': hasError && form.controls[question.id].invalid}"
+      >
         <div class="option" *ngFor="let option of options">
           <label [for]="question.id + '-' + option.value" class="option-label">
             <input
@@ -20,21 +27,28 @@
               [id]="question.id + '-' + option.value"
               [formControlName]="question.id"
               [value]="option.value"
-              class="option-input">
+              class="option-input"
+              (change)="onFieldChange()">
             <span class="option-text">{{ option.text }}</span>
           </label>
         </div>
       </div>
     </div>
 
-    <div class="text-teacher">
+    <div
+      class="text-teacher"
+      [ngClass]="{'error-border': hasError && form.controls['textTeacher'].invalid}"
+    >
       <div class="header-teacher">
         <strong>Observações do psicólogo</strong>
       </div>
       <textarea
         id="text-id"
         formControlName="textTeacher"
-        required></textarea>
+        required
+        (input)="onFieldChange()"
+        [ngClass]="{'error-border': hasError && form.controls['textTeacher'].invalid}"
+      ></textarea>
     </div>
 
     <div class="btn-wrapper">

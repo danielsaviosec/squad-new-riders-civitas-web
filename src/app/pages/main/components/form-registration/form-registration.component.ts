@@ -20,6 +20,7 @@ export class FormRegistrationComponent implements OnInit {
   form!: FormGroup;
   textTeacher: string = '';
   hasError: boolean = false;
+  formSubmitted: boolean = false;
 
   questions: IQuestion[] = [
     {
@@ -83,18 +84,15 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.formSubmitted = true;
 
-    // Validação de campos preenchidos
     if (this.form.invalid) {
-        this.hasError = true;
-
-        // Ocultar a mensagem após 5 segundos
-        setTimeout(() => {
-          this.hasError = false;
-        }, 5000);
-
-        return;
+      this.hasError = true;
+      this.form.markAllAsTouched();
+      return;
     }
+
+    this.hasError = false;
 
     if (this.form.valid && this.studentId !== null) {
       this.form.markAsPending();
@@ -150,5 +148,11 @@ export class FormRegistrationComponent implements OnInit {
       errorMessage,
       'Verifique as informações inseridas ou tente cadastrar novos dados'
     );
+  }
+
+  onFieldChange(): void {
+    if (this.formSubmitted) {
+      this.hasError = !this.form.valid;
+    }
   }
 }
