@@ -1,4 +1,4 @@
-<div class="card" (click)="onViewAdiClick()" (keydown)="onViewAdiClick()" tabindex="0">
+<div class="card">
   <div class="section-text">
     <ng-container *ngIf="tipo === 'psicologo'; else tipoTemplate">
       <!-- Exibir dados do psicologo -->
@@ -26,6 +26,16 @@
   </div>
 
   <div class="section-controlers">
+    <button
+      mat-icon-button
+      aria-label="Visualizar"
+      title="Visualizar"
+      (click)="onViewAdiClick()"
+      *ngIf="tipo === 'estudante'"
+    >
+      <mat-icon style="font-size: 18px">description</mat-icon>
+    </button>
+
     <button mat-icon-button aria-label="Editar" title="Editar" (click)="onUpdateClick($event)">
       <mat-icon style="font-size: 18px">edit</mat-icon>
     </button>

@@ -34,7 +34,7 @@
   <div class="history-ADIs">
     <h4>Histórico de ADIs</h4>
 
-    <div class="ADIs-list" *ngIf="adisData?.latestEvaluation; else noHistoryData">
+    <div class="ADIs-list" *ngIf="adisData.evaluations.length > 0; else noHistoryData">
       <ng-container *ngFor="let adi of adisData?.evaluations">
         <div class="ADI-item" (click)="onAdiClick(adi.id)" (keydown)="onAdiClick(adi.id)" tabindex="0">
           {{ adi.formattedLabel }}
@@ -53,7 +53,7 @@
     <h4>Pré-visualização do ADI</h4>
     <span>{{ adiDate ? adiDate : '--/--/--' }}</span>
 
-    <div class="chart-container" *ngIf="adisData?.latestEvaluation; else noChartData">
+    <div class="chart-container" *ngIf="adisData.evaluations.length > 0; else noChartData">
       <echarts *ngIf="!isLoadingChart" [options]="chartOptions" class="echart"></echarts>
 
       <div *ngIf="isLoadingChart">
@@ -67,7 +67,7 @@
 
     <button
       (click)="onVisualizarClick()"
-      [disabled]="!adisData"
+      [disabled]="adisData.evaluations.length <= 0"
       (keydown)="onVisualizarClick()">
       Visualizar
     </button>

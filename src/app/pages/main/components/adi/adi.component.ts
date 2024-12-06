@@ -28,7 +28,7 @@ export class AdiComponent implements OnInit, AfterViewChecked {
   isLoadingChart: boolean = false;
 
   breadcrumbItems = [
-    { label: 'Suas Turmas', link: '/main/class-list' },
+    { label: 'Turmas', link: '/main/class-list' },
     { label: '', link: '' },
     { label: '', link: '' }
   ];
@@ -250,6 +250,6 @@ export class AdiComponent implements OnInit, AfterViewChecked {
   updateBreadcrumb(): void {
     this.breadcrumbItems[1].label = this.apelidoTurma || 'Turma Desconhecida';
     this.breadcrumbItems[2].label = this.nomeDoEstudante || 'Estudante Desconhecido';
-    this.breadcrumbItems[1].link = `/main/student-class-list/${this.idTurma}`;
+    this.breadcrumbItems[1].link = this.userRole === "admin" ? '' : `/main/student-class-list/${this.idTurma}`;
   }
 }

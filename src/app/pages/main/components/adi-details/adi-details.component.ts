@@ -25,7 +25,7 @@ export class AdiDetailsComponent implements OnInit {
   isLoading: boolean = false;
 
   breadcrumbItems = [
-    { label: 'Suas Turmas', link: '/main' },
+    { label: 'Turmas', link: '/main' },
     { label: '', link: '' }, // Nome da turma será dinâmico
     { label: '', link: '' }, // Nome do estudante será dinâmico
   ];
