@@ -109,9 +109,9 @@ export class UpdateTeacherComponent implements OnInit {
     });
   }
 
-  private handleSuccess() {
+  private handleSuccess(): void {
     this._snackBar.open('Dados do psicólogo atualizado com sucesso!', '', {
-      duration: 3000,
+      duration: 3500,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });

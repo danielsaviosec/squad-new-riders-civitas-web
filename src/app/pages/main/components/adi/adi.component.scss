@@ -179,6 +179,11 @@ section.main {
 
     mat-icon {
       transform: scale(0.8);
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: scale(1);
+      }
     }
 
     &::-webkit-scrollbar {
@@ -203,11 +208,16 @@ section.main {
   background-color: #ffffff;
   align-items: center;
   padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #6750A4;
+  border-radius: 15px;
   margin-bottom: 10px;
   cursor: pointer;
   position: relative;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #EADDFF;
+  }
 
   mat-icon {
     position: absolute;

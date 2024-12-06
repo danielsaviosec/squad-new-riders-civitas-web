@@ -16,8 +16,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MenuHamburguerComponent } from './menu-hamburguer/menu-hamburguer.component';
 import { ListTeacherComponent } from './list-teacher/list-teacher.component';
-import { AdminScreenComponent } from './admin-screen/admin-screen.component';
-import { TeacherScreenComponent } from './teacher-screen/teacher-screen.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DialogComponent } from './dialog/dialog.component';
@@ -34,8 +32,6 @@ import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
     SidebarComponent,
     MenuHamburguerComponent,
     ListTeacherComponent,
-    AdminScreenComponent, // Retirar posteriormente
-    TeacherScreenComponent, // Retirar posteriormente
     HomeAdminComponent,
     HomeTeacherComponent,
     BreadcrumbComponent,
@@ -67,8 +63,8 @@ import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
     BreadcrumbComponent,
     MenuHamburguerComponent,
     RouterModule,
-    HomeAdminComponent, // Retirar posteriormente
-    HomeTeacherComponent, // Retirar posteriormente
+    HomeAdminComponent,
+    HomeTeacherComponent,
   ],
   providers: [MatSnackBar]
 })

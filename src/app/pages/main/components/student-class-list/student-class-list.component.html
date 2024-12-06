@@ -8,20 +8,22 @@
   </section>
 
   <div class="title">
-    <h2>Alunos da Turma</h2>
+    <h2>Avaliação de Desenvolvimento Individual</h2>
   </div>
 
   <div class="search">
-    <app-back-button></app-back-button>
-  </div>
+    <div class="left-search">
+      <app-back-button></app-back-button>
 
-  <div class="sub-title" *ngIf="students.length !== 0">
-    <app-breadcrumb
-      [breadcrumbItems]="[
-        { label: 'Suas turmas', link: '/main/class-list' },
-        { label: turma.name || 'Nome da Turma', link: '' }
-      ]"
-    ></app-breadcrumb>
+      <div class="sub-title" *ngIf="students.length !== 0">
+        <app-breadcrumb
+          [breadcrumbItems]="[
+            { label: 'Turmas', link: '/main/class-list' },
+            { label: turma.name || 'Nome da Turma', link: '' }
+          ]"
+        ></app-breadcrumb>
+      </div>
+    </div>
   </div>
 
   <section class="main-section" >
@@ -31,7 +33,7 @@
           <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-.5-13H11v6l4.5 2.67.5-.867-4-2.303V7z" />
         </svg>
         <h3>Nenhum estudante registrado nesta turma</h3>
-        <p>Verifique com o administrador ou registre novos estudantes para começar a acompanhar.</p>
+        <p>Tente novamente ou registre novos estudantes para começar a acompanhar.</p>
       </div>
 
       <ng-container *ngFor="let student of students">

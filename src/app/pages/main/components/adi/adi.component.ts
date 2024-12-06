@@ -25,9 +25,10 @@ export class AdiComponent implements OnInit, AfterViewChecked {
   adiDate!: string;
   adisData!: IAdisReponse;
   isLoading: boolean = false;
+  isLoadingChart: boolean = false;
 
   breadcrumbItems = [
-    { label: 'Suas Turmas', link: '/main/class-list' },
+    { label: 'Turmas', link: '/main/class-list' },
     { label: '', link: '' },
     { label: '', link: '' }
   ];
@@ -36,15 +37,13 @@ export class AdiComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private classesService: ClassService,
-    private studentsService: StudentService,
     private adiService: AdiService
   ) {}
 
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
-    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Psicólogos", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
     { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
@@ -84,8 +83,15 @@ export class AdiComponent implements OnInit, AfterViewChecked {
               this.nomeDoEstudante = adiData.studentInfo.fullName;
               this.apelidoTurma = adiData.studentInfo.className;
               this.idCurrentAdi = adiData.latestEvaluation.id;
-              this.adisData = adiData;
               this.adiDate = adiData.latestEvaluation.date;
+              this.adisData = {
+                ...adiData,
+                evaluations: adiData.evaluations.map((adi: any) => ({
+                  ...adi,
+                  formattedLabel: this.formatAdiLabel(adi.label)
+                }))
+              };
+
               this.updateBreadcrumb();
               this.setChartOptions();
             }
@@ -94,6 +100,18 @@ export class AdiComponent implements OnInit, AfterViewChecked {
       }
 
     });
+  }
+
+  formatAdiLabel(label: string): string {
+    const regex = /PDI(\d{2})_(\d{2})_(\d{4})_(\d{2}h\d{2})/;
+    const match = label.match(regex);
+
+    if (match) {
+      const [, day, month, year, time] = match;
+      return `PDI ${day}/${month}/${year} às ${time.replace('h', ':')}`;
+    }
+
+    return label;
   }
 
   ngAfterViewChecked(): void {
@@ -105,7 +123,14 @@ export class AdiComponent implements OnInit, AfterViewChecked {
 
   // Método para requisição de novos dados do gráfico
   onAdiClick(adiId: number): void {
-    this.adiService.getAdi(adiId).subscribe({
+   this.isLoadingChart = true;
+
+    this.adiService.getAdi(adiId)
+    .pipe(
+      finalize(() => {
+        this.isLoadingChart = false;
+    }))
+    .subscribe({
       next: (response: IAdiResponse) => {
         const reviews = response.reviews;
         this.adiDate = response.date;
@@ -141,7 +166,7 @@ export class AdiComponent implements OnInit, AfterViewChecked {
         left: '5%',
       },
       legend: {
-        data: ['Ideal', 'Real'],
+        data: ['Mínimo', 'Real'],
         bottom: '5%',
         textStyle: {
           fontSize: fontSize,
@@ -173,11 +198,11 @@ export class AdiComponent implements OnInit, AfterViewChecked {
           data: [
             {
               value: [
-                this.adisData.latestEvaluation.reviews.teamwork,
-                this.adisData.latestEvaluation.reviews.empathy,
-                this.adisData.latestEvaluation.reviews.selfAwareness,
-                this.adisData.latestEvaluation.reviews.communication,
-                this.adisData.latestEvaluation.reviews.autonomy,
+                this.adisData.latestEvaluation.reviews?.teamwork,
+                this.adisData.latestEvaluation.reviews?.empathy,
+                this.adisData.latestEvaluation.reviews?.selfAwareness,
+                this.adisData.latestEvaluation.reviews?.communication,
+                this.adisData.latestEvaluation.reviews?.autonomy,
               ],
               name: 'Real',
               lineStyle: { color: '#9368e9' },
@@ -186,7 +211,7 @@ export class AdiComponent implements OnInit, AfterViewChecked {
             },
             {
               value: [3, 3, 3, 3, 3], // Valores ideais
-              name: 'Ideal',
+              name: 'Mínimo',
               lineStyle: { color: 'rgb(240,194,50)', type: 'dashed' },
               itemStyle: { color: 'rgb(240,194,50)' }
             },
@@ -210,6 +235,10 @@ export class AdiComponent implements OnInit, AfterViewChecked {
     this.router.navigate([`/main/form-registration/${this.idEstudante}`]);
   }
 
+  onAdiDetailsClick(adiId: number) {
+    this.router.navigate([`/main/adi-details/${adiId}`]);
+  }
+
   onVisualizarClick(): void {
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/adi-details/${this.idCurrentAdi}`]);
@@ -219,6 +248,6 @@ export class AdiComponent implements OnInit, AfterViewChecked {
   updateBreadcrumb(): void {
     this.breadcrumbItems[1].label = this.apelidoTurma || 'Turma Desconhecida';
     this.breadcrumbItems[2].label = this.nomeDoEstudante || 'Estudante Desconhecido';
-    this.breadcrumbItems[1].link = `/main/student-class-list/${this.idTurma}`;
+    this.breadcrumbItems[1].link = this.userRole === "admin" ? '' : `/main/student-class-list/${this.idTurma}`;
   }
 }

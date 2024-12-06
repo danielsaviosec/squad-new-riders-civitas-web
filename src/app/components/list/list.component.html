@@ -1,7 +1,7 @@
 <div class="card">
-  <div class="section-text"  (click)="onViewAdiClick()" (keydown)="onViewAdiClick()" tabindex="0">
-    <ng-container *ngIf="tipo === 'professor'; else tipoTemplate">
-      <!-- Exibir dados do professor -->
+  <div class="section-text">
+    <ng-container *ngIf="tipo === 'psicologo'; else tipoTemplate">
+      <!-- Exibir dados do psicologo -->
       <h3>{{ nomeCompleto }}, {{ matricula }}</h3>
       <span>{{ apelidosTurmas.join(', ') }}</span>
     </ng-container>
@@ -26,6 +26,16 @@
   </div>
 
   <div class="section-controlers">
+    <button
+      mat-icon-button
+      aria-label="Visualizar"
+      title="Visualizar"
+      (click)="onViewAdiClick()"
+      *ngIf="tipo === 'estudante'"
+    >
+      <mat-icon style="font-size: 18px">description</mat-icon>
+    </button>
+
     <button mat-icon-button aria-label="Editar" title="Editar" (click)="onUpdateClick($event)">
       <mat-icon style="font-size: 18px">edit</mat-icon>
     </button>

@@ -134,7 +134,7 @@ export class TeacherRegistrationComponent implements OnInit {
 
   showSuccessMessage(): void {
     this.snackBar.open('Psicólogo(a) cadastrado com sucesso!', '', {
-      duration: 3000,
+      duration: 3500,
       panelClass: ['sucess-snackbar'],
       horizontalPosition: 'right',
     });

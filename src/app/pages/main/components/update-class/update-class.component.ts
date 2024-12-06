@@ -138,7 +138,7 @@ export class UpdateClassComponent implements OnInit {
 
   private handleSuccess() {
     this._snackBar.open('Turma atualizada com sucesso!', '', {
-      duration: 3000,
+      duration: 3500,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });

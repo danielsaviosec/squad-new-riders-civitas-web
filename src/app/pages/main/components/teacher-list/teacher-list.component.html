@@ -29,9 +29,19 @@
   </div>
 
   <section class="main-section">
-    <div class="content-wrapper" *ngIf="!isLoading">
+
+    <div *ngIf="isLoadingSearch" class="loading-spinner-search">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="teachers.length === 0 && !isLoadingSearch" class="empty-state">
+      <h3>Nenhum psicólogo encontrado como resultado dessa pesquisa</h3>
+      <p>Tente novamente ou registre novos psicólogos para começar a acompanhar.</p>
+    </div>
+
+    <div class="content-wrapper" *ngIf="!isLoadingSearch">
       <app-list *ngFor="let teacher of teachers"
-        tipo="professor"
+        tipo="psicologo"
         [nomeCompleto]="teacher.fullName"
         [matricula]="'CRP: ' + teacher.registrationNumber"
         [apelidosTurmas]="teacherClassesNames[teacher.registrationNumber]"

@@ -12,7 +12,8 @@ interface StudentInfo {
 interface Evaluations {
   id: number,
   date: string,
-  label: string
+  label: string,
+  formattedLabel?: string
 }
 
 interface LatestEvaluation {

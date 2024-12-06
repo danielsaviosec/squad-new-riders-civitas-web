@@ -99,6 +99,10 @@ h3 {
 
 .text-teacher {
   margin-top: 20px;
+
+  .error-border {
+    border: 1px solid #B3261E;
+  }
 }
 
 .text-teacher label {
@@ -121,7 +125,21 @@ h3 {
 .btn-wrapper {
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 10px;
+
+  .error-message {
+    color: #f44336;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+}
+
+.error-border {
+  border: 1px solid #B3261E;
 }
 
 .header-teacher {

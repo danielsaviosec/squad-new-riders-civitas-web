@@ -12,14 +12,20 @@
   </div>
 
   <div class="navigate">
-    <app-back-button></app-back-button>
+    <mat-icon
+      class="back-button"
+      matSuffix (click)="goBack()"
+      style="cursor: pointer;"
+    >
+      arrow_back_icon
+    </mat-icon>
 
     <div
       class="new-adi-btn"
       (click)="onVisualizarClick()"
       (keydown)="onVisualizarClick()"
       tabindex="0"
-      *ngIf="userRole !== 'guardian'"
+      *ngIf="userRole === 'teacher'"
     >
       Registrar novo ADI
       <mat-icon>add_circle_outline</mat-icon>
@@ -35,7 +41,7 @@
 
     <div class="adi-informations">
       <h4>ADI</h4>
-      <span>Realizado em {{ data }}</span>
+      <span>Realizado em {{ formattedLabel }}</span>
     </div>
 
   </div>

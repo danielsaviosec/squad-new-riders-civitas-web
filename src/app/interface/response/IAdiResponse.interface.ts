@@ -1,6 +1,8 @@
 export interface IAdiResponse {
   id: number,
   date: string,
+  label: string,
+  formattedLabel?: string,
   student: Student,
   reviews: Reviews,
   teacherComments: string

@@ -18,13 +18,14 @@ export class AdiDetailsComponent implements OnInit {
   idStudent!: number;
   nomeDoEstudante!: string;
   data!: string;
+  formattedLabel!: string;
   apelidoTurma!: string;
   teacherComments!: string;
   reviews: Reviews = { teamwork: 0, empathy: 0, selfAwareness: 0, communication: 0, autonomy: 0 };
   isLoading: boolean = false;
 
   breadcrumbItems = [
-    { label: 'Suas Turmas', link: '/main' },
+    { label: 'Turmas', link: '/main' },
     { label: '', link: '' }, // Nome da turma será dinâmico
     { label: '', link: '' }, // Nome do estudante será dinâmico
   ];
@@ -37,8 +38,10 @@ export class AdiDetailsComponent implements OnInit {
   ) {}
 
   icons: ISidebarIcons[] = [
-    { name: 'Início', image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
-    { name: 'Turmas', image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
+    { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
+    { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
+    { name: "Psicólogos", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
   ngOnInit(): void {
@@ -46,6 +49,11 @@ export class AdiDetailsComponent implements OnInit {
 
     // Filtra os ícones com base no papel do usuário
     if (this.userRole === "guardian") { this.icons = [] }
+    if (this.userRole === "teacher") {
+        this.icons = this.icons.filter(icon =>
+            icon.name === "Início" || icon.name === "Turmas"
+        );
+    }
 
     this.idAdi = +this.route.snapshot.paramMap.get('id')!;
     this.setChartOptions();
@@ -65,7 +73,7 @@ export class AdiDetailsComponent implements OnInit {
         this.nomeDoEstudante = data.student.fullName;
         this.apelidoTurma = data.student.studentClass;
         this.reviews = data.reviews;
-        this.data = data.date;
+        this.formattedLabel = this.formatAdiLabel(data.label)
         this.teacherComments = data.teacherComments;
         this.idStudent = data.student.id;
         this.setChartOptions();
@@ -76,6 +84,18 @@ export class AdiDetailsComponent implements OnInit {
         this.isLoading = false; // Finaliza o carregamento em caso de erro
       },
     });
+  }
+
+  formatAdiLabel(label: string): string {
+    const regex = /PDI(\d{2})_(\d{2})_(\d{4})_(\d{2}h\d{2})/;
+    const match = label.match(regex);
+
+    if (match) {
+      const [, day, month, year, time] = match;
+      return `${day}/${month}/${year} às ${time.replace('h', ':')}`;
+    }
+
+    return label;
   }
 
   setChartOptions(): void {
@@ -89,7 +109,7 @@ export class AdiDetailsComponent implements OnInit {
       },
       tooltip: {},
       legend: {
-        data: ['Ideal', 'Real'],
+        data: ['Mínimo', 'Real'],
         bottom: '5%',
         textStyle: {
           fontSize: fontSize,
@@ -152,7 +172,7 @@ export class AdiDetailsComponent implements OnInit {
             },
             {
               value: [3, 3, 3, 3, 3],
-              name: 'Ideal',
+              name: 'Mínimo',
               lineStyle: {
                 color: 'rgb(240,194,50)',
                 type: 'dashed',
@@ -183,5 +203,9 @@ export class AdiDetailsComponent implements OnInit {
   onVisualizarClick(): void {
     // Redirecionando para a página do estudante
     this.router.navigate([`/main/form-registration/${this.idStudent}`]);
+  }
+
+  goBack(): void {
+    this.router.navigate([`/main/class-list`]);
   }
 }

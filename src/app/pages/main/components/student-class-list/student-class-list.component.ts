@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { forkJoin } from 'rxjs';
 import { StudentService } from '../../../../service/students/student.service';
+import { ClassService } from 'src/app/service/classes/classes.service';
 import { IStudentResponse } from 'src/app/interface/response/IStudentsResponse.interface';
-import { SharedDataService } from 'src/app/service/utils/shared-data.service';
 
 @Component({
   selector: 'app-student-class-list',
@@ -23,14 +24,11 @@ export class StudentClassListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private studentService: StudentService,
-    private sharedDataService: SharedDataService
+    private classService: ClassService,
   ) {}
 
   ngOnInit(): void {
     this.classId = Number(this.route.snapshot.paramMap.get('id'));
-
-    // Recupera o apelido da turma do serviço compartilhado
-    this.turma.name = this.sharedDataService.getData()?.apelidoTurma;
 
     if (this.classId) {
       this.fetchStudentsByClassId(this.classId);
@@ -39,13 +37,18 @@ export class StudentClassListComponent implements OnInit {
 
   fetchStudentsByClassId(classId: number): void {
     this.isLoading = true;
-    this.studentService.getStudentsByClassId(classId).subscribe({
-      next: (data) => {
-        this.students = data;
+
+    forkJoin({
+      students: this.studentService.getStudentsByClassId(classId),
+      classInfo: this.classService.getClass(classId)
+    }).subscribe({
+      next: ({ students, classInfo }) => {
+        this.students = students;
+        this.turma.name = classInfo.name; // Extraindo apenas o nome da turma
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Erro ao buscar alunos da turma:', err);
+        console.error('Erro ao buscar dados:', err);
         this.isLoading = false;
       }
     });

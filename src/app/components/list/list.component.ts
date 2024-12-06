@@ -12,9 +12,9 @@ import { DialogService } from 'src/app/service/utils/dialog.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  @Input() tipo!: 'professor' | 'turma' | 'estudante'; // Adicionando o tipo "estudante"
+  @Input() tipo!: 'psicologo' | 'turma' | 'estudante'; // Adicionando o tipo "estudante"
 
-  // Inputs para professor
+  // Inputs para psicologo
   @Input() nomeCompleto?: string;
   @Input() matricula?: string;
   @Input() apelidosTurmas: string[] = [];
@@ -64,7 +64,7 @@ export class ListComponent {
     const content =
       this.tipo === 'turma'
         ? `Ao excluir <strong>${this.apelidoTurma}</strong>, não será possível resgatar informações.`
-        : this.tipo === 'professor'
+        : this.tipo === 'psicologo'
         ? `Ao excluir <strong>${this.nomeCompleto}</strong>, não será possível resgatar informações.`
         : `Ao excluir <strong>${this.nomeDoEstudante}</strong>, não será possível resgatar informações.`;
 
@@ -85,7 +85,7 @@ export class ListComponent {
               error: (data) => this.onDeleteError(data.error.message, 'estudante'),
             })
             break;
-          case 'professor':
+          case 'psicologo':
             this.teacherService.deleteTeacher(this.id).subscribe({
               next: () => this.handleSuccess(),
               error: (data) => this.onDeleteError(data, 'professor'),
@@ -95,8 +95,10 @@ export class ListComponent {
     })
   }
 
-  private handleSuccess(): void {
-    this._snackBar.open(`${this.tipo} excluido com sucesso.`, '', {
+  private handleSuccess() {
+    const artigo = this.tipo === 'turma' ? 'excluída' : 'excluído';
+
+    this._snackBar.open(`${this.tipo} ${artigo} com sucesso.`, '', {
       duration: 3000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'

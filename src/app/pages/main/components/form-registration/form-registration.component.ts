@@ -19,12 +19,14 @@ import { IAdiRegistrationData } from 'src/app/interface/register/IAdiRegistratio
 export class FormRegistrationComponent implements OnInit {
   form!: FormGroup;
   textTeacher: string = '';
+  hasError: boolean = false;
+  formSubmitted: boolean = false;
 
   questions: IQuestion[] = [
     {
       id: 'autoconhecimento',
       title: 'Autoconhecimento',
-      description: 'Habilidades como reconhecer e gerenciar emoções, lidar com frustrações, e desenvolver resiliência emocional são essenciais para o desenvolvimento de uma personalidade equilibrada.'
+      description: 'O estudante tem habilidades de reconhecer e gerenciar emoções, lidar com frustrações, e desenvolver resiliência emocional são essenciais para o desenvolvimento de uma personalidade equilibrada.'
     },
     {
       id: 'empatia',
@@ -82,6 +84,16 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.formSubmitted = true;
+
+    if (this.form.invalid) {
+      this.hasError = true;
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.hasError = false;
+
     if (this.form.valid && this.studentId !== null) {
       this.form.markAsPending();
       const requestData: IAdiRegistrationData = this.mapFormToRequest();
@@ -119,8 +131,8 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   private handleSuccess(response: CreateResponse) {
-    this._snackBar.open('ADI registrado com sucesso!', '', {
-      duration: 3000,
+    this._snackBar.open('ADI registrada com sucesso!', '', {
+      duration: 5000,
       horizontalPosition: 'right',
       panelClass: 'snackbar-success'
     });
@@ -131,14 +143,16 @@ export class FormRegistrationComponent implements OnInit {
   }
 
   handleError(error: CreateResponse):void {
-    const errorMessage: string = error?.message || "Erro ao atualizar turma. Tente novamente."
+    const errorMessage: string = error?.message || "Erro ao registrar ADI. Tente novamente."
     this.snackbarErrorService.showErrorMessage(
       errorMessage,
-      'Verifique as informações digitadas ou cadastre novos dados'
+      'Verifique as informações inseridas ou tente cadastrar novos dados'
     );
   }
 
-  goBack(): void {
-    this.router.navigate(['/'])
+  onFieldChange(): void {
+    if (this.formSubmitted) {
+      this.hasError = !this.form.valid;
+    }
   }
 }

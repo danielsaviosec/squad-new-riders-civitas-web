@@ -6,8 +6,6 @@ import { ClassRegistrationComponent } from "./components/class-registration/clas
 import { TeacherRegistrationComponent } from "./components/teacher-registration/teacher-registration.component";
 import { StudentRegistrationComponent } from "./components/student-registration/student-registration.component";
 import { StudentListComponent } from "./components/student-list/student-list.component";
-import { SearchClassComponent } from "./components/search-class/search-class.component";
-import { SearchStudentComponent } from "./components/search-student/search-student.component";
 import { UpdateClassComponent } from "./components/update-class/update-class.component";
 import { UpdateTeacherComponent } from "./components/update-teacher/update-teacher.component";
 import { UpdateStudentComponent } from "./components/update-student/update-student.component";
@@ -64,18 +62,6 @@ const routes: Routes = [
     component: StudentClassListComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['teacher'] }
-  },
-  {
-    path: 'search-class',
-    component: SearchClassComponent,
-    canActivate: [AuthGuard],
-    data: { allowedRoles: ['admin'] }
-  },
-  {
-    path: 'search-student',
-    component: SearchStudentComponent,
-    canActivate: [AuthGuard],
-    data: { allowedRoles: ['admin'] }
   },
   {
     path: 'update-class/:id',
