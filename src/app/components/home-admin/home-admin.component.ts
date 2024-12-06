@@ -40,7 +40,7 @@ export class HomeAdminComponent implements OnInit {
   // ======================================
   //Direcionamento do botão de "Acesse aqui".
   intoToVideo(): void {
-    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_self');
+    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
   }
 
   //Direcionamento do botão dos cards para as páginas de cadastros.

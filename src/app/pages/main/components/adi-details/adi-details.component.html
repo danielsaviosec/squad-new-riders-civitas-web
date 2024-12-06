@@ -19,7 +19,7 @@
       (click)="onVisualizarClick()"
       (keydown)="onVisualizarClick()"
       tabindex="0"
-      *ngIf="userRole !== 'guardian'"
+      *ngIf="userRole === 'teacher'"
     >
       Registrar novo ADI
       <mat-icon>add_circle_outline</mat-icon>

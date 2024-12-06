@@ -20,7 +20,13 @@
       </div>
     </div>
 
-    <div class="new-adi-btn" (click)="onRegisterNewAdi()" (keydown)="onRegisterNewAdi()" tabindex="0">
+    <div
+      class="new-adi-btn"
+      (click)="onRegisterNewAdi()"
+      (keydown)="onRegisterNewAdi()"
+      tabindex="0"
+      *ngIf="userRole === 'teacher'"
+    >
       Registrar novo ADI
       <mat-icon>add_circle_outline</mat-icon>
     </div>

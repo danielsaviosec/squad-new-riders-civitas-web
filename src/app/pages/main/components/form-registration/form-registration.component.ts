@@ -25,7 +25,7 @@ export class FormRegistrationComponent implements OnInit {
     {
       id: 'autoconhecimento',
       title: 'Autoconhecimento',
-      description: 'Habilidades como reconhecer e gerenciar emoções, lidar com frustrações, e desenvolver resiliência emocional são essenciais para o desenvolvimento de uma personalidade equilibrada.'
+      description: 'O estudante tem habilidades de reconhecer e gerenciar emoções, lidar com frustrações, e desenvolver resiliência emocional são essenciais para o desenvolvimento de uma personalidade equilibrada.'
     },
     {
       id: 'empatia',
