@@ -21,9 +21,9 @@ export class StudentListComponent implements OnInit {
   ];
 
   students: IStudentResponse[] = [];
+  searchTerm$ = new Subject<string>();
   isLoading: boolean = true;
   isLoadingSearch: boolean = false;
-  searchTerm$ = new Subject<string>(); // Subject para controlar a busca
 
   constructor(private studentService: StudentService, private router: Router) {}
 
@@ -72,7 +72,6 @@ export class StudentListComponent implements OnInit {
 
   onNavigateViewAdi(event: { id: number, classId: number }) {
     const { id, classId } = event;
-    console.log(`/main/class/${classId}/student-adi/${id}`)
     this.router.navigate([`/main/class/${classId}/student-adi/${id}`]);
   }
 }
