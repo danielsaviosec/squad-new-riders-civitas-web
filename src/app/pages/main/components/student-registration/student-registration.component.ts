@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorService } from 'src/app/components/snackbar-error/snackbar-error.service';
 import { Router } from '@angular/router';
@@ -57,7 +57,7 @@ export class StudentRegistrationComponent implements OnInit {
       matricula: ['', [Validators.required, Validators.maxLength(20)]],
       turma: ['', Validators.required],
       cpfResponsavel: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/), Validators.maxLength(14)]],
-      cpfOrRg: ['', [Validators.required, this.cpfOrRgValidator, Validators.maxLength(14)]]
+      cpfOrRg: ['', [Validators.required, Validators.maxLength(14)]]
     });
 
     this.classService.getClasses().subscribe(
@@ -76,18 +76,6 @@ export class StudentRegistrationComponent implements OnInit {
         this.isLoading = false;
       }
     );
-  }
-
-  cpfOrRgValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-    const rgRegex = /^(\d{1,2}\.?\d{3}\.?\d{3}-?\d{1,2}|\d{7,14})$/;
-
-    if (cpfRegex.test(value) || rgRegex.test(value)) {
-      return null;
-    }
-
-    return { invalidCpfOrRg: true };
   }
 
   goBack(): void {

@@ -10,5 +10,6 @@ export interface IStudentResponse {
 }
 
 interface Class {
+  id: number,
   name: string
 }

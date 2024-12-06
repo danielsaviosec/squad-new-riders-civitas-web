@@ -99,13 +99,13 @@ const routes: Routes = [
     path: 'class/:classId/student-adi/:studentId',
     component: AdiComponent,
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['teacher', 'guardian'] }
+    data: { allowedRoles: ['admin', 'teacher', 'guardian'] }
   },
   {
     path: 'adi-details/:id',
     component: AdiDetailsComponent,
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['teacher', 'guardian'] },
+    data: { allowedRoles: ['admin', 'teacher', 'guardian'] }
   },
   {
     path: 'form-registration/:id',

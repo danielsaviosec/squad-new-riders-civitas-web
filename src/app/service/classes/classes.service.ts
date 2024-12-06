@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -31,10 +31,15 @@ export class ClassService {
   }
 
   // Novo método para obter a lista de classes
-  getClasses(): Observable<ClassesResponse[]> {
+  getClasses(name?: string): Observable<ClassesResponse[]> {
+    let params = new HttpParams();
     const token = localStorage.getItem('@civitas:token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<ClassesResponse[]>(`${environment.apiUrl}classes`, { headers });
+    if (name) {
+      params = params.set('name', name);
+    }
+
+    return this.http.get<ClassesResponse[]>(`${environment.apiUrl}classes`, { headers, params });
   }
 
   // Novo método para obter a lista de professores

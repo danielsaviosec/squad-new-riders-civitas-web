@@ -30,6 +30,8 @@ import { FormRegistrationComponent } from './components/form-registration/form-r
 import { HomeScreenComponent } from './components/home-screen/home-screen.component'
 import { UpdateClassComponent } from './components/update-class/update-class.component';
 import { AdiDetailsComponent } from './components/adi-details/adi-details.component';
+import { SmartMaskDirective } from 'src/app/shared/smart-mask.directive';
+import { CpfMaskDirective } from 'src/app/shared/cpf-mask.directive';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { AdiDetailsComponent } from './components/adi-details/adi-details.compon
     StudentClassListComponent,
     FormRegistrationComponent,
     AdiDetailsComponent,
+    SmartMaskDirective,
+    CpfMaskDirective
   ],
   imports: [
     MainRoutingModule,

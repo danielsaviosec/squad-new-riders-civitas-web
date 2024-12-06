@@ -10,7 +10,6 @@ export class DialogService {
   constructor(private dialog: MatDialog) { }
 
   openDeleteDialog(title: string, content: string, hasError: boolean = false) {
-    console.log(content);
     return this.dialog.open(DialogComponent, {
       width: '400px',
       data: { title, content, hasError },

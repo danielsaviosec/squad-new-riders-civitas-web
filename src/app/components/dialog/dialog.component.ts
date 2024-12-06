@@ -12,11 +12,11 @@ export class DialogComponent {
     private dialogRef: MatDialogRef<DialogComponent>
   ) {}
 
-  closeDialog(): void {
+  closeDialog() {
     this.dialogRef.close(false);
   }
 
-  confirmDelete(): void {
+  confirmDelete() {
     this.dialogRef.close(true);
   }
 }

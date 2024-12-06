@@ -26,7 +26,7 @@
           <div class="form-card">
               <mat-form-field appearance="outline" floatLabel="always">
                   <mat-label>RG ou CPF do Estudante</mat-label>
-                  <input matInput formControlName="cpfOrRg" placeholder="xx.xxx.xxx-xx" maxlength="14">
+                  <input matInput formControlName="cpfOrRg" placeholder="xx.xxx.xxx-xx" maxlength="14" appSmartMask>
                   <mat-error *ngIf="form.get('cpfOrRg')?.hasError('invalidCpfOrRg')">
                       Insira um CPF ou RG válido.
                   </mat-error>
@@ -63,7 +63,7 @@
           <div class="form-card">
               <mat-form-field appearance="outline" floatLabel="always">
                   <mat-label>CPF do Responsável</mat-label>
-                  <input matInput formControlName="cpfResponsavel" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+                  <input matInput formControlName="cpfResponsavel" appCpfMask placeholder="xxx.xxx.xxx-xx" maxlength="14">
                   <mat-error *ngIf="form.get('cpfResponsavel')?.hasError('pattern')">
                       CPF inválido. Verifique as informações digitadas.
                   </mat-error>

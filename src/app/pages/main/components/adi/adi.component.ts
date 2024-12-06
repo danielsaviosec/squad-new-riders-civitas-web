@@ -44,6 +44,8 @@ export class AdiComponent implements OnInit, AfterViewChecked {
   icons: ISidebarIcons[] = [
     { name: "Início", image: 'assets/icons-sidebar/inicio.svg', route: 'main' },
     { name: "Turmas", image: 'assets/icons-sidebar/turmas.svg', route: 'main/class-list' },
+    { name: "Professores", image: 'assets/icons-sidebar/professores.svg', route: 'main/teacher-list' },
+    { name: "Estudantes", image: 'assets/icons-sidebar/estudantes.svg', route: 'main/student-list' }
   ];
 
   ngOnInit(): void {
@@ -51,6 +53,11 @@ export class AdiComponent implements OnInit, AfterViewChecked {
 
     // Filtra os ícones com base no papel do usuário
     if (this.userRole === "guardian") { this.icons = [] }
+    if (this.userRole === "teacher") {
+        this.icons = this.icons.filter(icon =>
+            icon.name === "Início" || icon.name === "Turmas"
+        );
+    }
 
     this.route.params.subscribe(params => {
       this.idTurma = +params['classId'];

@@ -15,7 +15,7 @@ import { ILoginRegistrationNumberCredentials } from 'src/app/interface/auth/ILog
 })
 export class LoginTeacherComponent {
   isInvalid: boolean = false;
-  inputValue: string= '';
+  inputValue: string = '';
 
   authForm = new FormGroup({
     registrationNumber: new FormControl('', [Validators.required]),

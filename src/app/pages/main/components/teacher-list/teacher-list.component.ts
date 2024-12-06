@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ISidebarIcons } from 'src/app/interface';
 import { TeacherService } from '../../../../service/teachers/teachers.service';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
 
 import { Teacher } from 'src/app/interface/register/Teacher.interface';
 import { Class } from 'src/app/interface/register/Class.interface';
@@ -21,25 +22,49 @@ export class TeacherListComponent implements OnInit {
 
   teachers: Teacher[] = [];
   teacherClassesNames: { [key: string]: string[] } = {};
-  isLoading: boolean = true;
+  isLoading = true;
+  searchTerm$ = new Subject<string>(); // Subject para controlar a busca
 
   constructor(private teacherService: TeacherService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.teacherService.getTeachers().subscribe(
-      (data) => {
-        this.teachers = data;
+  ngOnInit() {
+      this.searchTerm$
+      .pipe(
+        debounceTime(300), // Aguarda 300ms após o último evento
+        distinctUntilChanged(), // Evita requisições repetidas
+        switchMap(term =>
+          this.teacherService.getTeachers(term).pipe(
+            catchError(err => {
+              console.error('Erro ao buscar professores:', err);
+              this.teachers = []; // Limpa resultados anteriores
+              this.isLoading = false; // Atualiza o estado de carregamento
+              return of([]); // Continua emitindo um array vazio para que a busca prossiga
+            })
+          )
+        )
+      )
+      .subscribe({
+        next: (data) => {
+          this.teachers = data;
 
-        data.forEach((teacher) => {
-          this.teacherClassesNames[teacher.registrationNumber] = teacher.classes.map((classItem: Class) => classItem.name);
-        });
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error("Erro ao carregar psicólogos:", error);
-        this.isLoading = false;
-      }
-    );
+          data.forEach((teacher) => {
+            this.teacherClassesNames[teacher.registrationNumber] = teacher.classes.map((classItem: Class) => classItem.name);
+          });
+          this.isLoading = false;
+        },
+        error: () => {
+          this.teachers = [];
+          this.isLoading = false;
+        }
+      });
+
+      // Disparar busca inicial
+      this.searchTerm$.next('');
+  }
+
+  onSearch(term: string): void {
+    // TODO: Carregamento de pesquisa...
+    this.searchTerm$.next(term);
   }
 
   onNavigateToUpdateTeacher(id: number): void {

@@ -47,7 +47,7 @@ export class LoginGuardianComponent {
 
   private handleLoginError(error: HttpErrorResponse): void {
     this.authForm.reset();
-    
+
     switch (error.status) {
       case 401:
         this.isInvalid = true;

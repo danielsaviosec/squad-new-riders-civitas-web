@@ -22,7 +22,7 @@
       <div class="form-card">
         <mat-form-field appearance="outline" floatLabel="always">
           <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf" placeholder="xxx.xxx.xxx-xx" maxlength="14">
+          <input matInput formControlName="cpf" placeholder="xxx.xxx.xxx-xx" appCpfMask maxlength="14">
           <mat-error *ngIf="form.get('cpf')?.hasError('pattern')">
             CPF inválido. Verifique as informações digitadas.
           </mat-error>

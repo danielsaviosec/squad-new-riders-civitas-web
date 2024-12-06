@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ISidebarIcons } from 'src/app/interface';
 import { IStudentResponse } from 'src/app/interface/response/IStudentsResponse.interface';
 import { StudentService } from 'src/app/service/students/student.service';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-student-list',
@@ -20,24 +21,53 @@ export class StudentListComponent implements OnInit {
   ];
 
   students: IStudentResponse[] = [];
+  searchTerm$ = new Subject<string>();
   isLoading: boolean = true;
-  
+
   constructor(private studentService: StudentService, private router: Router) {}
 
   ngOnInit() {
-    this.studentService.getStudents().subscribe(
-      (data) => {
+    this.searchTerm$
+    .pipe(
+      debounceTime(300), // Aguarda 300ms após o último evento
+      distinctUntilChanged(), // Evita requisições repetidas
+      switchMap(term =>
+        this.studentService.getStudents(term).pipe(
+          catchError(err => {
+            console.error('Erro ao buscar estudantes:', err);
+            this.students = []; // Limpa resultados anteriores
+            this.isLoading = false; // Atualiza o estado de carregamento
+            return of([]); // Continua emitindo um array vazio para que a busca prossiga
+          })
+        )
+      )
+    )
+    .subscribe({
+      next: (data) => {
         this.students = data;
         this.isLoading = false;
       },
-      (error) => {
-        console.error("Erro ao carregar estudantes:", error);
+      error: () => {
+        this.students = [];
         this.isLoading = false;
       }
-    );
+    });
+
+    // Disparar busca inicial
+    this.searchTerm$.next('');
+  }
+
+  onSearch(term: string): void {
+    // TODO: Carregamento de pesquisa...
+    this.searchTerm$.next(term);
   }
 
   onNavigateToUpdateStudent(id: number): void {
     this.router.navigate([`/main/update-student/${id}`]);
+  }
+
+  onNavigateViewAdi(event: { id: number, classId: number }) {
+    const { id, classId } = event;
+    this.router.navigate([`/main/class/${classId}/student-adi/${id}`]);
   }
 }
